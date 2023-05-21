@@ -9,7 +9,7 @@ const userController = require("../Controllers/UserController");
 
 /* GET home page. */
 
-router.get('/',verifyToken,userController.Home);
+router.get('/',userController.Home);
 router.post('/usersignup',userController.userSignup)
 router.post('/userlogin',userController.userLogin)
 router.get("/refresh",refreshToken,userController.Home)

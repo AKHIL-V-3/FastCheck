@@ -14,8 +14,6 @@ require('dotenv').config()
 
 var app = express();
 
-// app.use(express.raw());
-
 app.use(
   cors({
     
@@ -27,9 +25,6 @@ app.use(
   })
 
 )
-
-
-
 
 
 

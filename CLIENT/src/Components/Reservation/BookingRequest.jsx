@@ -107,7 +107,7 @@ function BookingRequest() {
 
     const handleBooking = async() => {
 
-         jwtInterceptor.post("http://localhost:8000/reservation", Reservation, {
+         jwtInterceptor.post("/reservation", Reservation, {
             withCredentials: true,           
         })
         .then((res)=>{  

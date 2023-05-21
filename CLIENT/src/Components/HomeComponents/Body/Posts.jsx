@@ -13,18 +13,13 @@ function Posts() {
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
-
-
   const [currentPage, setCurrentPage] = useState(1)
-  const [postsPerPage, setpostsPetPage] = useState(12)
-
+  const [postsPerPage, setpostsPerPage] = useState(12)
   const [rating,setRating] = useState([])
-
-
   const searchHotels = useSelector(state => state.user.searchHotels)
  
   const GetAllHotels = async () => {
-    const { data } = await baseUrl.get("http://localhost:8000/getallhotels", {
+    const { data } = await baseUrl.get("/getallhotels", {
       withCredentials: true
     }).catch((err) => {
       console.log(err);
@@ -37,7 +32,7 @@ function Posts() {
 
   const getHotelData = async (hotelId) => {
 
-    const { data } = await baseUrl.get("http://localhost:8000/getonehotel/" + hotelId, {
+    const { data } = await baseUrl.get("/getonehotel/" + hotelId, {
       withCredentials: true
     }).catch((err) => {
       console.log(err,);
@@ -66,19 +61,9 @@ function Posts() {
 
   }, [dispatch])
 
-
-
-
-
-
   const lastpostIndex = currentPage * postsPerPage
   const firstPostIndex = lastpostIndex - postsPerPage
   const currentPosts = searchHotels?.slice(firstPostIndex, lastpostIndex)
-
-
-
-
-
 
   useEffect(() => {
 
@@ -86,7 +71,7 @@ function Posts() {
 
       const ratingArray = await Promise.all(currentPosts?.map(async (hotel) => {
         try {
-          const { data } = await baseUrl.get("http://localhost:8000/review/rating/" + hotel._id, {
+          const { data } = await baseUrl.get("/review/rating/" + hotel._id, {
             withCredentials: true
           })
 
@@ -101,7 +86,7 @@ function Posts() {
 
     getAllRating()
 
-  }, [hotels])
+  }, [])
 
 
   return (

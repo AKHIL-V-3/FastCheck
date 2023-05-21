@@ -133,7 +133,7 @@ function SingleRoom() {
             receiverId: HotelData.HostData._id,
         }
         try {
-            const res = await jwtInterceptor.post("http://localhost:8000/chat", members, {
+            const res = await jwtInterceptor.post("/chat", members, {
                 withCredentials: true
             })
 
@@ -192,7 +192,7 @@ function SingleRoom() {
             hotelId: HotelData._id
         }
         try {
-            const res = await jwtInterceptor.post("http://localhost:8000/review", Review, {
+            const res = await jwtInterceptor.post("/review", Review, {
                 withCredentials: true
             })
             setReview("")
@@ -209,7 +209,7 @@ function SingleRoom() {
             hotelId: HotelData._id
         }
         try {
-            const { data } = await baseUrl.post("http://localhost:8000/review/rating", rating, {
+            const { data } = await baseUrl.post("/review/rating", rating, {
                 withCredentials: true
             })
             if (data) setStarRating(data)
@@ -221,7 +221,7 @@ function SingleRoom() {
     useEffect(() => {
         const getRating = async () => {
             try {
-                const { data } = await baseUrl.get("http://localhost:8000/review/rating/" + HotelData._id, {
+                const { data } = await baseUrl.get("/review/rating/" + HotelData._id, {
                     withCredentials: true
                 })
                 setRating(data)
@@ -237,7 +237,7 @@ function SingleRoom() {
     useEffect(() => {
         const getUserRating = async () => {
             try {
-                const { data } = await baseUrl.get(`http://localhost:8000/review/userrating/${user._id}/${HotelData._id}`, {
+                const { data } = await baseUrl.get(`/review/userrating/${user._id}/${HotelData._id}`, {
                     withCredentials: true
                 })
                 setUserIndividualRating(data)
@@ -253,7 +253,7 @@ function SingleRoom() {
     useEffect(() => {
         const getReviews = async () => {
             try {
-                const { data } = await baseUrl.get("http://localhost:8000/review/" + HotelData._id, {
+                const { data } = await baseUrl.get("/review/" + HotelData._id, {
                     withCredentials: true
                 })
                 const datas = data.slice(0, 6)
@@ -271,7 +271,7 @@ function SingleRoom() {
     useEffect(() => {
         const getReviewCount = async () => {
             try {
-                const { data } = await baseUrl.get("http://localhost:8000/review/reviewcount/" + HotelData._id, {
+                const { data } = await baseUrl.get("/review/reviewcount/" + HotelData._id, {
                     withCredentials: true
                 })
                 setReviewCount(data)

@@ -73,23 +73,21 @@ function Header() {
 
   }, [dispatch, isLoggedIn])
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    const getCurrentUser = () => {
+  //   const getCurrentUser = () => {
 
-      try {
+  //     try {
 
-        // const {data} = baseUrl.get("/getuser")
-
-      } catch (err) {
+  //     } catch (err) {
 
 
-      }
-    }
+  //     }
+  //   }
 
-    getCurrentUser()
+  //   getCurrentUser()
 
-  }, [])
+  // }, [])
 
 
 

@@ -1,34 +1,24 @@
-import React ,{useState,} from 'react'
+import React  from 'react'
 import { useNavigate } from "react-router-dom";
-import axios from 'axios'
 import {ToastContainer,toast} from "react-toastify"
 import {useFormik} from 'formik'
 import * as Yup from 'yup'
-import { baseUrl } from '../../Axios/api';
-// import baseUrl from '../../../Axios/api'
-
-
+import { baseUrl } from '../../../Axios/api';
 
 function HostSignup() {
 
   const navigate = useNavigate()
-
     const generateError = (err)=>{
-
-    console.log(err)
-        
+    console.log(err) 
       toast.error(err,{
          position:"top-right"
       })
       
    }
-
-
-
+   
     const formik = useFormik({
 
           initialValues:{
-
               Hostname:"",
               Email:"",
               Password:""

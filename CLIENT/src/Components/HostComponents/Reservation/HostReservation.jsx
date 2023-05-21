@@ -37,7 +37,7 @@ function HostReservation() {
                 denyButtonText: `No`,
             }).then(async (result) => {
                 if (result.isConfirmed) {
-                    const { data } = await baseUrl.patch("http://localhost:8000/trips/cancelreservation/" + BookingId, {
+                    const { data } = await baseUrl.patch("/trips/cancelreservation/" + BookingId, {
                         withCredentials: true
                     })
                     Swal.fire({
@@ -63,7 +63,7 @@ function HostReservation() {
         const hostId = host?.host?._id
 
         const getReservations = async () => {
-            const { data } = await baseUrl.get("http://localhost:8000/host/reservations/" + hostId, {
+            const { data } = await baseUrl.get("/host/reservations/" + hostId, {
                 withCredentials: true
             })
             setReservation(data)
@@ -76,7 +76,7 @@ function HostReservation() {
     const getPaymentHistory = async()=>{
         const hostId = host?.host?._id
             try {
-                const { data } = await baseUrl.get("http://localhost:8000/host/paymenthistory/" + hostId, {
+                const { data } = await baseUrl.get("/host/paymenthistory/" + hostId, {
                 withCredentials: true
             })
 

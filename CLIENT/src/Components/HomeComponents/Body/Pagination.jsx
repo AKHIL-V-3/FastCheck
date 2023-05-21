@@ -1,16 +1,10 @@
 import React from 'react'
 
 function Pagination({totalPosts,postPerPage,setCurrentPage,currentPage}) {
-
     let pages =[]
-
-    console.log(totalPosts,postPerPage, 'OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO');
-
     for(let i =1; i<=Math.ceil(totalPosts/postPerPage);i++){
          pages.push(i)
     }
-
-
   return (
 
     <div className='flex space-x-2 justify-end'>

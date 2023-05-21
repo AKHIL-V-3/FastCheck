@@ -25,7 +25,7 @@ function HostBody() {
     const getHoteldata = async () => {
 
         try {
-            const { data } = await hostInterceptor.get("http://localhost:8000/host/gethoteldata", {
+            const { data } = await hostInterceptor.get("/host/gethoteldata", {
                 withCredentials: true,
             })
             return data
@@ -40,7 +40,7 @@ function HostBody() {
 
     const removeHotel = async (hotelId) => {
         try {
-            await hostInterceptor.delete("http://localhost:8000/host/removehotel/" + hotelId, {
+            await hostInterceptor.delete("/host/removehotel/" + hotelId, {
                 withCredentials: true,
             }).then((response) => {
                 Swal.fire({

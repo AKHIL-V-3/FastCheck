@@ -26,7 +26,7 @@ function Reservations() {
                 denyButtonText: `No`,
             }).then(async (result) => {
                 if (result.isConfirmed) {
-                    const { data } = await axios.patch("http://localhost:8000/trips/cancelreservation/" + BookingId, {
+                    const { data } = await axios.patch("/trips/cancelreservation/" + BookingId, {
                         withCredentials: true
                     })
                     Swal.fire({
@@ -48,7 +48,7 @@ function Reservations() {
     }
     useEffect(() => {
         const getReservations = async () => {
-            const { data } = await jwtInterceptor.get("http://localhost:8000/trips", {
+            const { data } = await jwtInterceptor.get("/trips", {
                 withCredentials: true
             })
             setReservations(data.response)
@@ -59,7 +59,7 @@ function Reservations() {
 
     const filterReservation = async (e) => {
         const value = e.target.value
-        const { data } = await jwtInterceptor.get("http://localhost:8000/filteredtrips/" + value, {
+        const { data } = await jwtInterceptor.get("/filteredtrips/" + value, {
             withCredentials: true
         })
 
