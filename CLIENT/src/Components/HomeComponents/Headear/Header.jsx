@@ -45,24 +45,25 @@ function Header() {
     });
   }
   const userProfile = async () => {
-    const { data } = await jwtInterceptor.get("/userprofile", {
+       
+    
+
+   const {data} = await jwtInterceptor.get("/userprofile", {
       withCredentials: true
-    }).catch((err) => {
-      console.log(err.message);
-      console.log(err.code);
-      navigate("/userlogin")
     })
 
-    if (data) {
+    if(data){
       dispatch(authactions.setUser(data.user))
       navigate("/userprofile")
-    } else {
+    }else{ 
+      console.log();
+      console.log();
       navigate("/userlogin")
     }
+   
   }
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn)
-  const user = useSelector((state) => state.user.user)
-
+  
   useEffect(() => {
     apiCall().then(data => {
       if (data) {
@@ -72,6 +73,13 @@ function Header() {
     })
 
   }, [dispatch, isLoggedIn])
+
+
+
+
+
+
+
 
   // useEffect(() => {
 

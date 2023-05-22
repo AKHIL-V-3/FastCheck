@@ -16,6 +16,6 @@ router.post("/logout",HostController.logOut)
 router.get('/gethoteldata',verifyHost,HostController.getHoteldata)
 router.delete('/removehotel/:hotelId',verifyHost,HostController.removeHotel)
 router.get('/reservations/:hostId',verifyHost,HostController.getAllreservations)
-router.get('/paymenthistory/:hostId',verifyHost,HostController.getPaymentHistory)
+router.get('/paymenthistory/:userId',HostController.getPaymentHistory)
 
 module.exports = router;

@@ -277,8 +277,8 @@ getAllreservations:(req,res)=>{
        })
 },
 getPaymentHistory:(req,res)=>{
-    const hostId = req.params.hostId 
-       HostHelpers.getPaymentHistory(hostId).then((response)=>{
+    const userId = req.params.userId 
+       HostHelpers.getPaymentHistory(userId).then((response)=>{
            res.status(200).json(response)
        })
        .catch((err)=> {

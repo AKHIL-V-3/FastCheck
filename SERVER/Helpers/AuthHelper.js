@@ -20,7 +20,6 @@ module.exports = {
                })
                     .catch((error) => {
                          console.log(error.message);
-
                          if (error.code === 11000) reject(new Error("Email  is already Registered"))
                          else if (error.message.includes("Users validation failed")) reject(new Error("Valid User Name Required"))
                          else reject()
@@ -44,7 +43,6 @@ module.exports = {
                     }
                } else {
                     reject(new Error("Incorrect Email"))
-
                }
 
           })
@@ -69,7 +67,6 @@ module.exports = {
           return new Promise((resolve, reject) => {
 
                Users.findById(userId, "-Password").then((response) => {
-
                     resolve(response)
                })
                     .catch((err) => {

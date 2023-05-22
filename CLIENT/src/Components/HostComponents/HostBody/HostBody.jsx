@@ -109,13 +109,13 @@ function HostBody() {
 
     return (
         <section>
-            <div className=' bg-white h-full text-black'>
+            <div className=' bg-white h-full text-black relative'>
                 <div className='flex justify-center pt-8'>
                     <div className=' w-11/12 flex justify-between mt-5 items-center'>
 
                         <h1 className='xl:text-3xl text-lg font-bold'>Listed Properties</h1>
                         <div onClick={() => navigate('/host/addhotel')} className=''>
-                            <button className='xl:w-40 xl:h-12 w-30 h-10 bg-black rounded-md flex justify-center items-center text-white font-semibold text-md p-2  xl:font-semibold xl:text-lg'>Post My Property</button>
+                            <button className='xl:w-40 xl:h-12 w-30 h-10 bg-black rounded-md flex justify-center items-center text-white font-semibold text-sm p-2  xl:font-semibold xl:text-lg'>Post my property</button>
                         </div>
                     </div>
 
@@ -127,7 +127,11 @@ function HostBody() {
 
 
 
-                <div className='max-h-full  flex flex-col items-center'>
+                {   
+                   
+                   datas.length === 0  ?
+                    
+                    <div className='max-h-full  flex flex-col items-center'>
                     <div className='w-11/12 h-full mt-20 space-y-10'>
 
                         <div className='xl:grid grid-cols-4 justify-between items-center gap-10 space-y-6 xl:space-y-3'>
@@ -171,7 +175,16 @@ function HostBody() {
                     </div>
                 </div>
 
-                <footer>
+                :
+
+
+                <div className='h-80 flex justify-center items-center'>
+                    <h1 className='text-black font-bold text-8xl opacity-60'>No Reservations</h1>
+                </div>
+                
+            }
+
+                <footer className=''>
 
                     <div className={`w-full h-16 border-t-2 border-gray-700 flex justify-center ${datas.length ===0 ? "mt-96" : "mt-40"}`}>
 

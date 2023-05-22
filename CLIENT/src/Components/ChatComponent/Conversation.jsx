@@ -1,7 +1,8 @@
-import axios from 'axios'
+
 import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
+import { baseUrl } from '../../Axios/api'
 
 
 function Conversation({conversation,currentUser,selected,lastMessage,searchedUser}) {
@@ -11,7 +12,7 @@ function Conversation({conversation,currentUser,selected,lastMessage,searchedUse
         const friendId = conversation?.members?.find((m)=> m!== currentUser?._id)
         const getUser = async()=>{   
             try{
-                const { data } = await axios.get("http://localhost:8000/chat/gethost/"+friendId, {
+                const { data } = await baseUrl.get("/chat/gethost/"+friendId, {
                     withCredentials: true
                   })
                   setUser(data);

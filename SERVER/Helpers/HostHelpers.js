@@ -155,11 +155,11 @@ module.exports = {
                   ])
             })
      },
-     getPaymentHistory :(hostId)=>{
+     getPaymentHistory :(userId)=>{
             return new Promise((resolve,reject)=>{
                Reservation.find({
                     $and:[
-                         {"hostDetails.hostId" : new ObjectId(hostId)},
+                         {"userDetails.userId" : userId},
                          {paymentStatus:"paid"},   
                      ]
                }).then((response)=>{

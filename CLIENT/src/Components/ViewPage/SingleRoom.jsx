@@ -47,6 +47,7 @@ function SingleRoom() {
 
     const HotelData = useSelector((state) => state.user.hotelData)
     const user = useSelector(state => state.user.user)
+    const isLoggedIn = useSelector(state => state.user.isLoggedIn)
     console.log(HotelData,'444444444444444444444444444444444444444');
     const formatDate = (isoDate) => {
         const date = new Date(isoDate);
@@ -59,6 +60,8 @@ function SingleRoom() {
     const checkout = formatDate(endDate)
 
     const handleBooking = async () => {
+
+        if(!isLoggedIn)  return navigate("/userlogin")
 
         if (numberOfDay >= 1) {
             const BookingDetails = {
@@ -145,7 +148,6 @@ function SingleRoom() {
         }
     }
     useEffect(() => {
-
         document.getElementsByTagName("html")[0].scrollTop = 0
 
     }, [])
@@ -739,7 +741,7 @@ function SingleRoom() {
 
 
                                         <div className='xl:pt-12 pt-12 xl:w-52 w-full'>
-                                            <button onClick={() => CreateConversation()} className='xl:w-full w-full h-12 border-black border-2 rounded-md z-40'>Contact Host</button>
+                                            { isLoggedIn && <button onClick={() => CreateConversation()} className='xl:w-full w-full h-12 border-black border-2 rounded-md z-40'>Contact Host</button>}
                                         </div>
                                     </div>
                                 </div>

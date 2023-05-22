@@ -19,8 +19,7 @@ function UserLogin() {
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn)
 
   const [googledata, setGoogledata] = useState('')
-  const [user, setUser] = useState()
-
+ 
   const [userData, setUserdata] = useState({
 
     Email: "",
@@ -30,7 +29,7 @@ function UserLogin() {
   const generateError = (err) => {
 
     toast.error(err, {
-      position: "top-right"
+      position: "top-center"
     })
 
   }
@@ -40,25 +39,18 @@ function UserLogin() {
     const { data } = await baseUrl.post("/userlogin", userData, {
       withCredentials: true
     })
-
     if (data.errors) {
-
       const { email, password } = data.errors
       if (email) generateError(email)
       else if (password) generateError(password)
-
     } else {
-
       return data
     }
-
   }
 
   const handleSubmit = async (e) => {
-
     e.preventDefault()
     sendRequest().then((data) => {
-       setUser(data.user)
       dispatch(authactions.logIn())
       dispatch(authactions.setUser(data.user))
       navigate("/")

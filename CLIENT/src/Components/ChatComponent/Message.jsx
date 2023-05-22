@@ -240,7 +240,6 @@ function Message() {
     const selectUser = async (conv) => {
         setCurrentChat(conv)
         const friendId = currentChat?.members?.find((m) => m !== currentUserId)
-        // setSelected(friendId)
         try {
             const { data } = await baseUrl.get("/chat/gethost/" + friendId, {
                 withCredentials: true

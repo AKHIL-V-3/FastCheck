@@ -21,6 +21,7 @@ import HostEditHotelPage from './Pages/Host-EditHotelPage';
 import ReservationPage from './Pages/ReservationPage';
 import Chatpage from './Pages/Chat/Chatpage';
 import HostReservation from './Components/HostComponents/Reservation/HostReservation';
+import PaymentHistoryPage from './Pages/PaymentHistory-Page';
 
 
 
@@ -42,6 +43,7 @@ function App() {
         <Route path='/userprofile/createuserprofile'element = {<Createuserprofilepage/>}/>
         <Route path='/places'element = {<Searchplace/>}/>
         <Route path='/trips'element = {<ReservationPage/>}/>
+        <Route path='/paymenthistory'element = {<PaymentHistoryPage/>}/>
 
 
 

@@ -73,21 +73,21 @@ function HostReservation() {
     }, [host?.host?._id])
 
 
-    const getPaymentHistory = async()=>{
+    const getPaymentHistory = async () => {
         const hostId = host?.host?._id
-            try {
-                const { data } = await baseUrl.get("/host/paymenthistory/" + hostId, {
+        try {
+            const { data } = await baseUrl.get("/host/paymenthistory/" + hostId, {
                 withCredentials: true
             })
 
-                console.log(data,'ooooooooooooooooooooo');
-                setPaymentHistory(data)
+            console.log(data, 'ooooooooooooooooooooo');
+            setPaymentHistory(data)
 
-            }catch(err){
+        } catch (err) {
 
 
-            }
-          
+        }
+
     }
 
 
@@ -104,109 +104,99 @@ function HostReservation() {
 
                             <div className='flex justify-between'>
                                 <div className='mb-12'>
-                                { paymentHistory.length === 0  ? <h1 className='text-3xl font-bold'>Reservations</h1>
-                                 :
-                                  <div className='flex items-center space-x-4'>
-                                    <button onClick={()=>setPaymentHistory([])} className='flex items-center text-lg border-2 border-gray-600 px-2 rounded-md'>
-                                    <FontAwesomeIcon icon="fa-arrow-left" className='me-2' />
-                                        Back
-                                    </button>
-                                    <h1 className='text-3xl font-bold'>PaymentHistory</h1>
-                                  </div>
-                                  
-                                  }
+                                    {<h1 className='text-3xl font-bold'>Reservations</h1>
+
+                                        // <div className='flex items-center space-x-4'>
+                                        // <button onClick={()=>setPaymentHistory([])} className='flex items-center text-lg border-2 border-gray-600 px-2 rounded-md'>
+                                        // <FontAwesomeIcon icon="fa-arrow-left" className='me-2' />
+                                        //     Back
+                                        // </button>
+                                        // <h1 className='text-3xl font-bold'>PaymentHistory</h1>
+                                        // </div>
+
+
+                                    }
                                 </div>
 
                                 <div>
-                                    <button  onClick={getPaymentHistory} className='px-3 py-2 rounded-md border-2 border-gray-600'>Payment History</button>
+                                    <button onClick={getPaymentHistory} className='px-3 py-2 rounded-md border-2 border-gray-600'>Payment History</button>
                                 </div>
 
-
-                                {/* <div>
-                                    <select id="countries" className="bg-gray-950 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                        <option selected >Filter</option>
-                                        <option value="Booked" >Booked</option>
-                                        <option value="All">All</option>
-                                        <option value="Canceled">Canceled</option>
-                                    </select>
-                                </div> */}
                             </div>
 
+                            {
+                                paymentHistory.length === 0 ?
 
+                                    <div className='space-y-2 '>
+                                        <div className='w-full  h-12 border-b-2 border-gray-800 flex'>
+                                            <div className='pl-3 pt-2 w-1/12 flex justify-center border-gray-800'>NO</div>
+                                            <div className='pl-5 pt-2 w-3/12 flex  justify-center border-gray-800'>HotelName</div>
+                                            <div className='pl-5 pt-2 w-3/12   flex justify-center  border-gray-800'>Total Price</div>
+                                            <div className='pl-5 pt-2 w-3/12   flex justify-center border-gray-800'>Image</div>
+                                            <div className='pl-5 pt-2 w-3/12   flex justify-center  border-gray-800'>Status</div>
+                                            <div className='pl-5 pt-2 w-3/12   flex justify-center  border-gray-800'>Change Status</div>
+                                        </div>
+                                        {
+                                            reservation.map((Hotel, index) => (
 
-                           {
-                                 paymentHistory.length === 0 ?
+                                                <div className='w-full h-28 border-b-2 border-gray-800 flex'>
+                                                    <div className='w-1/12 h-full flex justify-center items-center '>{index + 1}</div>
+                                                    <div className='w-3/12 h-full flex justify-start items-center '>{Hotel.HotelDetails.HotelName}</div>
+                                                    <div className='w-3/12 h-full flex justify-center items-center '>{Hotel.BookingDetails.totalCost}</div>
+                                                    <div className='w-3/12 h-full flex justify-center items-center '>
+                                                        <div className=' w-20 h-20 bg-cover' style={{ backgroundImage: `url("${Hotel?.HotelDetails?.HotelImage}")` }} >
 
-                           <div className='space-y-2 '>
-                                <div className='w-full  h-12 border-b-2 border-gray-800 flex'>
-                                    <div className='pl-3 pt-2 w-1/12 flex justify-center border-gray-800'>NO</div>
-                                    <div className='pl-5 pt-2 w-3/12 flex  justify-center border-gray-800'>HotelName</div>
-                                    <div className='pl-5 pt-2 w-3/12   flex justify-center  border-gray-800'>Total Price</div>
-                                    <div className='pl-5 pt-2 w-3/12   flex justify-center border-gray-800'>Image</div>
-                                    <div className='pl-5 pt-2 w-3/12   flex justify-center  border-gray-800'>Status</div>
-                                    <div className='pl-5 pt-2 w-3/12   flex justify-center  border-gray-800'>Change Status</div>
-                                </div>
-                                {
-                                    reservation.map((Hotel, index) => (
-
-                                        <div className='w-full h-28 border-b-2 border-gray-800 flex'>
-                                            <div className='w-1/12 h-full flex justify-center items-center '>{index + 1}</div>
-                                            <div className='w-3/12 h-full flex justify-center items-center '>{Hotel.HotelDetails.HotelName}</div>
-                                            <div className='w-3/12 h-full flex justify-center items-center '>{Hotel.BookingDetails.totalCost}</div>
-                                            <div className='w-3/12 h-full flex justify-center items-center '>
-                                                <div className=' w-20 h-20 bg-cover' style={{ backgroundImage: `url("${Hotel?.HotelDetails?.HotelImage}")` }} >
-
+                                                        </div>
+                                                    </div>
+                                                    <div className='w-3/12 h-full flex justify-center items-center '>{Hotel?.Booking}</div>
+                                                    <div className='w-3/12 h-full flex justify-center items-center '>
+                                                        <button onClick={() => cancelReservation(Hotel?._id)} className='border-2 border-gray-700 rounded-sm text-sm font-bold px-2 py-1'>Cancel Reservation</button>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div className='w-3/12 h-full flex justify-center items-center '>{Hotel?.Booking}</div>
-                                            <div className='w-3/12 h-full flex justify-center items-center '>
-                                                <button onClick={cancelReservation} className='border-2 border-gray-700 rounded-sm text-sm font-bold px-2 py-1'>Cancel Reservation</button>
-                                            </div>
+
+                                            ))
+
+                                        }
+
+                                    </div>
+
+                                    :
+
+                                    <div className='space-y-2 h-auto'>
+                                        <div className='w-full  h-12 border-b-2 border-gray-800 flex'>
+                                            <div className='pl-3 pt-2 w-1/12 flex justify-center border-gray-800'>NO</div>
+                                            <div className='pl-5 pt-2 w-3/12 flex  justify-center border-gray-800'>HotelName</div>
+                                            <div className='pl-5 pt-2 w-3/12   flex justify-center border-gray-800'>paymentStatus</div>
+                                            <div className='pl-5 pt-2 w-3/12   flex justify-center  border-gray-800'>Amount Paid</div>
+                                            <div className='pl-5 pt-2 w-3/12   flex justify-center  border-gray-800'>UserEmailAddress</div>
+                                            <div className='pl-5 pt-2 w-3/12   flex justify-center  border-gray-800'>Booking Status</div>
                                         </div>
-                                        
-                                    ))
+                                        {
+                                            paymentHistory.map((Hotel, index) => (
 
-                                }
+                                                <div className={`w-full h-28 border-b-2 ${Hotel.Booking === "Canceled" && "bg-red-400"} border-gray-800 flex`}>
+                                                    <div className='w-1/12 h-full flex justify-center items-center '>{index + 1}</div>
+                                                    <div className='w-3/12 h-full flex justify-center items-center '>{Hotel.HotelDetails.HotelName}</div>
+                                                    <div className='w-3/12 h-full flex justify-center items-center '> {Hotel.paymentStatus}</div>
+                                                    <div className='w-3/12 h-full flex justify-center items-center '>{Hotel.BookingDetails.totalCost}</div>
+                                                    <div className='w-3/12 h-full flex justify-center items-center '>{Hotel?.customerEmail}</div>
+                                                    <div className='w-3/12 h-full flex justify-center items-center '>
+                                                        {Hotel.Booking}
+                                                    </div>
+                                                </div>
 
-                            </div>
+                                            ))
 
-                            :
+                                        }
 
-                            <div className='space-y-2 h-auto'>
-                                <div className='w-full  h-12 border-b-2 border-gray-800 flex'>
-                                    <div className='pl-3 pt-2 w-1/12 flex justify-center border-gray-800'>NO</div>
-                                    <div className='pl-5 pt-2 w-3/12 flex  justify-center border-gray-800'>HotelName</div>
-                                    <div className='pl-5 pt-2 w-3/12   flex justify-center border-gray-800'>paymentStatus</div>
-                                    <div className='pl-5 pt-2 w-3/12   flex justify-center  border-gray-800'>Amount Paid</div>
-                                    <div className='pl-5 pt-2 w-3/12   flex justify-center  border-gray-800'>UserEmailAddress</div>
-                                    <div className='pl-5 pt-2 w-3/12   flex justify-center  border-gray-800'>Booking Status</div>
-                                </div>
-                                {
-                                    paymentHistory.map((Hotel, index) => (
+                                    </div>
 
-                                        <div className={`w-full h-28 border-b-2 ${Hotel.Booking === "Canceled" && "bg-red-400"} border-gray-800 flex`}>
-                                            <div className='w-1/12 h-full flex justify-center items-center '>{index + 1}</div>
-                                            <div className='w-3/12 h-full flex justify-center items-center '>{Hotel.HotelDetails.HotelName}</div>
-                                            <div className='w-3/12 h-full flex justify-center items-center '> {Hotel.paymentStatus}</div>
-                                            <div className='w-3/12 h-full flex justify-center items-center '>{Hotel.BookingDetails.totalCost}</div>
-                                            <div className='w-3/12 h-full flex justify-center items-center '>{Hotel?.customerEmail}</div>
-                                            <div className='w-3/12 h-full flex justify-center items-center '>
-                                                {Hotel.Booking}
-                                            </div>
-                                        </div>
-                                        
-                                    ))
 
-                                }
-
-                            </div>
-                            
-                        
-                        }
+                            }
 
 
 
-                            
+
                         </div>
 
                     </div>

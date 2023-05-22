@@ -1,34 +1,22 @@
-const { response } = require('express');
-const express = require('express')
+
 var jwt = require('jsonwebtoken');
 const userHelper = require('../Helpers/AuthHelper');
 const User = require("../Helpers/UserHelper")
 require('dotenv').config()
-
-var router = express();
-
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY)
 
-const maxAge = 8 * 24 * 60 * 60 * 1000
-
-jwtSecret = "JsonWebAccessTokenSecretkey"
-const userToken = "userAccessToken"
-const userRefresh = "userrefreshToken"
 
 const handleErrors = (err) => {
 
     let errors = { email: "", password: "", username: "" }
-
     if (err.message === "Incorrect Email") {
         errors.email = "Please sign up for continue using our service."
         return errors
     }
-
     if (err.message === "Incorrect Password") {
         errors.password = "The Password is Incorrect"
         return errors
     }
-
     if (err.message === "Email  is already Registered") {
         errors.email = "Email is already registered"
         return errors
@@ -38,14 +26,11 @@ const handleErrors = (err) => {
         return errors
     }
     if (err.message.includes("Users validation failed")) {
-
         Objects.values(err.errors).forEach(({ properties }) => {
-
             errors[properties.path] = properties.message
         })
     }
     return errors
-
 }
 
 module.exports = {
@@ -67,7 +52,6 @@ module.exports = {
 
         try {
             const token = req.cookies.userAccessToken
-
             if (!token) {
                 res.status(401).json({ message: "NO token found" })
             } else {
@@ -81,20 +65,14 @@ module.exports = {
                 })
             }
 
-
         } catch (error) {
-
             console.log(error);
             console.log(error.name);
 
         }
-
-
-
     },
 
     userSignup: async (req, res) => {
-
         try {
             userHelper.userSignup(req.body).then((user) => {
                 res.status(201).json({ user: user, created: true, })
@@ -109,33 +87,30 @@ module.exports = {
         }
     },
 
-
-
     userLogin: (req, res) => {
 
         try {
             userHelper.userLogin(req.body).then((user) => {
-                const accessToken = jwt.sign({ id: user._id }, process.env.ACCESSTOKEN_SECRET, { expiresIn: "20m" })
-                const refreshToken = jwt.sign({ id: user._id }, process.env.ACCESSTOKEN_SECRET, { expiresIn: "7d" })
-                if (req.cookies[`${userToken}`]) {
-                    req.cookies[`${userToken}`] = "";
+                const accessToken = jwt.sign({ id: user._id }, process.env.ACCESSTOKEN_SECRET, { expiresIn: "59m" })
+                const refreshToken = jwt.sign({ id: user._id }, process.env.ACCESSTOKEN_SECRET, { expiresIn: "1y" })
+                if (req.cookies[`${process.env.USER_TOKEN}`]) {
+                    req.cookies[`${process.env.USER_TOKEN}`] = "";
                 }
-                res.cookie(userToken, accessToken, {
+                res.cookie(process.env.USER_TOKEN, accessToken, {
                     path: '/',
                     expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
                     httpOnly: true,
                     sameSite: "lax",
                 })
-                res.cookie(userRefresh, refreshToken, {
+                res.cookie(process.env.USER_REFRESH, refreshToken, {
                     path: '/',
-                    expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
+                    expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365),
                     httpOnly: true,
                     secure: true,
                     sameSite: "lax",
                 })
 
-
-                return res.status(200).send({ user: user, created: true, accessToken: accessToken })
+                return res.status(200).json({ user, created: true, accessToken: accessToken })
             })
                 .catch((error) => {
                     const errors = handleErrors(error)
@@ -148,7 +123,9 @@ module.exports = {
 
     refreshToken: (req, res, next) => {
 
-        const prevtoken = req.cookies.userrefreshToken
+        const prevtoken = req.cookies.process.env.USER_REFRESH
+
+        console.log(prevtoken);
         if (!prevtoken) {
             return res.status(400).json({ message: "couldn't find token" })
         }
@@ -158,9 +135,9 @@ module.exports = {
             }
             const token = jwt.sign({ id: user.id }, process.env.ACCESSTOKEN_SECRET, {
 
-                expiresIn: "20m"
+                expiresIn: "59m"
             })
-            res.cookie(userToken, token, {
+            res.cookie(process.env.USER_TOKEN, token, {
                 path: '/',
                 expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
                 httpOnly: true,
@@ -174,10 +151,10 @@ module.exports = {
     logOut: (req, res) => {
 
 
-        res.clearCookie(`${userToken}`)
-        req.cookies[`${userToken}`] = "";
-        res.clearCookie(`${userRefresh}`)
-        req.cookies[`${userRefresh}`] = "";
+        res.clearCookie(`${process.env.USER_TOKEN}`)
+        req.cookies[`${process.env.USER_TOKEN}`] = "";
+        res.clearCookie(`${process.env.USER_REFRESH}`)
+        req.cookies[`${process.env.USER_REFRESH}`] = "";
 
         res.status(200).json({ message: "Successfully Logged Out" })
 
@@ -195,47 +172,34 @@ module.exports = {
                         return res.status(200).json({ user })
                     }
                 })
-
             } else {
-
                 res.status(404).json({ message: "user not found" })
             }
-
         }
         catch (error) {
-
             console.log(error);
         }
-
     },
 
     uploadUserImage: (req, res) => {
 
         const userId = req.id
-
         const userImage = req.body.userImage
-
         userHelper.UploadUserImage(userImage, userId).then((response) => {
-
             res.status(200).json({ response })
         })
             .catch((err) => res.status(500).json({ message: "upation failed" }))
-
     },
 
     adduserInformation: (req, res) => {
-
+        
         const userId = req.id
-
         userHelper.addUserInformation(req.body, userId).then((response) => {
-
             res.status(200).json({ response })
         })
             .catch((err) => {
-
                 res.status(500).json({ message: "failed to add userInfo" })
             })
-
     },
 
     getAllHotels: (req, res) => {
@@ -258,34 +222,11 @@ module.exports = {
         const { totalCost, } = req.body
         const userId = req.id
         const user = await userHelper.getUser(userId)
-
-        const BookingDetail = {
-            HotelDetails: {
-                _id: req.body.HotelDetails._id,
-                HotelName: req.body.HotelDetails.HotelName,
-                NumberOfRooms: req.body.HotelDetails.NumberofRooms,
-                HotelAddress: req.body.HotelDetails.HotelAddress,
-                Price: req.body.HotelDetails.Price,
-                HotelFacelities: req.body.HotelDetails.HotelFacilities,
-            },
-            HostData: req.body.HotelDetails.HostData,
-            BookingDetails: {
-                CheckIn: req.body.CheckIn,
-                CheckOut: req.body.CheckOut,
-                NumberOfNights: req.body.numberOfNights,
-                TotalGusts: req.body.TotalGusts,
-                numberOfAdults: req.body.numberOfAdults,
-                numberOfChildren: req.body.numberOfChildren,
-                numberOfInfants: req.body.numberOfInfants,
-                totalCost: req.body.totalCost
-            }
-        }
         try {
             const customer = await stripe.customers.create({
                 metadata: {
                     email: user.Email,
                     name: user.UserName,
-
                     CheckIn: req.body.CheckIn,
                     CheckOut: req.body.CheckOut,
                     NumberOfNights: req.body.numberOfNights,
@@ -294,66 +235,45 @@ module.exports = {
                     numberOfChildren: req.body.numberOfChildren,
                     numberOfInfants: req.body.numberOfInfants,
                     totalCost: req.body.totalCost,
-
                     hostId: req.body.HotelDetails.HostData._id,
                     hostName: req.body.HotelDetails.HostData.Hostname,
                     Email: req.body.HotelDetails.HostData.Email,
-
-
                     userName: user.UserName,
                     userId: req.id,
                     userEmail: user.Email,
-
-
                     HotelName: req.body.HotelDetails.HotelName,
                     HotelId: req.body.HotelDetails._id,
                     HotelAddress: req.body.HotelDetails.HotelAddress.place_name,
                     HotelImage: req.body.HotelDetails.HotelImages[0],
-
-
-
-
                 }
             })
-
             const session = await stripe.checkout.sessions.create({
                 customer: customer.id,
                 line_items: [
                     {
                         price_data: {
                             currency: 'INR',
-                            unit_amount: (totalCost * 100),
                             product_data: {
                                 name: req.body.HotelDetails.HotelName,
                                 images: [req.body.HotelDetails.HotelImages[0]],
                                 metadata: {
                                     id: req.body._id,
-
                                 }
                             },
-                            unit_amount: totalCost,
+                            unit_amount: totalCost * 100,
                         },
                         quantity: 1,
-
                     },
                 ],
                 mode: 'payment',
-                success_url: "http://localhost:3000/success",
-                cancel_url: "http://localhost:3000/cancel",
-
-
+                success_url: process.env.STRIPE_SUCCESS_URL,
+                cancel_url: process.env.STRIPE_CANCEL_URL,
             });
-
             res.status(200).json({ url: session.url })
-
         } catch (err) {
-
             console.log(err);
-
             res.status(500).json({ message: "payment failed" })
-
         }
-
     },
 
 
@@ -421,15 +341,13 @@ module.exports = {
                         userName: res.metadata.userName,
                         userId: res.metadata.userId,
                         userEmail: res.metadata.userEmail
-                    },
-                    
+                    },   
                 }
                 const response = await User.reserveHotel(reservationDetails)
                      if(response){
                           User.updateHotelToBooked(response)
                      }
                 })
-            
         }
         res.send().end();
     },

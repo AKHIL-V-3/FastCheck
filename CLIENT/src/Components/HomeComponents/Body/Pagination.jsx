@@ -6,7 +6,6 @@ function Pagination({totalPosts,postPerPage,setCurrentPage,currentPage}) {
          pages.push(i)
     }
   return (
-
     <div className='flex space-x-2 justify-end'>
         {
             pages.map((page,index)=>{
