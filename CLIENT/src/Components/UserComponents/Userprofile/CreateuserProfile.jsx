@@ -10,22 +10,25 @@ import Swal from 'sweetalert2'
 import jwtInterceptor from '../../helpers/jwtInterceptor'
 import { useEffect } from 'react'
 import { baseUrl } from '../../../Axios/api'
+import { ColorRing, Oval } from 'react-loader-spinner'
 
 function CreateuserProfile() {
 
   const dispatch = useDispatch()
 
   const [upload, setUpload] = useState(false)
+  const [loading, setLoading] = useState(false)
 
 
   const user = useSelector(state => state.user.user)
   const userImage = useSelector(state => state.user.userImage)
-  const tempUser = useSelector(state =>state.user.personalInfo)
+  const tempUser = useSelector(state => state.user.personalInfo)
 
 
   const userFirstLetter = user.UserName.split("")[0].toUpperCase()
 
   const uploadImage = async (e) => {
+
     const file = e.target.files[0]
     const url = URL.createObjectURL(file)
     const userImage = {
@@ -36,10 +39,8 @@ function CreateuserProfile() {
 
     try {
 
-
       setUpload(false)
-
-
+      setLoading(true)
       const formData = new FormData()
       formData.append("file", file)
       formData.append("upload_preset", "UserImages")
@@ -48,8 +49,9 @@ function CreateuserProfile() {
       const { data } = await jwtInterceptor.post("/userprofile/uploaduserimage", { userImage: res.data.secure_url }, {
         withCredentials: true
       })
-       
-        dispatch(authactions.setUser(data.response))
+
+      setLoading(false)
+      dispatch(authactions.setUser(data.response))
 
     } catch (err) {
       console.log(err.message);
@@ -57,18 +59,16 @@ function CreateuserProfile() {
 
   }
 
-
   const formik = useFormik({
 
     initialValues: {
-
       school: tempUser ? tempUser.school : user.personalInformation ? user.personalInformation.school : "",
-      work:tempUser ? tempUser.work :user.personalInformation ? user.personalInformation.work : "",
-      live:tempUser ? tempUser.live :user.personalInformation ? user.personalInformation.live : "",
-      language:tempUser ? tempUser.language :user.personalInformation ? user.personalInformation.language : "",
-      pets:tempUser ? tempUser.pets :user.personalInformation ? user.personalInformation.pets : "",
-      spendtime:tempUser ? tempUser.spendtime :user.personalInformation ? user.personalInformation.spendtime : "",
-      about:tempUser ? tempUser.about :user.personalInformation ? user.personalInformation.about : ""
+      work: tempUser ? tempUser.work : user.personalInformation ? user.personalInformation.work : "",
+      live: tempUser ? tempUser.live : user.personalInformation ? user.personalInformation.live : "",
+      language: tempUser ? tempUser.language : user.personalInformation ? user.personalInformation.language : "",
+      pets: tempUser ? tempUser.pets : user.personalInformation ? user.personalInformation.pets : "",
+      spendtime: tempUser ? tempUser.spendtime : user.personalInformation ? user.personalInformation.spendtime : "",
+      about: tempUser ? tempUser.about : user.personalInformation ? user.personalInformation.about : ""
     },
 
     validationSchema: Yup.object({
@@ -88,30 +88,26 @@ function CreateuserProfile() {
   })
   const updateUserInformation = async () => {
 
-      dispatch(authactions.settemporaryUser(formik.values))
+    dispatch(authactions.settemporaryUser(formik.values))
     const { data } = await jwtInterceptor.post("/userprofile/addpersonalinformation", formik.values, {
       withCredentials: true
     })
 
     dispatch(authactions.setUser(data.response))
 
-    if(data){
+    if (data) {
       Swal.fire({
         position: 'center',
         icon: 'success',
         title: 'User Information Updated',
         showConfirmButton: false,
-        timer:2500
+        timer: 2500
       })
     }
   }
 
-  useEffect(() => {
-
-    return () => {
-    
-    }
-  },[])
+  
+  console.log(user,'uuuuuuuuuu');
 
   return (
     <section>
@@ -124,10 +120,41 @@ function CreateuserProfile() {
             <div className='pt-40 pb-20'>
               <div className='xl:relative w-full xl:flex'>
                 <div className='xl:sticky top-40 flex flex-col xl:items-end items-center h-64 xl:w-4/12 w-full'>
-                  <div className='w-52 h-52 bg-white relative rounded-full flex flex-col items-center pt-6 bg-cover' style={{ backgroundImage: `url(${userImage ? userImage?.userImg : user?.photoUrl})` }} >
-                    {(user.photoUrl || userImage) ? null: <h1 className='text-9xl font-bold text-black'>{userFirstLetter}</h1>}
+
+
+
+
+                  <div className={`w-52 h-52 ${loading && "opacity-30"} bg-white relative border-4 rounded-full flex  flex-col items-center pt-6 bg-cover`} style={{ backgroundImage: `url(${userImage ? userImage?.userImg : user?.photoUrl})` }} >
+
+                    {
+
+                      loading &&
+
+
+                      <div>
+                        <Oval
+                          height={100}
+                          width={100}
+                          color="#4fa94d"
+                          wrapperStyle={{}}
+                          wrapperClass=""
+                          visible={true}
+                          ariaLabel='oval-loading'
+                          secondaryColor="#4fa94d"
+                          strokeWidth={2}
+                          strokeWidthSecondary={2}
+  
+                        />
+                      </div>
+
+
+                    }
+
+
+                    {(user.photoUrl || userImage) ? null : <h1 className='text-9xl font-bold text-black'>{userFirstLetter}</h1>}
 
                     <label onChange={uploadImage} for="file-upload" class="absolute bottom-0 cursor-pointer border-2 w-20 h-8  border-gray-900 bg-white  font-medium text-black flex justify-center items-center space-x-2  rounded-sm  mt-8 shadow-md shadow-gray-700">
+
                       <FontAwesomeIcon icon="fa-camera" />
                       <span class="inline-block rounded-sm  hover:bg-primary-600">
                         {user.photoUrl ? "Edit" : "Add"}
@@ -151,62 +178,62 @@ function CreateuserProfile() {
 
                     <div>
                       <p className='text-md font-light'>The information you share will be used across Airbnb to help other guests and Hosts get to know you</p>
-                    </div>                     
-                      
-                      <form action="" onSubmit={formik.handleSubmit} enctype="multipart/form-data" >
-                        <div className='flex flex-col space-y-10 mt-14'>
-                          <div className='xl:flex space-y-10 xl:space-y-0  xl:space-x-10'>
-                            <div className='xl:w-6/12 w-full h-12'>
-                              <input type="text" name='school' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.school} className='w-full h-full border-b-2 bg-white outline-none p-2 border-gray-800' placeholder='Where I went to School' />
-                              {formik.touched.school && formik.errors.school ? <p className='text-red-600 text-sm'>{formik.errors.school}</p> : null}
-                            </div>
+                    </div>
 
-                            <div className='xl:w-6/12 w-full h-12'>
-                              <input type="text" name='work' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.work} className='w-full h-full border-b-2 bg-white outline-none p-2 border-gray-800' placeholder='My Work' />
-                              {formik.touched.work && formik.errors.work ? <p className='text-red-600 text-sm'>{formik.errors.work}</p> : null}
-                            </div>
+                    <form action="" onSubmit={formik.handleSubmit} enctype="multipart/form-data" >
+                      <div className='flex flex-col space-y-10 mt-14'>
+                        <div className='xl:flex space-y-10 xl:space-y-0  xl:space-x-10'>
+                          <div className='xl:w-6/12 w-full h-12'>
+                            <input type="text" name='school' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.school} className='w-full h-full border-b-2 bg-white outline-none p-2 border-gray-800' placeholder='Where I went to School' />
+                            {formik.touched.school && formik.errors.school ? <p className='text-red-600 text-sm'>{formik.errors.school}</p> : null}
                           </div>
 
-                          <div className='xl:flex space-y-10 xl:space-y-0 xl:space-x-10'>
-
-                            <div className='xl:w-6/12 w-full h-12'>
-                              <input type="text" name='live' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.live} className='w-full h-full border-b-2 bg-white outline-none p-2 border-gray-800' placeholder='Where I Live' />
-                              {formik.touched.live && formik.errors.live ? <p className='text-red-600 text-sm'>{formik.errors.live}</p> : null}
-                            </div>
-                            <div className='xl:w-6/12 w-full h-12'>
-                              <input type="text" name='language' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.language} className='w-full h-full border-b-2 bg-white outline-none p-2 border-gray-800' placeholder='Languages I speak' />
-                              {formik.touched.language && formik.errors.language ? <p className='text-red-600 text-sm'>{formik.errors.language}</p> : null}
-                            </div>
-                          </div>
-
-                          <div className='xl:flex space-y-10 xl:space-y-0 xl:space-x-10'>
-                            <div className='xl:w-6/12 w-full h-12'>
-                              <input type="text" name='spendtime' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.spendtime} className='w-full h-full border-b-2 bg-white outline-none p-2 border-gray-800' placeholder='I spend too much time' />
-                              {formik.touched.school && formik.errors.spendtime ? <p className='text-red-600 text-sm'>{formik.errors.spendtime}</p> : null}
-                            </div>
-                            <div className='xl:w-6/12 w-full h-12'>
-                              <input type="text" name='pets' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.pets} className='w-full h-full border-b-2 bg-white outline-none p-2 border-gray-800' placeholder='Pets' />
-                              {formik.touched.pets && formik.errors.pets ? <p className='text-red-600 text-sm'>{formik.errors.pets}</p> : null}
-                            </div>
-                          </div>
-
-
-                          <div>
-                            <h1 className='text-3xl font-bold'>About You</h1>
-                          </div>
-
-
-                          <div>
-                            <textarea name="about" id="" onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.about} className='w-full h-24 border-gray-800 border-2 bg-white outline-none p-4 ' cols="30" rows="10"></textarea>
-                          </div>
-                          
-                          <div className='flex justify-end'>
-                            <button type='submit' className='w-24 h-12 border-2 border-gray-800 rounded-md hover:shadow-md hover:shadow-gray-500 hover:bg-white'>Submit</button>
+                          <div className='xl:w-6/12 w-full h-12'>
+                            <input type="text" name='work' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.work} className='w-full h-full border-b-2 bg-white outline-none p-2 border-gray-800' placeholder='My Work' />
+                            {formik.touched.work && formik.errors.work ? <p className='text-red-600 text-sm'>{formik.errors.work}</p> : null}
                           </div>
                         </div>
-                      </form>
-                      
-                     
+
+                        <div className='xl:flex space-y-10 xl:space-y-0 xl:space-x-10'>
+
+                          <div className='xl:w-6/12 w-full h-12'>
+                            <input type="text" name='live' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.live} className='w-full h-full border-b-2 bg-white outline-none p-2 border-gray-800' placeholder='Where I Live' />
+                            {formik.touched.live && formik.errors.live ? <p className='text-red-600 text-sm'>{formik.errors.live}</p> : null}
+                          </div>
+                          <div className='xl:w-6/12 w-full h-12'>
+                            <input type="text" name='language' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.language} className='w-full h-full border-b-2 bg-white outline-none p-2 border-gray-800' placeholder='Languages I speak' />
+                            {formik.touched.language && formik.errors.language ? <p className='text-red-600 text-sm'>{formik.errors.language}</p> : null}
+                          </div>
+                        </div>
+
+                        <div className='xl:flex space-y-10 xl:space-y-0 xl:space-x-10'>
+                          <div className='xl:w-6/12 w-full h-12'>
+                            <input type="text" name='spendtime' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.spendtime} className='w-full h-full border-b-2 bg-white outline-none p-2 border-gray-800' placeholder='I spend too much time' />
+                            {formik.touched.school && formik.errors.spendtime ? <p className='text-red-600 text-sm'>{formik.errors.spendtime}</p> : null}
+                          </div>
+                          <div className='xl:w-6/12 w-full h-12'>
+                            <input type="text" name='pets' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.pets} className='w-full h-full border-b-2 bg-white outline-none p-2 border-gray-800' placeholder='Pets' />
+                            {formik.touched.pets && formik.errors.pets ? <p className='text-red-600 text-sm'>{formik.errors.pets}</p> : null}
+                          </div>
+                        </div>
+
+
+                        <div>
+                          <h1 className='text-3xl font-bold'>About You</h1>
+                        </div>
+
+
+                        <div>
+                          <textarea name="about" id="" onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.about} className='w-full h-24 border-gray-800 border-2 bg-white outline-none p-4 ' cols="30" rows="10"></textarea>
+                        </div>
+
+                        <div className='flex justify-end'>
+                          <button type='submit' className='w-24 h-12 border-2 border-gray-800 rounded-md hover:shadow-md hover:shadow-gray-500 hover:bg-white'>Submit</button>
+                        </div>
+                      </div>
+                    </form>
+
+
 
 
                   </div>

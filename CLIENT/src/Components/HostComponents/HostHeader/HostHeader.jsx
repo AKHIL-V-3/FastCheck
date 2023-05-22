@@ -73,7 +73,7 @@ function HostHeader() {
     <section className='sticky top-0 z-40 '>
       <nav className='bg-white text-black h-auto shadow-md shadow-gray-400'>
         <div className='flex items-center justify-start h-20 xl:ml-10 ml-5 relative'>
-          <div className='font-extrabold text-3xl xl:text-4xl'>LOGO</div>
+          <div className='font-extrabold text-3xl xl:text-4xl'>Fastcheck-In</div>
           <div className='xl:flex justify-evenly items-center w-4/12 hidden'>            
           </div>
           <div className='flex absolute xl:right-16 right-8'>

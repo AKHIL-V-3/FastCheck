@@ -58,24 +58,18 @@ module.exports={
 
     hostHome:async(req,res)=>{     
            
-            const hostId = req.id
-              
+            const hostId = req.hostId 
             HostHelpers.getHost(hostId).then((host)=>{
-
                   if(!host){
-
                       return res.status(404).json({message:"host not found"})
                   }
-
                   res.status(200).json({host})
             })
           
     },
  
     getHoteldata:(req,res)=>{
-
-        const hostId = req.id
-
+        const hostId = req.hostId
         HostHelpers.getHotelData(hostId).then((response)=>{
             res.status(200).json(response)    
         })
@@ -97,8 +91,7 @@ module.exports={
             console.log(error, 'catcherrrorr');
             const errors = handleErrors(error)
             res.status(403).json({ errors, created: false })
-        }
-         
+        }   
     },
 
     hostLogin:(req,res)=>{
@@ -122,23 +115,15 @@ module.exports={
                     httpOnly: true,
                     secure: true,
                     sameSite: "lax",
-                })
-
-                 
+                })  
                 return res.status(200).send({ user: user, created: true, accessToken: accessToken })     
-              
             })
                 .catch((error) => {
-
                     const errors = handleErrors(error)
                     res.json({ errors, created: false })
                 })
         } catch (error) {
-
-            console.log(error.message,'86868686868686');
-            console.log('error ivide aaaaneeeee');
-
-
+            console.log(error);
         }
     },
 
@@ -152,25 +137,21 @@ module.exports={
                     if (err) {
                         res.status(401).json({ message: "unAutharized token" })
                     } else {
-                        req.id = user.id
+                        req.hostId = user.id
                         next()
                     }
                 })
             }
 
-
         } catch (error) {
 
             console.log(error);
             console.log(error.name);
-
         }
- 
 },
 
 refreshTokenHost :(req,res,next)=>{
 
-    console.log('refreshtoken calllllllllled');
     const prevtoken = req.cookies.hostRefreshToken
     if (!prevtoken) {
         return res.status(400).json({ message: "couldn't find token" })
@@ -180,7 +161,6 @@ refreshTokenHost :(req,res,next)=>{
             return res.status(403).json({ message: "Authentication failed" })
         }
         const token = jwt.sign({ id: user.id }, process.env.ACCESSTOKEN_SECRETHOST, {
-
             expiresIn: "20m"
         })
         res.cookie(HostToken, token, {
@@ -189,7 +169,7 @@ refreshTokenHost :(req,res,next)=>{
             httpOnly: true,
             sameSite: "lax",
         })
-        req.id = user.id
+        req.hostId = user.id
         next()
     })
 
@@ -197,17 +177,13 @@ refreshTokenHost :(req,res,next)=>{
 },
 
 addHotel:async (req,res)=>{
-
-    const hostId = req.id
+    const hostId = req.hostId
     req.body.hostId = new ObjectId(hostId)
-
     HostHelpers.addHotel(req.body).then((response)=>{
-
            console.log(response);     
            res.status(200).json({message:"Hotel Added"})
     })
     .catch((error)=>{
-
           console.log(error);
     })
 },
@@ -224,40 +200,28 @@ getOneHotel:(req,res)=>{
 },
 
 editHotel:(req,res)=>{
-
     const hotelId = req.params.hotelId 
     HostHelpers.editHotel(req.body,hotelId).then((response)=>{
-
          res.status(200).json({response})
     })
     .catch((error)=>{
-
          res.status(500).json({message:"failed"})
-    })
-
-      
+    })   
 },
 
 
 logOut:(req,res)=>{
-
    res.clearCookie(`${HostToken}`)
    req.cookies[`${HostToken}`] = "";
    res.clearCookie(`${HostRefresh}`)
    req.cookies[`${HostRefresh}`] = "";
-
    res.status(200).json({ message: "Successfully Logged Out" })
-
 },
 
 
 removeHotel:(req,res)=>{
-
        const hotelId = req.params.hotelId  
        HostHelpers.removeHotel(hotelId).then((response)=>{
-
-           console.log(response);
-
            res.status(200).json({message:"successfully deleted"})
        })
        .catch((err)=> {

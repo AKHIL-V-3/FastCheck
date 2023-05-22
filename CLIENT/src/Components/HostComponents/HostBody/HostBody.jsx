@@ -94,10 +94,9 @@ function HostBody() {
 
 
     useEffect(() => {
-
+        
         getHoteldata().then((data) => {
             setDatas(data)
-
         }).catch((err) => {
 
             console.log(err);
@@ -129,7 +128,7 @@ function HostBody() {
 
                 {   
                    
-                   datas.length === 0  ?
+                   datas.length !== 0  ?
                     
                     <div className='max-h-full  flex flex-col items-center'>
                     <div className='w-11/12 h-full mt-20 space-y-10'>
@@ -148,7 +147,7 @@ function HostBody() {
                                         <div className='flex justify-between mt-4'>
                                             <div className='flex flex-col space-y-3'>
                                                 <h1 className='font-semibold text-sm'>{item?.HotelName}</h1>
-                                                <p className='font-semibold text-sm'>₹ {item.Price}<span className='font-thin ml-2'>night</span></p>
+                                                <p className='font-semibold text-sm'>₹ {item?.Price}<span className='font-thin ml-2'>night</span></p>
 
 
                                             </div>

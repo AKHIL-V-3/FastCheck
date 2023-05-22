@@ -1,12 +1,16 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Footer from '../../HomeComponents/Footer/Footer'
 import Header from '../../HomeComponents/Headear/Header'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { baseUrl } from '../../../Axios/api'
 
 
 function UserProfile() {
+
+
+    const [userdata,setUserdata] = useState()
 
     const user = useSelector(state => state.user.user)
     const navigate = useNavigate()
@@ -17,16 +21,30 @@ function UserProfile() {
         document.getElementsByTagName("html")[0].scrollTop = 0
 
     }, [])
+
+    // useEffect(()=>{
+       
+    //         const getUserprofile = async ()=>{
+
+    //                const {data} = await baseUrl.get("/getuserimage",{withCredentials:true})
+
+    //                setUserdata(data.response)
+    //         }
+    //         getUserprofile()
+    // },[])
+
+
+
     return (
         <div>
             <Header />
             <section>
                 <div className='h-full xl:pb-10 w-full bg-white text-black  flex justify-center'>
                     <div className=' w-10/12 xl:flex' >
-                        <div className=' xl:w-1/2 w-full xl:h-full h-auto ml-4 flex flex-col pt-14'>
+                        <div className=' xl:w-5/12 w-full xl:h-full h-auto ml-4 flex flex-col pt-14'>
                             <div className='border-2 border-gray-300 xl:w-80 w-full xl:h-64 h-72 rounded-3xl flex  flex-col items-center pt-8 shadow-md shadow-gray-300'>
-                                <div className='w-32 h-32 rounded-full bg-white flex pt-2 justify-center bg-cover' style={{ backgroundImage: `url(${user?.photoUrl})` }}>
-                                    {!user?.photoUrl && <h1 className='text-8xl font-bold text-black'>{userFirstLetter}</h1>}
+                                <div className='w-32 h-32 rounded-full bg-black flex pt-2 justify-center text-white bg-cover border-2' style={{ backgroundImage: `url(${user?.photoUrl})` }}>
+                                    {!user?.photoUrl && <h1 className='text-8xl font-bold'>{userFirstLetter}</h1>}
                                 </div>
                                 <div className='mt-3'>
                                     <h1 className='font-semibold text-2xl'>{user?.UserName}</h1>
@@ -63,7 +81,7 @@ function UserProfile() {
 
                         </div>
 
-                        <div className='xl:w-1/2 w-full h-full  xl:flex xl:items-start pt-16 '>
+                        <div className='xl:w-7/12 w-full h-full  xl:flex xl:items-start pt-16 '>
 
 
                             {!user?.personalInformation ?
@@ -83,7 +101,7 @@ function UserProfile() {
 
                                         <div className='space-y-12 w-full'>
 
-                                            <div className='flex space-x-2  xl:w-10/12 w-full xl:items-center'>
+                                            <div className='flex space-x-2 xl:w-10/12 w-full xl:items-center'>
                                                 <FontAwesomeIcon icon="fa-graduation-cap" className='text-xl' />
                                                 <p>Where I went to School : {user?.personalInformation.school}</p>
                                             </div>
@@ -98,7 +116,7 @@ function UserProfile() {
                                             </div>
                                         </div>
 
-                                        <div className='flex flex-col space-y-12'>
+                                        <div className='flex flex-col w-full space-y-12 mt-12'>
 
                                             <div className='flex space-x-2 xl:w-10/12 w-full xl:items-center'>
                                                 <FontAwesomeIcon icon="shopping-bag" className='text-xl' />

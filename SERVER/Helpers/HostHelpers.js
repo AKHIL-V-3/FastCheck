@@ -98,7 +98,6 @@ module.exports = {
      getHotelData: (hostId) => {
           return new Promise(async (resolve, reject) => {
                Hotel.find({hostId:new ObjectId(hostId)}).then((data) => {
-
                     if (data) resolve(data)
                     else reject()
 

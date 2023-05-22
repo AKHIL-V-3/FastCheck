@@ -24,7 +24,7 @@ router.post('/webhook', express.json({type: 'application/json'}),userController.
 router.get("/trips",verifyToken,userController.getReservations)
 router.get("/filteredtrips/:value",verifyToken,userController.getFilteredReservations)
 router.patch("/trips/cancelreservation/:BookingId",userController.cancelReservation)
-
+router.get("/getuserimage/:userId",verifyToken,userController.getUserImage)
 
 
 module.exports = router;

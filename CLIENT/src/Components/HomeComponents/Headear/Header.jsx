@@ -45,25 +45,24 @@ function Header() {
     });
   }
   const userProfile = async () => {
-       
-    
-
-   const {data} = await jwtInterceptor.get("/userprofile", {
+    const { data } = await jwtInterceptor.get("/userprofile", {
       withCredentials: true
+    }).catch((err) => {
+      console.log(err.message);
+      console.log(err.code);
+      navigate("/userlogin")
     })
 
-    if(data){
+    if (data) {
       dispatch(authactions.setUser(data.user))
       navigate("/userprofile")
-    }else{ 
-      console.log();
-      console.log();
+    } else {
       navigate("/userlogin")
     }
-   
   }
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn)
-  
+  const user = useSelector((state) => state.user.user)
+
   useEffect(() => {
     apiCall().then(data => {
       if (data) {
@@ -73,13 +72,6 @@ function Header() {
     })
 
   }, [dispatch, isLoggedIn])
-
-
-
-
-
-
-
 
   // useEffect(() => {
 
@@ -105,8 +97,7 @@ function Header() {
       <nav className='bg-white text-black h-auto shadow-md shadow-gray-400'>
         <div className='flex items-center justify-start h-20 xl:ml-10 ml-5 relative'>
           <div className='font-extrabold text-3xl xl:text-4xl flex' onClick={() => navigate("/")}>
-            <img src="https://www.shutterstock.com/image-vector/map-pin-logo-design-element-600w-585188173.jpg" className='w-12 h-10 rounded-s-md' alt="" />
-            <img src="https://t3.ftcdn.net/jpg/04/37/56/48/360_F_437564804_9i2iMQl65goueDniemeb7ae6iiq1yFmy.jpg" className='w-12 h-10 rounded-e-md' alt="" />
+          <div className='font-extrabold text-3xl xl:text-4xl'>Fastcheck-In</div>
           </div>
           <div className='xl:flex justify-evenly items-center w-9/12 hidden'>
 

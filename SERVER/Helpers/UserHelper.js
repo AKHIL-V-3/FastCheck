@@ -139,5 +139,16 @@ module.exports = {
                     reject()
                  })
           })
+    },
+    getUserImage:(userId)=>{
+          return new Promise((resolve,reject)=>{
+                Users.findById(userId).then((response)=>{
+                    resolve(response)
+                 })
+                 .catch((err)=>{
+
+                    reject()
+                 })
+          })
     }
 }

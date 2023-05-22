@@ -51,8 +51,10 @@ function Posts() {
       setHotels(data.response)
       dispatch(authactions.setHomeHotels(data.response))
       dispatch(authactions.setsearchHotels(data.response))
+
     })
-   
+
+    
   }, [dispatch])
 
   const lastpostIndex = currentPage * postsPerPage
@@ -65,7 +67,7 @@ function Posts() {
 
       const ratingArray = await Promise.all(currentPosts?.map(async (hotel) => {
         try {
-          const { data } = await baseUrl.get("/review/rating/" + hotel?._id, {
+          const { data } = await baseUrl.get("/review/rating/" + hotel._id, {
             withCredentials: true
           })
 
@@ -80,7 +82,7 @@ function Posts() {
 
     getAllRating()
 
-  }, [])
+  },[])
 
 
   return (

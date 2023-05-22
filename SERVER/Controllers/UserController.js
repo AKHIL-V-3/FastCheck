@@ -387,7 +387,18 @@ module.exports = {
            .catch((error)=>{
                 res.status(500).json({message:"cancel failed"})
            })
-    }
+    },
+    getUserImage:(req,res)=>{
+           const userId = req.id
+           User.getUserImage(userId).then((response)=>{
+                 res.status(200).json({response})
+           })
+           .catch((error)=>{
+                res.status(500).json({message:"cancel failed"})
+           })
+    },
+
+    
 
 
 }
