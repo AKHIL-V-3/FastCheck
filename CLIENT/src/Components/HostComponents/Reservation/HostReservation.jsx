@@ -14,6 +14,10 @@ function HostReservation() {
     const [paymentHistory, setPaymentHistory] = useState([])
     const host = useSelector(state => state.user.host)
 
+
+
+    console.log(host)
+
     const navigate = useNavigate()
 
 

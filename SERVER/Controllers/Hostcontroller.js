@@ -98,8 +98,8 @@ module.exports={
         try {
             HostHelpers.hostLogin(req.body).then((user) => {
 
-                const accessToken = jwt.sign({ id: user._id }, process.env.ACCESSTOKEN_SECRETHOST, { expiresIn: "20m" })
-                const refreshToken = jwt.sign({ id: user._id }, process.env.ACCESSTOKEN_SECRETHOST, { expiresIn: "7d" })
+                const accessToken = jwt.sign({ id: user._id }, process.env.ACCESSTOKEN_SECRETHOST, { expiresIn: "60m" })
+                const refreshToken = jwt.sign({ id: user._id }, process.env.ACCESSTOKEN_SECRETHOST, { expiresIn: "30d" })
                 if (req.cookies[`${HostToken}`]) {
                     req.cookies[`${HostToken}`] = "";
                 }
@@ -161,7 +161,7 @@ refreshTokenHost :(req,res,next)=>{
             return res.status(403).json({ message: "Authentication failed" })
         }
         const token = jwt.sign({ id: user.id }, process.env.ACCESSTOKEN_SECRETHOST, {
-            expiresIn: "20m"
+            expiresIn: "60m"
         })
         res.cookie(HostToken, token, {
             path: '/host',

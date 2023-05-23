@@ -136,7 +136,7 @@ function SingleRoom() {
             receiverId: HotelData.HostData._id,
         }
         try {
-            const res = await jwtInterceptor.post("/chat", members, {
+            const res = await jwtInterceptor.post("http://localhost:5000/chat", members, {
                 withCredentials: true
             })
 
@@ -194,7 +194,7 @@ function SingleRoom() {
             hotelId: HotelData._id
         }
         try {
-            const res = await jwtInterceptor.post("/review", Review, {
+            const res = await jwtInterceptor.post("http://localhost:5000/review", Review, {
                 withCredentials: true
             })
             setReview("")

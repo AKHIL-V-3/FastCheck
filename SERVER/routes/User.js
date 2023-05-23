@@ -13,7 +13,7 @@ router.get('/',userController.Home);
 router.post('/usersignup',userController.userSignup)
 router.post('/userlogin',userController.userLogin)
 router.get("/refresh",refreshToken,userController.Home)
-router.post("/logout",userController.logOut)
+router.get("/logout",userController.logOut)
 router.get("/userprofile",verifyToken,userController.userProfile)
 router.post("/userprofile/uploaduserimage",verifyToken,userController.uploadUserImage)
 router.post("/userprofile/addpersonalinformation",verifyToken,userController.adduserInformation)

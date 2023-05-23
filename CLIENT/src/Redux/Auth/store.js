@@ -6,11 +6,9 @@ import storage from 'redux-persist/lib/storage';
 
 
 const persistConfig = {
-  
-          key:"persistsecretkey",
+          key:"HotelBookingpersistsecretkey",
           storage
 }
-
 const persistAuthReducer = persistReducer(persistConfig,userReducer)
 
 const store = configureStore({
@@ -20,7 +18,5 @@ const store = configureStore({
   },
   
 })
-
 export default store;
-
 export const persistedStore = persistStore(store)

@@ -5,7 +5,6 @@ const User = require("../Helpers/UserHelper")
 require('dotenv').config()
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY)
 
-
 const handleErrors = (err) => {
 
     let errors = { email: "", password: "", username: "" }
@@ -52,6 +51,7 @@ module.exports = {
 
         try {
             const token = req.cookies.userAccessToken
+
             if (!token) {
                 res.status(401).json({ message: "NO token found" })
             } else {
@@ -91,14 +91,14 @@ module.exports = {
 
         try {
             userHelper.userLogin(req.body).then((user) => {
-                const accessToken = jwt.sign({ id: user._id }, process.env.ACCESSTOKEN_SECRET, { expiresIn: "59m" })
-                const refreshToken = jwt.sign({ id: user._id }, process.env.ACCESSTOKEN_SECRET, { expiresIn: "1y" })
+                const accessToken = jwt.sign({ id: user._id }, process.env.ACCESSTOKEN_SECRET, { expiresIn: "10s" })
+                const refreshToken = jwt.sign({ id: user._id }, process.env.ACCESSTOKEN_SECRET, { expiresIn: "365d" })
                 if (req.cookies[`${process.env.USER_TOKEN}`]) {
                     req.cookies[`${process.env.USER_TOKEN}`] = "";
                 }
                 res.cookie(process.env.USER_TOKEN, accessToken, {
                     path: '/',
-                    expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
+                    expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 10),
                     httpOnly: true,
                     sameSite: "lax",
                 })
@@ -123,8 +123,7 @@ module.exports = {
 
     refreshToken: (req, res, next) => {
 
-        const prevtoken = req.cookies.process.env.USER_REFRESH
-
+        const prevtoken = req.cookies.userrefreshToken
         console.log(prevtoken);
         if (!prevtoken) {
             return res.status(400).json({ message: "couldn't find token" })
@@ -135,7 +134,7 @@ module.exports = {
             }
             const token = jwt.sign({ id: user.id }, process.env.ACCESSTOKEN_SECRET, {
 
-                expiresIn: "59m"
+                expiresIn: "10s"
             })
             res.cookie(process.env.USER_TOKEN, token, {
                 path: '/',
@@ -150,13 +149,14 @@ module.exports = {
 
     logOut: (req, res) => {
 
+        console.log();
 
-        res.clearCookie(`${process.env.USER_TOKEN}`)
-        req.cookies[`${process.env.USER_TOKEN}`] = "";
-        res.clearCookie(`${process.env.USER_REFRESH}`)
-        req.cookies[`${process.env.USER_REFRESH}`] = "";
-
-        res.status(200).json({ message: "Successfully Logged Out" })
+   res.clearCookie(`${process.env.USER_TOKEN}`)
+   req.cookies[`${process.env.USER_TOKEN}`] = "";
+   res.clearCookie(`${process.env.USER_TOKEN}`)
+   req.cookies[`${process.env.USER_TOKEN}`] = "";
+   res.status(200).json({ message: "Successfully Logged Out" })
+ 
 
     },
 

@@ -7,14 +7,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import jwtInterceptor from '../../helpers/jwtInterceptor';
 import { baseUrl } from '../../../Axios/api';
 
+
+
 function Header() {
 
   const [toggle, setToggle] = useState(false)
-
   const handleToggle = () => {
     setToggle(!toggle)
   }
-
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const apiCall = async () => {
@@ -26,7 +26,7 @@ function Header() {
     return data
   }
   const sendLogoutReq = async () => {
-    const response = await baseUrl.post("/logout", null, {
+    const response = await baseUrl.get("/logout",  {
       withCredentials: true
     })
     return response
@@ -52,7 +52,7 @@ function Header() {
       console.log(err.code);
       navigate("/userlogin")
     })
-
+    
     if (data) {
       dispatch(authactions.setUser(data.user))
       navigate("/userprofile")
@@ -71,25 +71,7 @@ function Header() {
       }
     })
 
-  }, [dispatch, isLoggedIn])
-
-  // useEffect(() => {
-
-  //   const getCurrentUser = () => {
-
-  //     try {
-
-  //     } catch (err) {
-
-
-  //     }
-  //   }
-
-  //   getCurrentUser()
-
-  // }, [])
-
-
+  }, [dispatch])
 
   return (
 
@@ -97,7 +79,7 @@ function Header() {
       <nav className='bg-white text-black h-auto shadow-md shadow-gray-400'>
         <div className='flex items-center justify-start h-20 xl:ml-10 ml-5 relative'>
           <div className='font-extrabold text-3xl xl:text-4xl flex' onClick={() => navigate("/")}>
-          <div className='font-extrabold text-3xl xl:text-4xl'>Fastcheck-In</div>
+          <div className='font-extrabold text-3xl xl:text-4xl cursor-pointer'>Fastcheck-in</div>
           </div>
           <div className='xl:flex justify-evenly items-center w-9/12 hidden'>
 
@@ -142,11 +124,11 @@ function Header() {
                     </div>)
                     :
                     <div className='flex flex-col item-start space-y-2'>
-                      <div className='hover:bg-slate-300 w-full h-10 pl-3 flex items-center'>
-                        <p className='cursor-pointer' onClick={() => navigate("/chat/messages")} >Messages</p>
+                      <div  onClick={() => navigate("/chat/messages")} className='hover:bg-slate-300 w-full h-10 pl-3 flex items-center'>
+                        <p className='cursor-pointer'  >Messages</p>
                       </div>
-                      <div className='hover:bg-slate-300 w-full h-10 pl-3 flex items-center'>
-                        <p className='cursor-pointer' onClick={() => navigate("/trips")}>Reservations</p>
+                      <div  onClick={() => navigate("/trips")} className='hover:bg-slate-300 w-full h-10 pl-3 flex items-center'>
+                        <p className='cursor-pointer' >Reservations</p>
                       </div>
                     </div>
                 }
@@ -161,15 +143,12 @@ function Header() {
 
                 isLoggedIn &&
                 <div className='w-full space-y-2'>
-                  <div className='hover:bg-slate-300 w-full h-10 pl-3 flex items-center'>
-                    <p className='cursor-pointer' onClick={() => userProfile()} >Account</p>
+                  <div  onClick={() => userProfile()} className='hover:bg-slate-300 w-full h-10 pl-3 flex items-center'>
+                    <p className='cursor-pointer'  >Account</p>
                   </div>
                 </div>}
 
-
-
               <hr className='w-full' />
-
 
               <div className='w-full space-y-2'>
                 <div className='hover:bg-slate-300 w-full h-10 pl-3 flex items-center'>
@@ -177,8 +156,8 @@ function Header() {
                 </div>
 
                 {isLoggedIn &&
-                  <div className='hover:bg-slate-300 w-full h-10 pl-3 flex items-center'>
-                    <p onClick={handleLogout} className='cursor-pointer'>Log out</p>
+                  <div onClick={handleLogout} className='hover:bg-slate-300 w-full h-10 pl-3 flex items-center'>
+                    <p  className='cursor-pointer'>Log out</p>
                   </div>
                 }
 

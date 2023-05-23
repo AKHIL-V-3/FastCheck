@@ -102,7 +102,6 @@ module.exports = {
                     else reject()
 
                }).catch((err)=>{
-
                     console.log(err,'errrrr');
                     reject()
                })

@@ -23,8 +23,6 @@ import Chatpage from './Pages/Chat/Chatpage';
 import HostReservation from './Components/HostComponents/Reservation/HostReservation';
 import PaymentHistoryPage from './Pages/PaymentHistory-Page';
 
-
-
 function App() {
 
   return (
@@ -45,10 +43,6 @@ function App() {
         <Route path='/trips'element = {<ReservationPage/>}/>
         <Route path='/paymenthistory'element = {<PaymentHistoryPage/>}/>
 
-
-
-
-
         <Route path='/host'element = {<HostdashboardPage/>}/>
         <Route path='/host/hostlogin'element = {<HostLogin/>}/>
         <Route path='/host/hostsignup'element = {<HostSignup/>}/>
@@ -56,22 +50,13 @@ function App() {
         <Route path='/host/edithotel'element = {<HostEditHotelPage />}/>
         <Route path='/host/reservationlist'element = {<HostReservation />}/>
 
-
-
         <Route path='/chat/messages'element = {<Chatpage />}/>
         <Route path='/host/messages'element = {<Chatpage />}/>
-
-
-
-
-
 
       </Routes>   
     </Router>
       
     </div>
-
-
 
   );
 }

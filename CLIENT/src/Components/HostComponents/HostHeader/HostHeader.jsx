@@ -5,6 +5,7 @@ import {  useSelector,useDispatch } from 'react-redux';
 import { authactions } from '../../../Redux/Auth/authSlice';
 import { hostInterceptor } from '../../helpers/jwtInterceptor';
 import { baseUrl } from '../../../Axios/api';
+import axios from 'axios';
 
 let firstRender = true
 
@@ -22,7 +23,7 @@ function HostHeader() {
   const Host = useSelector((state) => state.user.host)
 
     const apiCall = async () => {
-      const { data } = await baseUrl.get("/host", {
+      const { data } = await axios.get("/host", {
         withCredentials: true
       }).catch((err) => {
         console.log(err.message);
@@ -31,7 +32,7 @@ function HostHeader() {
     }
 
   const sendLogoutReq =async()=>{
-    const response = await hostInterceptor.post("/host/logout",null,{
+    const response = await hostInterceptor.post("http://localhost:5000/host/logout",null,{
       withCredentials: true
     })
     if (response.status === 200) return response
@@ -40,17 +41,14 @@ function HostHeader() {
 
 
 
-  const handleLogout = ()=>{
+  const handleLogout = async()=>{
 
-    sendLogoutReq().then((response) => {                                                                 
+   const response = await sendLogoutReq()                                                                 
       if (response) {
         dispatch(authactions.hostLogOut())
         dispatch(authactions.removeHost())
         navigate('/host/hostlogin')
-     
       }
-      
-    }).catch(err => console.log(err));
   }
 
 

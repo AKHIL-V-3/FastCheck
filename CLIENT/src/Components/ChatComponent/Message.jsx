@@ -23,7 +23,7 @@ function Message() {
     let currentUserId
     let User
     if (currentUrl === "http://localhost:3000/chat/messages") {
-        currentUserId = user._id
+        currentUserId = user?._id
         User = user
     } else if (currentUrl === "http://localhost:3000/host/messages") {
         currentUserId = host.host?._id

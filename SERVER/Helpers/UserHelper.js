@@ -83,9 +83,6 @@ module.exports = {
           })   
     },
 
-    
-
-
     getUserReservations:(userId)=>{
           return new Promise((resolve,reject)=>{
                reservation.ReservationSchema.find({

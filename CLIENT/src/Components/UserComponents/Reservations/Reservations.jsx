@@ -49,7 +49,7 @@ function Reservations() {
     }
     useEffect(() => {
         const getReservations = async () => {
-            const { data } = await jwtInterceptor.get("/trips", {
+            const { data } = await jwtInterceptor.get("http://localhost:5000/trips", {
                 withCredentials: true
             })
             setReservations(data.response)
@@ -57,11 +57,9 @@ function Reservations() {
         getReservations()
     }, [])
 
-
-
     const filterReservation = async (e) => {
         const value = e.target.value
-        const { data } = await jwtInterceptor.get("/filteredtrips/" + value, {
+        const { data } = await jwtInterceptor.get("http://localhost:5000/filteredtrips/" + value, {
             withCredentials: true
         })
 
@@ -102,7 +100,7 @@ function Reservations() {
                     </div>
 
                     {
-                        reservations.length > 0 ?
+                        reservations?.length > 0 ?
 
 
                             <div className='xl:grid xl:grid-cols-4 xl:gap-10 space-y-10 xl:space-y-0'>

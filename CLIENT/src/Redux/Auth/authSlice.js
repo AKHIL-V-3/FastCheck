@@ -100,9 +100,6 @@ const authSlice = createSlice({
                 state.searchHotels = null
           }
 
-
-
-
      }
 })
 

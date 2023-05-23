@@ -25,7 +25,7 @@ function HostBody() {
     const getHoteldata = async () => {
 
         try {
-            const { data } = await hostInterceptor.get("/host/gethoteldata", {
+            const { data } = await hostInterceptor.get("http://localhost:5000/host/gethoteldata", {
                 withCredentials: true,
             })
             return data
@@ -40,7 +40,7 @@ function HostBody() {
 
     const removeHotel = async (hotelId) => {
         try {
-            await hostInterceptor.delete("/host/removehotel/" + hotelId, {
+            await hostInterceptor.delete("http://localhost:5000/host/removehotel/" + hotelId, {
                 withCredentials: true,
             }).then((response) => {
                 Swal.fire({
@@ -73,7 +73,7 @@ function HostBody() {
 
     const getHotelData = async (hotelId) => {
         try {
-            const { data } = await baseUrl.get("/host/getonehoteldata/" + hotelId, {
+            const { data } = await axios.get("http://localhost:5000/host/getonehoteldata/" + hotelId, {
                 withCredentials: true,
             })
             return data.response;
@@ -89,21 +89,13 @@ function HostBody() {
 
     }
 
-
-
-
-
-    useEffect(() => {
-        
+    useEffect(() => { 
         getHoteldata().then((data) => {
             setDatas(data)
         }).catch((err) => {
-
             console.log(err);
         })
-
         if (!ishostLoggedIn) navigate('/host/hostlogin')
-
     }, [ishostLoggedIn, navigate])
 
     return (
@@ -128,7 +120,7 @@ function HostBody() {
 
                 {   
                    
-                   datas.length !== 0  ?
+                   datas?.length !== 0  ?
                     
                     <div className='max-h-full  flex flex-col items-center'>
                     <div className='w-11/12 h-full mt-20 space-y-10'>
@@ -185,7 +177,7 @@ function HostBody() {
 
                 <footer className=''>
 
-                    <div className={`w-full h-16 border-t-2 border-gray-700 flex justify-center ${datas.length ===0 ? "mt-96" : "mt-40"}`}>
+                    <div className={`w-full h-16 border-t-2 border-gray-700 flex justify-center ${datas?.length ===0 ? "mt-96" : "mt-40"}`}>
 
                         <div className='xl:w-11/12 w-full px-2 xl:px-0 h-full flex justify-between'>
 
