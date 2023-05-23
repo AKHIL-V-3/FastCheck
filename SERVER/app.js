@@ -20,7 +20,7 @@ app.use(
     origin:true,
     methods: ["GET", "POST","PUT","DELETE","PATCH"],
     credentials: true,
-    origin:"http://localhost:3000"
+    origin:"https://fastcheck.live"
     
   })
 

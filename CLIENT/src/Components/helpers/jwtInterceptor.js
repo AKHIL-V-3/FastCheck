@@ -5,10 +5,10 @@ import axios from 'axios'
 console.log('process',process.env.BASE_URL);
 
 const jwtInterceptor = axios.create({
-  baseURL: "http://localhost:5000"
+  baseURL: "https://server.fastcheck.live"
 })
 const HostjwtInterceptor = axios.create({
-  baseURL: "http://localhost:5000"
+  baseURL: "https://server.fastcheck.live"
 })
 
 
@@ -18,11 +18,11 @@ jwtInterceptor.interceptors.response.use(
     },
     async (error)=>{
            if(error.response.status === 401){
-             await axios.get("http://localhost:5000/refresh", {
+             await axios.get("https://server.fastcheck.live/refresh", {
                 withCredentials: true
               }).catch(async(err) => {
                   if(err) {
-                   await axios.post("http://localhost:5000/logout",null,{withCredentials:true})    
+                   await axios.post("https://server.fastcheck.live/logout",null,{withCredentials:true})    
                   }
                    return Promise.reject(err)
               }) 
@@ -43,12 +43,12 @@ jwtInterceptor.interceptors.response.use(
 
          if(error.response.status === 401){
 
-           await axios.get("http://localhost:5000/host/refreshhost", {
+           await axios.get("https://server.fastcheck.live/host/refreshhost", {
               withCredentials: true
         
             }).catch(async(err) => {
                 if(err) {
-                  await axios.post("http://localhost:5000/host/logout",null,{withCredentials:true})
+                  await axios.post("https://server.fastcheck.live/host/logout",null,{withCredentials:true})
                   
                 }
                  return Promise.reject(err)
