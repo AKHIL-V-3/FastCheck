@@ -32,7 +32,7 @@ function HostHeader() {
     }
 
   const sendLogoutReq =async()=>{
-    const response = await hostInterceptor.post("http://localhost:5000/host/logout",null,{
+    const response = await hostInterceptor.post("/host/logout",null,{
       withCredentials: true
     })
     if (response.status === 200) return response

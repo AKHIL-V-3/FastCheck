@@ -5,10 +5,10 @@ import axios from 'axios'
 console.log('process',process.env.BASE_URL);
 
 const jwtInterceptor = axios.create({
-  baseURL: "https://server.fastcheck.live"
+  baseURL: process.env.REACT_APP_BASE_URL
 })
 const HostjwtInterceptor = axios.create({
-  baseURL: "https://server.fastcheck.live"
+  baseURL:process.env.REACT_APP_BASE_URL
 })
 
 
@@ -18,11 +18,11 @@ jwtInterceptor.interceptors.response.use(
     },
     async (error)=>{
            if(error.response.status === 401){
-             await axios.get("https://server.fastcheck.live/refresh", {
+             await axios.get(`${process.env.REACT_APP_BASE_URL}/refresh`, {
                 withCredentials: true
               }).catch(async(err) => {
                   if(err) {
-                   await axios.post("https://server.fastcheck.live/logout",null,{withCredentials:true})    
+                   await axios.post(`${process.env.REACT_APP_BASE_URL}/logout`,null,{withCredentials:true})    
                   }
                    return Promise.reject(err)
               }) 
@@ -43,12 +43,12 @@ jwtInterceptor.interceptors.response.use(
 
          if(error.response.status === 401){
 
-           await axios.get("https://server.fastcheck.live/host/refreshhost", {
+           await axios.get(`${process.env.REACT_APP_BASE_URL}/host/refresh`, {
               withCredentials: true
         
             }).catch(async(err) => {
                 if(err) {
-                  await axios.post("https://server.fastcheck.live/host/logout",null,{withCredentials:true})
+                  await axios.post(`${process.env.REACT_APP_BASE_URL}/host/logout`,null,{withCredentials:true})
                   
                 }
                  return Promise.reject(err)

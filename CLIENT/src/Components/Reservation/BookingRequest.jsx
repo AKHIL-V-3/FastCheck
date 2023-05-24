@@ -1,10 +1,8 @@
 import React, { useState , useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useSelector, useDispatch } from 'react-redux'
-import axios from 'axios'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { authactions } from '../../Redux/Auth/authSlice'
 import jwtInterceptor from '../helpers/jwtInterceptor'
 
 
@@ -123,7 +121,6 @@ function BookingRequest() {
 
     }
 
-
     useEffect(()=>{
 
         document.getElementsByTagName("html")[0].scrollTop = 0  
@@ -135,7 +132,7 @@ function BookingRequest() {
             <div className=' bg-white text-black'>
 
                 <nav className='w-full h-20 flex justify-start items-center pl-12 border-b-2 border-gray-600'>
-                    <div className='font-extrabold text-3xl xl:text-4xl'>LOGO</div>
+                    <div className='font-extrabold text-3xl xl:text-4xl'>Fastcheck-in</div>
                 </nav>
 
                 <div className='w-full h-auto xl:flex xl:justify-center'>

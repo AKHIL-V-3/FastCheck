@@ -12,10 +12,8 @@ function HostSignup() {
     console.log(err) 
       toast.error(err,{
          position:"top-right"
-      })
-      
+      }) 
    }
-   
     const formik = useFormik({
 
           initialValues:{
@@ -37,15 +35,7 @@ function HostSignup() {
           }
     })
 
-    console.log(formik.errors);
-
-
      const handleSubmit =async()=>{
-
-      // e.preventDefault()
-         
-        console.log(formik.values,'valuesssss');
-  
         
       try {
 

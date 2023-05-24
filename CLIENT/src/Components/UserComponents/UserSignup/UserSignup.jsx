@@ -59,7 +59,6 @@ function UserSignup() {
           if(data.errors){   
             
               const {email,username} = data.errors
-
               if(email && username)generateError(username)
               else if(email) generateError(email)
               else generateError(username)   
