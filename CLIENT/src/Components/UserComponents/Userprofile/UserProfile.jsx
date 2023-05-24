@@ -150,58 +150,6 @@ function UserProfile() {
 
                 </div>
 
-                {/* <div className='bg-black text-white p-20 border-white border-solid'>
-                  
-
-                  <div className='xl:flex'>
-                    <div className='xl:w-72 w-full h-auto bg-gray-500 flex flex-col items-center rounded-md shadow-lg'>
-
-                        <div className='bg-black w-28 h-28 rounded-full mt-3'>
-
-                            <img src="https://as2.ftcdn.net/v2/jpg/01/18/03/35/1000_F_118033506_uMrhnrjBWBxVE9sYGTgBht8S5liVnIeY.jpg" className='w-full h-full rounded-full bg-cover' alt="https://t4.ftcdn.net/jpg/01/18/03/35/360_F_118033506_uMrhnrjBWBxVE9sYGTgBht8S5liVnIeY.jpg" />
-
-                        </div>
-
-                        <p>upload a photo</p>
-
-
-                        <div className='ms-4 space-y-6 mt-5'>
-                            <h1 className='text-xl font-bold'>Identity Verification</h1>
-                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia, nesciunt?</p>
-
-
-                            <div className='pb-8'>
-                                <h1 className='text-xl font-bold'>{user?.UserName}</h1>
-                                <p><span> <FontAwesomeIcon icon="check" /></span> Email Confirmed</p>
-                                <p><span><FontAwesomeIcon icon="check" /></span> Mobile Confirmed</p>
-                            </div>
-
-                        </div>
-
-
-
-                    </div>
-
-
-                    <div className='xl:ml-10 w-full xl:mt-0 mt-20'>
-
-                          <h1 className='text-xl font-bold'>Hello, {user?.UserName}</h1>
-                          <p className='font-semibold opacity-75'>Joined in 2021</p>
-
-                          <button className='bg-white rounded-xl text-black w-32 h-10 font-semibold text-lg mt-4'>Edit Profile</button>
-
-                          <div className='ml-4 mt-4 font-semibold opacity-75'>
-                            <p>0 Reviews</p>
-                          </div>
-
-                          <hr className='h-1  xl:w-1/2 w-full mt-4 ' />
-                    </div>
-
-                    </div>
-
-
-                </div> */}
-
                 <hr  className='w-full xl:h-0 h-1 bg-black mt-12'/>
 
             </section>

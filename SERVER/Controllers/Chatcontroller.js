@@ -113,8 +113,10 @@ module.exports = {
             res.status(500).json(error)
         }  
     },
-    getSelecedUser:async(req,res)=>{  
-        const coversationId = req.params.coversationId  
+    getSelecedUser:async(req,res)=>{ 
+
+        const coversationId = req.params.coversationId 
+
         try{
             const User = await Conversation.aggregate([
                 {
@@ -150,7 +152,6 @@ module.exports = {
 
             ])
 
-            console.log(User,'uuuuuuuuuuuuuuuuuuu');
             res.status(200).json(User[0])
         } catch(error){
             console.log(error);
@@ -192,10 +193,33 @@ module.exports = {
         }
     },
 
+    getAllHosts:async(req,res)=>{
+
+          try{
+              const Users = await Conversation.aggregate([
+                {
+                    $match:{
+                        members:{$in :[req.params.userId] }
+                    }
+                }
+              ])
+             const UserId =  Users.map((user)=>{ 
+                  return user.members[1]
+              })
+              const resultArray = await Promise.all(UserId.map(async (id) => {
+                const result = await HostModel.findById(id,"-password");
+                return result;
+              }));
+              res.status(200).json(resultArray)
+          }catch(err){
+            console.log(err);
+            res.status(500).json(err)
+          }
+    },
+
     getAllUsers:async(req,res)=>{
         
           try{
-            const userData = []
               const Users = await Conversation.aggregate([
                 {
                     $match:{

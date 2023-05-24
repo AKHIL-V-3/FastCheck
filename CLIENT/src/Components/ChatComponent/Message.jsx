@@ -4,7 +4,6 @@ import Conversation from './Conversation'
 import Chat from './Chat'
 import {useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import axios from 'axios';
 import { useRef } from 'react';
 import { io } from "socket.io-client"
 import { baseUrl } from '../../Axios/api';
@@ -22,11 +21,11 @@ function Message() {
 
     let currentUserId
     let User
-    if (currentUrl === "http://localhost:3000/chat/messages") {
+    if (currentUrl === `${process.env.REACT_APP_CLIENT_URL}/chat/messages`) {
         currentUserId = user?._id
         User = user
-    } else if (currentUrl === "http://localhost:3000/host/messages") {
-        currentUserId = host.host?._id
+    } else if (currentUrl === `${process.env.REACT_APP_CLIENT_URL}/host/messages`) {
+        currentUserId = host?._id
         User = host
     }
 
@@ -39,7 +38,8 @@ function Message() {
     const [selectedUser, setSelectedUser] = useState(null)
     const [selected, setSelected] = useState("")
     const [lastMessages, setLastMessages] = useState({})
-    const [clickedUser, setClickedUser] = useState({})
+    const [clickedUser, setClickedUser] = useState(null)
+    const [ClickedHost, setClickedHost] = useState(null)
 
 
     const [search, setSearch] = useState(null)
@@ -88,7 +88,7 @@ function Message() {
     const socket = useRef()
 
     useEffect(() => {
-        socket.current = io("ws://localhost:8080")
+        socket.current = io(process.env.REACT_APP_SOCKET_CURRENT)
         socket.current.on("getMessage", data => {
             setarrivalMessage({
                 sender: data.senderId,
@@ -157,6 +157,7 @@ function Message() {
     useEffect(() => {
 
         const getMessages = async () => {
+
             try {
                 const { data } = await baseUrl.get("/chat/message/" + currentChat?._id, {
                     withCredentials: true
@@ -205,29 +206,22 @@ function Message() {
     useEffect(() => {
         const getselectedUser = async () => {
             try {
-
-                if(currentUrl === "http://localhost:3000/chat/messages"){
-
+                if(currentUrl === `${process.env.REACT_APP_CLIENT_URL}/chat/messages` ){
                     const { data } = await baseUrl.get("/chat/gethostdata/" + currentChat?._id, {
                     withCredentials: true
                 })
-
-
-                console.log(data,'$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$');
                 setClickedUser(data)
                 setSelected(data?.userId)
 
-                } else if (currentUrl === "http://localhost:3000/host/messages"){
+                } else if (currentUrl === `${process.env.REACT_APP_CLIENT_URL}/host/messages`){
 
                     const { data } = await baseUrl.get("/chat/getuser/" + currentChat?._id, {
                         withCredentials: true
                     })
     
-                    setClickedUser(data)
+                    setClickedHost(data)
                     setSelected(data?.userId)
-
-                    console.log(data,'#############################33');
-                          
+     
                 }
              
             } catch (error) {
@@ -238,6 +232,7 @@ function Message() {
     },[currentChat?._id,currentUrl])
 
     const selectUser = async (conv) => {
+
         setCurrentChat(conv)
         const friendId = currentChat?.members?.find((m) => m !== currentUserId)
         try {
@@ -250,6 +245,8 @@ function Message() {
         }
     }
 
+    console.log(clickedUser,'666666666666666666666');
+    
 
     return (
         <section>
@@ -291,7 +288,6 @@ function Message() {
                                         ))
                                         :
                                         conversation.map((conv, index) => (
-
                                             <div key={conv._id} onClick={() => selectUser(conv)}>
                                                 <Conversation conversation={conv} currentUser={User} selected={selected} lastMessage={lastMessages[conv?._id]} />
                                             </div>
@@ -312,7 +308,7 @@ function Message() {
                                     </div>
 
                                     <div className='ms-3'>
-                                        <h1>{clickedUser?.user?.UserName ? clickedUser?.user?.UserName : clickedUser && clickedUser?.user?.Hostname}</h1>
+                                        <h1>{ClickedHost ? ClickedHost?.user.UserName : clickedUser && clickedUser?.user?.Hostname}</h1>
                                     </div>
 
                                 </div>

@@ -33,13 +33,11 @@ function HostLogin() {
   })
      
   if(data.errors){
-
     const {email,password} = data.errors            
        if(email) generateError(email)
        else if(password) generateError(password)
 
   }else{
-
    return data 
   }
      
@@ -49,13 +47,14 @@ function HostLogin() {
 
     e.preventDefault()
       
-    sendRequest().then((data)=>{
+   const data = await sendRequest()
+
+       if(data){
          dispatch(authactions.hostLogin())
          dispatch(authactions.setHost(data.user))
-    }).then(()=>{
-
          navigate('/host')
-    })
+
+       }
 
     }
 

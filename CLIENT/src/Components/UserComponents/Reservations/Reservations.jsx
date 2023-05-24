@@ -49,7 +49,7 @@ function Reservations() {
     }
     useEffect(() => {
         const getReservations = async () => {
-            const { data } = await jwtInterceptor.get("http://localhost:5000/trips", {
+            const { data } = await jwtInterceptor.get("/trips", {
                 withCredentials: true
             })
             setReservations(data.response)
@@ -59,7 +59,7 @@ function Reservations() {
 
     const filterReservation = async (e) => {
         const value = e.target.value
-        const { data } = await jwtInterceptor.get("http://localhost:5000/filteredtrips/" + value, {
+        const { data } = await jwtInterceptor.get("/filteredtrips/" + value, {
             withCredentials: true
         })
 

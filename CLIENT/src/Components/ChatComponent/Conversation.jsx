@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { baseUrl } from '../../Axios/api'
 
 
-function Conversation({conversation,currentUser,selected,lastMessage,searchedUser}) {
+function Conversation({conversation,currentUser,selected,lastMessage}) {
 
     const [user,setUser] = useState([])
     useEffect(()=>{
@@ -15,6 +15,11 @@ function Conversation({conversation,currentUser,selected,lastMessage,searchedUse
                 const { data } = await baseUrl.get("/chat/gethost/"+friendId, {
                     withCredentials: true
                   })
+
+
+                  console.log(data,'ddddddddddd');
+
+
                   setUser(data);
             }catch(error){
                 console.log(error);

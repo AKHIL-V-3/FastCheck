@@ -89,7 +89,7 @@ function CreateuserProfile() {
   const updateUserInformation = async () => {
 
     dispatch(authactions.settemporaryUser(formik.values))
-    const { data } = await jwtInterceptor.post("http://localhost:5000/userprofile/addpersonalinformation", formik.values, {
+    const { data } = await jwtInterceptor.post("/userprofile/addpersonalinformation", formik.values, {
       withCredentials: true
     })
 
@@ -105,9 +105,6 @@ function CreateuserProfile() {
       })
     }
   }
-
-  
-  console.log(user,'uuuuuuuuuu');
 
   return (
     <section>

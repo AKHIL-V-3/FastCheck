@@ -39,6 +39,7 @@ function UserLogin() {
     const { data } = await baseUrl.post("/userlogin", userData, {
       withCredentials: true
     })
+
     if (data.errors) {
       const { email, password } = data.errors
       if (email) generateError(email)
@@ -47,15 +48,15 @@ function UserLogin() {
       return data
     }
   }
-
   const handleSubmit = async (e) => {
     e.preventDefault()
-    sendRequest().then((data) => {
-      dispatch(authactions.logIn())
-      dispatch(authactions.setUser(data.user))
-      navigate("/")
-    })
+    const data = await sendRequest()
 
+        if(data){
+          dispatch(authactions.logIn())
+          dispatch(authactions.setUser(data.user))
+          navigate("/")
+        }
   }
 
 
@@ -102,11 +103,10 @@ function UserLogin() {
 
     setGoogledata(localStorage.getItem('email'))
     const username = setGoogledata(localStorage.getItem('username'))
-    console.log(username);
     // if(isLoggedIn) navigate('/')
 
 
-  }, [])
+  }, [googledata])
 
   return (
     <section>
@@ -130,7 +130,7 @@ function UserLogin() {
                 <input type="password" name='Password' autocomplete="on" onChange={(e) => setUserdata({ ...userData, [e.target.name]: e.target.value })} className=" w-64 xl:w-80 h-11  border border-gray-900   text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Your Password" required></input>
               </div>
 
-              <button className='bg-black mt-12 ml-8 text-white p-2 rounded-3xl w-28 font-semibold'>Continue</button>
+              <button type='submit' className='bg-black mt-12 ml-8 text-white p-2 rounded-3xl w-28 font-semibold'>Continue</button>
             </form>
 
             <div className='flex justify-center mt-8'>

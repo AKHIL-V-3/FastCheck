@@ -9,7 +9,7 @@ router.post("/",chatController.addConversation)
 router.post("/message",chatController.addMessage)
 
 router.get("/gethost/:hostId",chatController.getHost)
-router.get("/getallcommunicatedusers/:userId",chatController.getAllUsers)
+router.get("/getallcommunicatedusers/:userId",chatController.getAllHosts)
 
 router.get("/:currentUserId",chatController.getConversation)
 router.get("/host/:userId",chatController.getConversation)

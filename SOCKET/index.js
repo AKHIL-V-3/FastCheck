@@ -1,7 +1,10 @@
 
+
+require('dotenv').config()
+
 const io = require("socket.io")(8080,{
     cors:{
-        origin:"http://localhost:3000"
+        origin:process.env.REACT_APP_CLIENT_URL
     }
 })
 let users =[]

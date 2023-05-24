@@ -100,18 +100,24 @@ module.exports={
 
                 const accessToken = jwt.sign({ id: user._id }, process.env.ACCESSTOKEN_SECRETHOST, { expiresIn: "60m" })
                 const refreshToken = jwt.sign({ id: user._id }, process.env.ACCESSTOKEN_SECRETHOST, { expiresIn: "30d" })
-                if (req.cookies[`${HostToken}`]) {
-                    req.cookies[`${HostToken}`] = "";
+                if (req.cookies[process.env.HOST_TOKEN]) {
+                    req.cookies[process.env.HOST_TOKEN] = "";
                 }
-                res.cookie(HostToken, accessToken, {
+
+                if (req.cookies[process.env.HOST_REFRESH]) {
+                    req.cookies[process.env.HOST_REFRESH    ] = "";
+                }
+
+
+                res.cookie(process.env.HOST_TOKEN, accessToken, {
                     path: '/host',
                     expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
                     httpOnly: true,
                     sameSite: "lax",
                 })
-                res.cookie(HostRefresh, refreshToken, {
+                res.cookie(process.env.HOST_REFRESH, refreshToken, {
                     path: '/host',
-                    expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
+                    expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
                     httpOnly: true,
                     secure: true,
                     sameSite: "lax",

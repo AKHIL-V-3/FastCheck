@@ -47,8 +47,6 @@ function BookingRequest() {
         panNumber: Yup.string().required('PAN number is required').test('valid-pan', 'Invalid PAN number', validatePan),
     });
 
-
-
     const panformik = useFormik({
         initialValues: {
             panNumber: null
@@ -94,7 +92,6 @@ function BookingRequest() {
             setShowModal(false)
     }
     const addPanNumber = () => {
-
         const { panNumber } = panformik.values
         if (panNumber) {
             setPanNumber(parseInt(panNumber))
@@ -104,7 +101,6 @@ function BookingRequest() {
     }
 
     const handleBooking = async() => {
-
          jwtInterceptor.post("/reservation", Reservation, {
             withCredentials: true,           
         })

@@ -91,11 +91,16 @@ module.exports = {
 
         try {
             userHelper.userLogin(req.body).then((user) => {
-                const accessToken = jwt.sign({ id: user._id }, process.env.ACCESSTOKEN_SECRET, { expiresIn: "10s" })
+                const accessToken = jwt.sign({ id: user._id }, process.env.ACCESSTOKEN_SECRET, { expiresIn: "60m" })
                 const refreshToken = jwt.sign({ id: user._id }, process.env.ACCESSTOKEN_SECRET, { expiresIn: "365d" })
-                if (req.cookies[`${process.env.USER_TOKEN}`]) {
-                    req.cookies[`${process.env.USER_TOKEN}`] = "";
+                if (req.cookies[process.env.USER_TOKEN]) {
+                    req.cookies[process.env.USER_TOKEN] = "";
                 }
+
+                if (req.cookies[process.env.USER_REFRESH]) {
+                    req.cookies[process.env.USER_REFRESH] = "";
+                }
+
                 res.cookie(process.env.USER_TOKEN, accessToken, {
                     path: '/',
                     expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 10),
@@ -124,7 +129,6 @@ module.exports = {
     refreshToken: (req, res, next) => {
 
         const prevtoken = req.cookies.userrefreshToken
-        console.log(prevtoken);
         if (!prevtoken) {
             return res.status(400).json({ message: "couldn't find token" })
         }
@@ -134,7 +138,7 @@ module.exports = {
             }
             const token = jwt.sign({ id: user.id }, process.env.ACCESSTOKEN_SECRET, {
 
-                expiresIn: "10s"
+                expiresIn: "60m"
             })
             res.cookie(process.env.USER_TOKEN, token, {
                 path: '/',
@@ -149,15 +153,12 @@ module.exports = {
 
     logOut: (req, res) => {
 
-        console.log();
-
    res.clearCookie(`${process.env.USER_TOKEN}`)
    req.cookies[`${process.env.USER_TOKEN}`] = "";
    res.clearCookie(`${process.env.USER_TOKEN}`)
    req.cookies[`${process.env.USER_TOKEN}`] = "";
    res.status(200).json({ message: "Successfully Logged Out" })
  
-
     },
 
     userProfile: (req, res) => {
@@ -182,7 +183,7 @@ module.exports = {
     },
 
     uploadUserImage: (req, res) => {
-
+        
         const userId = req.id
         const userImage = req.body.userImage
         userHelper.UploadUserImage(userImage, userId).then((response) => {

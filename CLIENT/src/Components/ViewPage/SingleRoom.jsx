@@ -48,7 +48,6 @@ function SingleRoom() {
     const HotelData = useSelector((state) => state.user.hotelData)
     const user = useSelector(state => state.user.user)
     const isLoggedIn = useSelector(state => state.user.isLoggedIn)
-    console.log(HotelData,'444444444444444444444444444444444444444');
     const formatDate = (isoDate) => {
         const date = new Date(isoDate);
         const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
@@ -136,7 +135,7 @@ function SingleRoom() {
             receiverId: HotelData.HostData._id,
         }
         try {
-            const res = await jwtInterceptor.post("http://localhost:5000/chat", members, {
+            const res = await jwtInterceptor.post("/chat", members, {
                 withCredentials: true
             })
 
@@ -194,7 +193,7 @@ function SingleRoom() {
             hotelId: HotelData._id
         }
         try {
-            const res = await jwtInterceptor.post("http://localhost:5000/review", Review, {
+            const res = await jwtInterceptor.post("/review", Review, {
                 withCredentials: true
             })
             setReview("")

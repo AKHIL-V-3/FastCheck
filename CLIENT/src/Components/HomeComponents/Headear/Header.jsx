@@ -18,12 +18,20 @@ function Header() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const apiCall = async () => {
-    const { data } = await baseUrl.get("/", {
+     baseUrl.get("/", {
       withCredentials: true
-    }).catch((err) => {
+    })
+    .then((res)=>{
+   
+       console.log(res.data,'yyyyyyyyyyyyyyyyyyyyyy');
+
+       return res.data
+
+    })
+    .catch((err) => {
       console.log(err.message);
     })
-    return data
+    
   }
   const sendLogoutReq = async () => {
     const response = await baseUrl.get("/logout",  {
