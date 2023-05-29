@@ -9,6 +9,7 @@ function Conversation({conversation,currentUser,selected,lastMessage}) {
 
     const [user,setUser] = useState([])
     useEffect(()=>{
+
         const friendId = conversation?.members?.find((m)=> m!== currentUser?._id)
         const getUser = async()=>{   
             try{

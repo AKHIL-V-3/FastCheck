@@ -22,11 +22,7 @@ function Header() {
       withCredentials: true
     })
     .then((res)=>{
-   
-       console.log(res.data,'yyyyyyyyyyyyyyyyyyyyyy');
-
        return res.data
-
     })
     .catch((err) => {
       console.log(err.message);

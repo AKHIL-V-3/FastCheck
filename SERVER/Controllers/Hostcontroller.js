@@ -1,18 +1,9 @@
 
 
 var jwt = require('jsonwebtoken');
-const Users = require("../Models/HostModel")
-const userHelper = require('../Helpers/AuthHelper');
-const cookie = require('cookie'); 
 const HostHelpers = require('../Helpers/HostHelpers');
-const { response } = require('express');
-const { uploadmultipleImages } = require('../Connections/uploadImages');
 var ObjectId = require('mongoose').Types.ObjectId;
- 
-const jwtSecret = "JsonWebAccessTokenSecretkeyhost"
-const HostToken = "hostAccessToken"
-const HostRefresh = "hostRefreshToken"
-
+require('dotenv').config()
 
 const handleErrors = (err) => {
 
@@ -58,7 +49,11 @@ module.exports={
 
     hostHome:async(req,res)=>{     
            
-            const hostId = req.hostId 
+            const hostId = req.id 
+
+            console.log(hostId);
+
+
             HostHelpers.getHost(hostId).then((host)=>{
                   if(!host){
                       return res.status(404).json({message:"host not found"})
@@ -69,7 +64,7 @@ module.exports={
     },
  
     getHoteldata:(req,res)=>{
-        const hostId = req.hostId
+        const hostId = req.id
         HostHelpers.getHotelData(hostId).then((response)=>{
             res.status(200).json(response)    
         })
@@ -143,7 +138,7 @@ module.exports={
                     if (err) {
                         res.status(401).json({ message: "unAutharized token" })
                     } else {
-                        req.hostId = user.id
+                         req.id = user.id
                         next()
                     }
                 })
@@ -169,13 +164,13 @@ refreshTokenHost :(req,res,next)=>{
         const token = jwt.sign({ id: user.id }, process.env.ACCESSTOKEN_SECRETHOST, {
             expiresIn: "60m"
         })
-        res.cookie(HostToken, token, {
+        res.cookie(process.env.HOST_TOKEN, token, {
             path: '/host',
             expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
             httpOnly: true,
             sameSite: "lax",
         })
-        req.hostId = user.id
+        req.id = user.id
         next()
     })
 
@@ -217,11 +212,14 @@ editHotel:(req,res)=>{
 
 
 logOut:(req,res)=>{
-   res.clearCookie(`${HostToken}`)
-   req.cookies[`${HostToken}`] = "";
-   res.clearCookie(`${HostRefresh}`)
-   req.cookies[`${HostRefresh}`] = "";
+
+   res.clearCookie(`${process.env.HOST_TOKEN}`)
+   req.cookies[`${process.env.HOST_TOKEN}`] = "";
+   res.clearCookie(`${process.env.HOST_REFRESH}`)
+   req.cookies[`${process.env.HOST_REFRESH}`] = "";
    res.status(200).json({ message: "Successfully Logged Out" })
+
+
 },
 
 
@@ -256,11 +254,6 @@ getPaymentHistory:(req,res)=>{
         res.status(403).json({message:"something wrong"})
        })
 }
-
-
-
-
-
 
 
 }

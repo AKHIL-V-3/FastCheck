@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 var router = express.Router();
 const chatController = require("../Controllers/Chatcontroller");
+const { verifyHost } = require('../Controllers/Hostcontroller');
 
 
 

@@ -16,7 +16,7 @@ function HostReservation() {
 
 
 
-    console.log(host)
+    console.log(host,'hhhhhhhhhhhhhhhhh')
 
     const navigate = useNavigate()
 
@@ -64,7 +64,7 @@ function HostReservation() {
 
     useEffect(() => {
 
-        const hostId = host?.host?._id
+        const hostId = host?._id
 
         const getReservations = async () => {
             const { data } = await baseUrl.get("/host/reservations/" + hostId, {
@@ -74,11 +74,11 @@ function HostReservation() {
         }
         getReservations()
 
-    }, [host?.host?._id])
+    }, [host?._id])
 
 
     const getPaymentHistory = async () => {
-        const hostId = host?.host?._id
+        const hostId = host?._id
         try {
             const { data } = await baseUrl.get("/host/paymenthistory/" + hostId, {
                 withCredentials: true

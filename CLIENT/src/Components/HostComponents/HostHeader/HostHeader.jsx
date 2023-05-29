@@ -23,32 +23,46 @@ function HostHeader() {
   const Host = useSelector((state) => state.user.host)
 
     const apiCall = async () => {
-      const { data } = await axios.get("/host", {
+      const { data } = await baseUrl.get("/host", {
         withCredentials: true
       }).catch((err) => {
         console.log(err.message);
       })
+      console.log(data);
       return data
     }
 
-  const sendLogoutReq =async()=>{
-    const response = await hostInterceptor.post("/host/logout",null,{
-      withCredentials: true
-    })
-    if (response.status === 200) return response
-    return new Error("Unable to logout please try again")
+  const sendLogoutReq = async()=>{
+    try{
+      const response = await baseUrl.get("/host/logout",{
+        withCredentials: true
+      })
+
+
+      alert("")
+
+      console.log(response,'[[[[[[[[[[[[[[[[[[[');
+
+
+       return response
+      
+    }catch(err){
+       console.log(err);
+    } 
   }
 
-
-
   const handleLogout = async()=>{
-
-   const response = await sendLogoutReq()                                                                 
+ 
+    sendLogoutReq().then((response) => {
       if (response) {
+        alert('')
         dispatch(authactions.hostLogOut())
         dispatch(authactions.removeHost())
         navigate('/host/hostlogin')
       }
+    }).catch(err => {
+      console.log(err)
+    });
   }
 
 
@@ -56,7 +70,6 @@ function HostHeader() {
   useEffect(()=>{
 
     if(firstRender){ 
-        firstRender = false
        apiCall().then(data => {
          if (data) {
            dispatch(authactions.hostLogin())
@@ -110,8 +123,8 @@ function HostHeader() {
                     <p className='cursor-pointer' >Account</p>
                   </div>
 
-                  <div className='hover:bg-slate-300 w-full h-10 pl-3 flex items-center'>
-                    <p onClick={handleLogout} className='cursor-pointer'>Log out</p>
+                  <div onClick={handleLogout} className='hover:bg-slate-300 w-full h-10 pl-3 flex items-center'>
+                    <p  className='cursor-pointer'>Log out</p>
                   </div>
 
 

@@ -114,9 +114,7 @@ module.exports = {
         }  
     },
     getSelecedUser:async(req,res)=>{ 
-
         const coversationId = req.params.coversationId 
-
         try{
             const User = await Conversation.aggregate([
                 {

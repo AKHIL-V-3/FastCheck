@@ -139,6 +139,10 @@ module.exports = {
             })
      },
      getAllreservations :(hostId)=>{
+
+          console.log(hostId,'hhhhhhhh');
+
+
             return new Promise((resolve,reject)=>{
                Reservation.find({
                     $and:[
