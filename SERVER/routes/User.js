@@ -25,6 +25,7 @@ router.get("/trips",verifyToken,userController.getReservations)
 router.get("/filteredtrips/:value",verifyToken,userController.getFilteredReservations)
 router.patch("/trips/cancelreservation/:BookingId",userController.cancelReservation)
 router.get("/getuserimage/:userId",verifyToken,userController.getUserImage)
+router.get('/paymenthistory/:userId',verifyToken,userController.getPaymentHistory)
 
 
 module.exports = router;

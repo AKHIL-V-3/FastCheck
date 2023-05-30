@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
-import { useDispatch ,useSelector} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { authactions } from '../../../Redux/Auth/authSlice';
 import { auth, provider } from "../../../GoogleSignIn/Config"
 import { signInWithPopup } from "firebase/auth"
@@ -15,11 +14,7 @@ function UserLogin() {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
-
-  const isLoggedIn = useSelector((state) => state.user.isLoggedIn)
-
   const [googledata, setGoogledata] = useState('')
- 
   const [userData, setUserdata] = useState({
 
     Email: "",
@@ -59,26 +54,20 @@ function UserLogin() {
         }
   }
 
-
   const googleSignIn = () => {
 
     signInWithPopup(auth, provider).then(async (data) => {
 
       setGoogledata(data.user.email)
-
       const user = {
-
         Email: data.user.email,
         Password: data.user.uid
       }
-
       try {
-
         const { data } = await baseUrl.post("/userlogin", user, {
           withCredentials: true
         })
         if (data.errors) {
-
           const { email, password } = data.errors
           if (email) generateError(email)
           else if (password) generateError(password)
@@ -86,8 +75,6 @@ function UserLogin() {
         } else {
           dispatch(authactions.setUser(user))
           dispatch(authactions.logIn())
-          localStorage.setItem('email', data.user.email)
-          localStorage.setItem('username', data.user.displayName)
           navigate('/')  
         }
 
@@ -98,15 +85,6 @@ function UserLogin() {
 
     })
   }
-
-  useEffect(() => {
-
-    setGoogledata(localStorage.getItem('email'))
-    const username = setGoogledata(localStorage.getItem('username'))
-    // if(isLoggedIn) navigate('/')
-
-
-  }, [googledata])
 
   return (
     <section>
@@ -122,12 +100,12 @@ function UserLogin() {
             <form action="" onSubmit={(e) => handleSubmit(e)}>
               <div className='mt-12 ml-8 rounded-xl'>
                 
-                <input type="email" name='Email' onChange={(e) => setUserdata({ ...userData, [e.target.name]: e.target.value })} className=" w-64 xl:w-80 h-11  border border-gray-900  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Your EmailAddress" required></input>
+                <input type="email" name='Email' onChange={(e) => setUserdata({ ...userData, [e.target.name]: e.target.value })} className=" w-64 xl:w-80 h-11  border border-gray-900  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Your EmailAddress" required></input>
               </div>
 
               <div className='mt-12 ml-8 rounded-xl'>
                 
-                <input type="password" name='Password' autocomplete="on" onChange={(e) => setUserdata({ ...userData, [e.target.name]: e.target.value })} className=" w-64 xl:w-80 h-11  border border-gray-900   text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Your Password" required></input>
+                <input type="password" name='Password' autocomplete="on" onChange={(e) => setUserdata({ ...userData, [e.target.name]: e.target.value })} className=" w-64 xl:w-80 h-11  border border-gray-900   text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Your Password" required></input>
               </div>
 
               <button type='submit' className='bg-black mt-12 ml-8 text-white p-2 rounded-3xl w-28 font-semibold'>Continue</button>

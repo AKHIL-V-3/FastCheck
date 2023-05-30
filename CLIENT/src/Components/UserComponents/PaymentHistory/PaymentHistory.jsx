@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { baseUrl } from '../../../Axios/api'
+import jwtInterceptor from '../../helpers/jwtInterceptor'
 
 function PaymentHistory() {
 
@@ -15,7 +16,7 @@ function PaymentHistory() {
 
             const userId = user?._id
             try {
-                const { data } = await baseUrl.get("/host/paymenthistory/" + userId, {
+                const { data } = await jwtInterceptor.get("/paymenthistory/" + userId, {
                     withCredentials: true
                 })
                 console.log(data, 'ooooooooooooooooooooo');

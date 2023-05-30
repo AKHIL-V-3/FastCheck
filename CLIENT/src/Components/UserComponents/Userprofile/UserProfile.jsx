@@ -22,26 +22,14 @@ function UserProfile() {
 
     }, [])
 
-    // useEffect(()=>{
-       
-    //         const getUserprofile = async ()=>{
-
-    //                const {data} = await baseUrl.get("/getuserimage",{withCredentials:true})
-
-    //                setUserdata(data.response)
-    //         }
-    //         getUserprofile()
-    // },[])
-
-
-
     return (
         <div>
             <Header />
             <section>
                 <div className='h-full xl:pb-10 w-full bg-white text-black  flex justify-center'>
                     <div className=' w-10/12 xl:flex' >
-                        <div className=' xl:w-5/12 w-full xl:h-full h-auto ml-4 flex flex-col pt-14'>
+
+                        <div className=' xl:w-5/12 w-full xl:h-full h-auto  flex flex-col pt-14'>
                             <div className='border-2 border-gray-300 xl:w-80 w-full xl:h-64 h-72 rounded-3xl flex  flex-col items-center pt-8 shadow-md shadow-gray-300'>
                                 <div className='w-32 h-32 rounded-full bg-black flex pt-2 justify-center text-white bg-cover border-2' style={{ backgroundImage: `url(${user?.photoUrl})` }}>
                                     {!user?.photoUrl && <h1 className='text-8xl font-bold'>{userFirstLetter}</h1>}

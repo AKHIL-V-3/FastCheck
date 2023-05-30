@@ -99,7 +99,7 @@ function Posts() {
             {
               currentPosts?.map((hotel, index) => (
 
-                <div onClick={() => getHotelData(hotel._id)}>
+                <div onClick={() => getHotelData(hotel._id)} className='cursor-pointer'>
                   <div className='xl:w-80 w-full h-72 flex justify-end rounded-lg bg-slate-400 bg-cover duration-200' style={{ backgroundImage: `url(${hotel?.HotelImages[0]})` }} >
                     <FontAwesomeIcon icon="heart" className='me-3 mt-3 w-5 h-5 text-gray-800' />
                   </div>

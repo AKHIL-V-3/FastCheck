@@ -300,7 +300,7 @@ function SingleRoom() {
 
                     <div className='w-full space-y-4 xl:space-y-6 xl:flex xl:flex-col xl:items-center'>
 
-                        <div className='xl:mt-10 w-full xl:flex xl:pl-32 pl-5 h-6'>
+                        <div className='xl:mt-10 mt-10 w-full xl:flex xl:pl-32 pl-5 h-6'>
                             <h1 className='xl:text-3xl text-xl font-bold'>{HotelData.HotelName}</h1>
 
                         </div>
@@ -467,13 +467,6 @@ function SingleRoom() {
                                                     </div>
                                                     <p>TV</p>
                                                 </div>}
-                                                {/* <div className='flex space-x-3'>
-                                                    <div className='w-8 h-8 flex justify-center items-center rounded-full border-white border-2'>
-                            
-                                                        <FontAwesomeIcon icon="fas fa-air-freshnar" />
-                                                    </div>
-                                                    <p>Washing Machine</p>
-                                                </div> */}
                                             </div>
                                         </div>
                                     </div>

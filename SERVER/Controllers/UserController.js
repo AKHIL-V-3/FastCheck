@@ -399,6 +399,17 @@ module.exports = {
            })
     },
 
+    getPaymentHistory:(req,res)=>{
+        const userId = req.params.userId 
+           User.getPaymentHistory(userId).then((response)=>{
+               res.status(200).json(response)
+           })
+           .catch((err)=> {
+            console.log(err)
+            res.status(403).json({message:"something wrong"})
+           })
+    }
+
     
 
 

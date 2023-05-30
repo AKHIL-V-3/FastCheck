@@ -1,5 +1,7 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react'
-import { Map, Marker } from 'react-map-gl';
+// import { Map, Marker, } from 'react-map-gl';
+import MapGL, { Marker } from 'react-map-gl';
 
 export const MapComponent = (props) => {
 
@@ -16,13 +18,17 @@ export const MapComponent = (props) => {
     return (
 
         <section className=' h-96 w-full rounded-md'>
-        <Map
-            mapStyle='mapbox://styles/akhilv033/clh8n66hy00rb01qtakpt56a9'
-            mapboxAccessToken='pk.eyJ1IjoiYWtoaWx2MDMzIiwiYSI6ImNsaDdnaGM0dzA5OGkzZ3BpaDdlejZuanYifQ.-FRRw7jUSm6r0TwReFdTTw'
-            {...viewport}
-        >
 
-        </Map >
+            <MapGL
+                mapStyle='mapbox://styles/akhilv033/cli9rvidj00vv01pn8smg9bwx'
+                mapboxAccessToken='pk.eyJ1IjoiYWtoaWx2MDMzIiwiYSI6ImNsaDdodXg4ejBnODAzY210ZnBqNXRjazYifQ.TB4Ynq9txwJTID5zEYlNIA'
+                {...viewport}
+            >    
+                    <Marker latitude={props.latitude} longitude={props.longitude}> {/* Replace with your desired latitude and longitude */}
+                        <FontAwesomeIcon icon="map-marker-alt" className='text-red-600 h-6 w-6 absolute right-56 bottom-96  xl:right-0 xl:bottom-0' style={{right:"620px",bottom:"380px"}}  />
+                        
+                    </Marker>
+            </MapGL >
 
         </section>
 

@@ -147,5 +147,20 @@ module.exports = {
                     reject()
                  })
           })
-    }
+    },
+    getPaymentHistory :(userId)=>{
+        return new Promise((resolve,reject)=>{
+           Hotel.ReservationSchema.find({
+                $and:[
+                     {"userDetails.userId" : userId},
+                     {paymentStatus:"paid"},   
+                 ]
+           }).then((response)=>{
+                   resolve(response)
+              })
+              .catch((err)=>[
+                  reject()
+              ])
+        })
+ }
 }

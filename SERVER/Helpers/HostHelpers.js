@@ -139,10 +139,6 @@ module.exports = {
             })
      },
      getAllreservations :(hostId)=>{
-
-          console.log(hostId,'hhhhhhhh');
-
-
             return new Promise((resolve,reject)=>{
                Reservation.find({
                     $and:[
@@ -157,20 +153,6 @@ module.exports = {
                   ])
             })
      },
-     getPaymentHistory :(userId)=>{
-            return new Promise((resolve,reject)=>{
-               Reservation.find({
-                    $and:[
-                         {"userDetails.userId" : userId},
-                         {paymentStatus:"paid"},   
-                     ]
-               }).then((response)=>{
-                       resolve(response)
-                  })
-                  .catch((err)=>[
-                      reject()
-                  ])
-            })
-     }
+    
 
 }

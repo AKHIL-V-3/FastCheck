@@ -11,6 +11,7 @@ import jwtInterceptor from '../../helpers/jwtInterceptor'
 import { useEffect } from 'react'
 import { baseUrl } from '../../../Axios/api'
 import {  Oval } from 'react-loader-spinner'
+import { useNavigate } from 'react-router-dom'
 
 function CreateuserProfile() {
 
@@ -18,6 +19,8 @@ function CreateuserProfile() {
 
   const [upload, setUpload] = useState(false)
   const [loading, setLoading] = useState(false)
+
+  const navigate = useNavigate()
 
 
   const user = useSelector(state => state.user.user)
@@ -111,7 +114,7 @@ function CreateuserProfile() {
       <section>
         <div className='bg-white text-black h-full'>
           <nav className='w-full h-20 flex justify-start bg-white shadow-md shadow-gray-400 items-center z-30 pl-12 fixed'>
-            <div className='font-extrabold text-3xl xl:text-4xl'>LOGO</div>
+            <div onClick={()=> navigate('/')} className='font-extrabold cursor-pointer text-3xl xl:text-4xl'>Fastcheck-in</div>
           </nav>
           <section>
             <div className='pt-40 pb-20'>

@@ -1,6 +1,5 @@
-import React ,{useState,} from 'react'
+import React from 'react'
 import { useNavigate } from "react-router-dom";
-import axios from 'axios'
 import {ToastContainer,toast} from "react-toastify"
 import {useFormik} from 'formik'
 import * as Yup from 'yup'
@@ -75,33 +74,25 @@ function UserSignup() {
       signInWithPopup(auth,provider).then(async (data)=>{
 
           const user = {
-             
+
                Email:data.user.email,
                UserName:data.user.displayName,
                photoUrl:data.user.photoURL,
                userId:data.user.uid,
-               Password:data.user.uid
+               Password:data.user.uid,
           }
-
-          console.log(user);
-
 
           try{
              
             const { data } = await baseUrl.post("/usersignup",user,{
               withCredentials:true
             })
-
-            if(data.error){
-
-                 console.log(data,);
-            }
-                  
+            if(data) navigate('/userlogin')
           }catch(err){
 
              console.log(err);
           }
-          navigate('/')
+          
       })
   }
      
@@ -113,27 +104,24 @@ function UserSignup() {
 
           <h1 className='text-lg font-bold mt-3 ml-5 '>Login Or SignUp</h1>
 
-          {/* <div className='bg-white w-100 h-1'></div> */}
           <hr className='bg-black m-5' />
 
           <div className='flex-col w-full h-3/4'>
 
             <form action="" onSubmit={formik.handleSubmit} >
             <div className='mt-8 ml-8 rounded-xl'>
-              {/* <input type="text" className='w-full h-full rounded-xl caret-white bg-black text-white text-start' placeholder='Enter Your Email Address'/> */}
-              <input type="text" name='UserName' onBlur={formik.handleBlur}  onChange={formik.handleChange} value={formik.values.UserName}   className=" w-64 xl:w-80 h-11 bg-white border border-black  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Your Name"></input>
+             
+              <input type="text" name='UserName' onBlur={formik.handleBlur}  onChange={formik.handleChange} value={formik.values.UserName}   className=" w-64 xl:w-80 h-11 bg-white border border-black  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Your Name"></input>
               {formik.touched.UserName && formik.errors.UserName ? <p>{formik.errors.UserName}</p> : null}
             </div>
 
             <div className='mt-8 ml-8 rounded-xl'>
-              {/* <input type="text" className='w-full h-full rounded-xl caret-white bg-black text-white text-start' placeholder='Enter Your Email Address'/> */}
-              <input type="Email" name='Email' onBlur={formik.handleBlur}  onChange={formik.handleChange} value={formik.values.Email} className=" w-64 xl:w-80 h-11 bg-white border border-black  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Your EmailAddress"></input>
+              <input type="Email" name='Email' onBlur={formik.handleBlur}  onChange={formik.handleChange} value={formik.values.Email} className=" w-64 xl:w-80 h-11 bg-white border border-black  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Your EmailAddress"></input>
               {formik.touched.Email && formik.errors.Email ? <p>{formik.errors.Email}</p> : null}
             </div>
 
             <div className='mt-8 ml-8 rounded-xl'>
-              {/* <input type="text" className='w-full h-full rounded-xl  bg-black' placeholder='Enter Your Password' /> */}
-              <input type="Password" autocomplete="on" name='Password' onBlur={formik.handleBlur}  onChange={formik.handleChange} value={formik.values.Password} className=" w-64 xl:w-80 h-11 bg-white border border-black  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Your Password"></input>
+              <input type="Password" autocomplete="on" name='Password' onBlur={formik.handleBlur}  onChange={formik.handleChange} value={formik.values.Password} className=" w-64 xl:w-80 h-11 bg-white border border-black  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Your Password"></input>
               {formik.touched.Password && formik.errors.Password ? <p>{formik.errors.Password}</p>  : null}
             </div>
 

@@ -119,11 +119,11 @@ function Header() {
                 {
                   !isLoggedIn ?
                     (<div className='flex flex-col item-start w-full space-y-2'>
-                      <div className='hover:bg-slate-300 w-full h-10 pl-3 flex items-center'>
-                        <p className='cursor-pointer' onClick={() => navigate("/userlogin")}>Login</p>
+                      <div onClick={() => navigate("/userlogin")} className='cursor-pointer hover:bg-slate-300 w-full h-10 pl-3 flex items-center'>
+                        <p className='cursor-pointer'>Login</p>
                       </div>
-                      <div className='hover:bg-slate-300 w-full h-10 pl-3 flex items-center'>
-                        <p className='cursor-pointer' onClick={() => navigate("/usersignup")}> Signup</p>
+                      <div onClick={() => navigate("/usersignup")} className='cursor-pointer hover:bg-slate-300 w-full h-10 pl-3 flex items-center'>
+                        <p className='cursor-pointer'> Signup</p>
                       </div>
                     </div>)
                     :
@@ -147,20 +147,20 @@ function Header() {
 
                 isLoggedIn &&
                 <div className='w-full space-y-2'>
-                  <div  onClick={() => userProfile()} className='hover:bg-slate-300 w-full h-10 pl-3 flex items-center'>
-                    <p className='cursor-pointer'  >Account</p>
+                  <div  onClick={() => userProfile()} className='cursor-pointer hover:bg-slate-300 w-full h-10 pl-3 flex items-center'>
+                    <p className=''  >Account</p>
                   </div>
                 </div>}
 
               <hr className='w-full' />
 
               <div className='w-full space-y-2'>
-                <div className='hover:bg-slate-300 w-full h-10 pl-3 flex items-center'>
+                <div className='cursor-pointer  hover:bg-slate-300 w-full h-10 pl-3 flex items-center'>
                   <p className='cursor-pointer' >Help</p>
                 </div>
 
                 {isLoggedIn &&
-                  <div onClick={handleLogout} className='hover:bg-slate-300 w-full h-10 pl-3 flex items-center'>
+                  <div onClick={handleLogout} className='cursor-pointer  hover:bg-slate-300 w-full h-10 pl-3 flex items-center'>
                     <p  className='cursor-pointer'>Log out</p>
                   </div>
                 }
@@ -189,18 +189,18 @@ function Header() {
                   {isLoggedIn ?
 
                     <>
-                      < div  onClick={() => navigate("/chat/messages")} className='hover:bg-slate-300 w-full h-10 pl-3 flex items-center' >
+                      < div  onClick={() => navigate("/chat/messages")} className='cursor-pointer hover:bg-slate-300 w-full h-10 pl-3 flex items-center' >
                         <p >Messages</p>
                       </div>
 
-                      <div onClick={() => navigate("/trips")} className='hover:bg-slate-300 w-full h-10 pl-3 flex items-center'>
+                      <div onClick={() => navigate("/trips")} className='cursor-pointer hover:bg-slate-300 w-full h-10 pl-3 flex items-center'>
                         <p  >Reservations</p>
                       </div>
-                      <div onClick={() => userProfile()} className='hover:bg-slate-300 w-full h-10 pl-3 flex items-center'>
+                      <div onClick={() => userProfile()} className='cursor-pointer hover:bg-slate-300 w-full h-10 pl-3 flex items-center'>
                         <p >Account</p>
                       </div>
 
-                      <div onClick={handleLogout} className='hover:bg-slate-300 w-full h-10 pl-3 flex items-center'>
+                      <div onClick={handleLogout} className='cursor-pointer hover:bg-slate-300 w-full h-10 pl-3 flex items-center'>
                         <p >Log out</p>
                       </div>
 

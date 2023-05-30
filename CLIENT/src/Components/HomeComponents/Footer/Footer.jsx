@@ -8,7 +8,7 @@ function Footer() {
         <div className='w-11/12 xl:flex justify-between xl:space-x-28 space-y-24 xl:space-y-0'>
 
           <div className='xl:w-3/12 space-y-7'>
-            <div className='font-extrabold text-3xl xl:text-4xl'>LOGO</div>
+            <div className='font-extrabold text-3xl xl:text-4xl'>Fastcheck-in</div>
             <div>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, laboriosam ullam!</div>
             {/* <div className='flex space-x-3'>
               <button className='bg-black text-white w-36 h-10 rounded-xl font-semibold text-md flex items-center justify-center space-x-2'>

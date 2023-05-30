@@ -187,9 +187,8 @@ function AddHotel() {
   return (
 
     <section>
-      {/* <hr className='bg-white w-full fixed' /> */}
+     
     {
-      
 
       isLoading ? 
 
@@ -258,8 +257,6 @@ function AddHotel() {
             </div>
           </div>
 
-          {/* {formik.touched.Address && formik.errors.Address ? <p className='text-red-600 text-sm'>{formik.errors.Address}</p> : null} */}
-
           <div className='xl:ml-8 xl:mt-8 xl:me-8 rounded-xl xl:flex justify-between items-center'>
             <div>
               <label htmlFor="">Enter Hotel Address</label>
@@ -281,7 +278,7 @@ function AddHotel() {
                 <div className='space-y-3 w-auto h-auto m-3'>
                   {
                     place.map((value, index) => (
-                      <div key={index} onClick={() => assignValue(index)} className='flex items-center space-x-2 hover:bg-gray-800'>
+                      <div key={index} onClick={() => assignValue(index)} className='flex items-center space-x-2 hover:bg-gray-100 cursor-pointer'>
                         <FontAwesomeIcon icon="location" className='w-3 h-3 pl-2' />
                         <p >{value?.place_name}</p>
                       </div>
