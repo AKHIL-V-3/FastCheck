@@ -17,10 +17,6 @@ function Conversation({conversation,currentUser,selected,lastMessage}) {
                     withCredentials: true
                   })
 
-
-                  console.log(data,'ddddddddddd');
-
-
                   setUser(data);
             }catch(error){
                 console.log(error);
@@ -37,7 +33,7 @@ function Conversation({conversation,currentUser,selected,lastMessage}) {
             <div  className={`w-full  h-20  flex items-center justify-between hover:bg-stone-200 ${user?._id === selected ? "bg-stone-200" : ""}`}>
               
                 <div className='w-2/12'>
-                    <div className='bg-white w-12 h-12 ms-2 rounded-full bg-cover' style={{backgroundImage:"url('https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png')"}} >
+                    <div className='bg-white w-12 h-12 ms-2 border border-stone-300 rounded-full bg-cover' style={{backgroundImage:"url('https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png')"}} >
                     </div>
                 </div>
 

@@ -48,6 +48,14 @@ function SingleRoom() {
     const HotelData = useSelector((state) => state.user.hotelData)
     const user = useSelector(state => state.user.user)
     const isLoggedIn = useSelector(state => state.user.isLoggedIn)
+
+
+
+    console.log(user,'888888888888888888888888888888888888');
+
+
+
+
     const formatDate = (isoDate) => {
         const date = new Date(isoDate);
         const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
@@ -697,7 +705,7 @@ function SingleRoom() {
 
                             <div className='ml-7'>
                                 <div className='flex items-center space-x-6'>
-                                    <div className='w-20 h-20 bg-slate-600 rounded-full bg-cover' style={{ backgroundImage: `url("${user?.photoUrl}")` }}></div>
+                                    <div className='w-20 h-20 bg-slate-200 rounded-full bg-cover' style={{ backgroundImage: `url("${user?.photoUrl}")` }}></div>
 
                                     <div>
                                         <h1 className='font-bold text-xl'>Hosted by {HotelData?.HostData?.Hostname}</h1>

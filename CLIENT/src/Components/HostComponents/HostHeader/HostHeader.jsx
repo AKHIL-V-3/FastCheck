@@ -3,9 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useNavigate } from 'react-router-dom';
 import {  useSelector,useDispatch } from 'react-redux';
 import { authactions } from '../../../Redux/Auth/authSlice';
-import { hostInterceptor } from '../../helpers/jwtInterceptor';
 import { baseUrl } from '../../../Axios/api';
-import axios from 'axios';
 
 let firstRender = true
 
@@ -38,12 +36,6 @@ function HostHeader() {
         withCredentials: true
       })
 
-
-      alert("")
-
-      console.log(response,'[[[[[[[[[[[[[[[[[[[');
-
-
        return response
       
     }catch(err){
@@ -55,7 +47,6 @@ function HostHeader() {
  
     sendLogoutReq().then((response) => {
       if (response) {
-        alert('')
         dispatch(authactions.hostLogOut())
         dispatch(authactions.removeHost())
         navigate('/host/hostlogin')
@@ -84,14 +75,10 @@ function HostHeader() {
     <section className='sticky top-0 z-40 '>
       <nav className='bg-white text-black h-auto shadow-md shadow-gray-400'>
         <div className='flex items-center justify-start h-20 xl:ml-10 ml-5 relative'>
-          <div className='font-extrabold text-3xl xl:text-4xl'>Fastcheck-In</div>
+          <div onClick={()=> navigate("/host")} className='font-extrabold cursor-pointer text-3xl xl:text-4xl'>Fastcheck-in</div>
           <div className='xl:flex justify-evenly items-center w-4/12 hidden'>            
           </div>
           <div className='flex absolute xl:right-16 right-8'>
-          {/* <div onClick={() => navigate('/host/hostlogin')} className=' w-40 h-10 rounded-3xl border border-gray-900 shadow-md xl:flex justify-center items-center cursor-pointer hidden'>
-              <p className='font-medium '>Become a Host</p>
-            </div> */}
-
             <div className='flex flex-col items-end'>
             <div>
                 <button onClick={handleToggle} type="button" aria-expanded="false" className='w-20 h-10 xl:w-24 xl:h-10 ml-5 rounded-3xl border border-gray-900 hover:shadow-lg shadow-gray-900 flex items-center justify-center'>

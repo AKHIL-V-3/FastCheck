@@ -138,7 +138,7 @@ function UserProfile() {
 
                 </div>
 
-                <hr  className='w-full xl:h-0 h-1 bg-black mt-12'/>
+                <hr  className='w-full bg-black mt-12'/>
 
             </section>
             <Footer />

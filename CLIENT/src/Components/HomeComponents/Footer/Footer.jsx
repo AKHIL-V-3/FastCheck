@@ -4,22 +4,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 function Footer() {
   return (
     <section>
-      <div className='w-full xl:h-96 h-full bg-white text-black flex justify-center pt-24 pb-16'>
-        <div className='w-11/12 xl:flex justify-between xl:space-x-28 space-y-24 xl:space-y-0'>
+      <div className='w-full xl:h-72 h-full bg-stone-200 text-black flex justify-center mt-0 xl:mt-12 pt-12 pb-8'>
+        <div className='w-11/12 xl:flex justify-between xl:space-x-28 space-y-12 xl:space-y-0'>
 
           <div className='xl:w-3/12 space-y-7'>
             <div className='font-extrabold text-3xl xl:text-4xl'>Fastcheck-in</div>
             <div>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, laboriosam ullam!</div>
-            {/* <div className='flex space-x-3'>
-              <button className='bg-black text-white w-36 h-10 rounded-xl font-semibold text-md flex items-center justify-center space-x-2'>
-                <svg role="img" className='w-4 h-4 ' viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Google Play</title><path d="M22.018 13.298l-3.919 2.218-3.515-3.493 3.543-3.521 3.891 2.202a1.49 1.49 0 0 1 0 2.594zM1.337.924a1.486 1.486 0 0 0-.112.568v21.017c0 .217.045.419.124.6l11.155-11.087L1.337.924zm12.207 10.065l3.258-3.238L3.45.195a1.466 1.466 0 0 0-.946-.179l11.04 10.973zm0 2.067l-11 10.933c.298.036.612-.016.906-.183l13.324-7.54-3.23-3.21z" /></svg>
-                <p> PlayStore</p>
-              </button>
-              <button className='bg-black text-white w-36 h-10 rounded-xl font-semibold text-md flex items-center justify-center space-x-2'>
-                <svg xmlns="http://www.w3.org/2000/svg" className='w-5 font-bold h-5' viewBox="0 0 24 24"> <g> <path fill="none" d="M0 0h24v24H0z" /> <path fill-rule="nonzero" d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm0 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16zM8.823 15.343l-.79 1.37a.823.823 0 1 1-1.428-.822l.589-1.016c.66-.206 1.201-.048 1.629.468zM13.21 8.66l2.423 4.194h2.141a.82.82 0 0 1 .823.822.82.82 0 0 1-.823.823h-1.19l.803 1.391a.824.824 0 0 1-1.427.823l-3.04-5.266c-.69-1.19-.198-2.383.29-2.787zm.278-3.044c.395.226.528.73.302 1.125l-3.528 6.109h2.553c.826 0 1.29.972.931 1.645h-7.48a.82.82 0 0 1-.822-.823.82.82 0 0 1 .822-.822h2.097l2.685-4.653-.838-1.456a.824.824 0 0 1 1.427-.823l.359.633.367-.633a.823.823 0 0 1 1.125-.302z" /> </g> </svg>
-                <p> AppStore</p>
-              </button>
-            </div> */}
           </div>
 
           <div className='flex flex-col xl:w-3/12 items-start  mt-2'>

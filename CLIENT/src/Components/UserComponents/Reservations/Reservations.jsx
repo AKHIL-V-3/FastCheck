@@ -76,17 +76,17 @@ function Reservations() {
                 <div className='w-11/12'>
                     <div className='flex justify-between'>
                         <div className='mb-12'>
-                            <h1 className='text-3xl font-bold'>Reservations</h1>
+                            <h1 className='xl:text-3xl text-xl font-bold'>Reservations</h1>
                         </div>
 
-                        <div className='flex items-center space-x-5'>
+                        <div className='flex xl:items-center items-start space-x-5'>
                             <div>
-                                <button onClick={()=> navigate("/paymenthistory")} className='px-3 py-2 border border-gray-300'>Payment history</button>
+                                <button onClick={()=> navigate("/paymenthistory")} className='xl:px-3 xl:py-2 px-1 py-1 border border-gray-300'>Payment history</button>
                             </div>
 
-                            <div className='flex space-x-6 items-center'>
+                            <div className='flex items-center'>
 
-                                <div className='border-gray-300 border pe-2'>
+                                <div className='border-gray-300 border xl:pe-2 pe-1'>
                                     <select id="countries" onChange={filterReservation} className=" border-none outline-none  text-sm  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
                                         <option selected >Filter</option>
                                         <option value="Booked" >Booked</option>

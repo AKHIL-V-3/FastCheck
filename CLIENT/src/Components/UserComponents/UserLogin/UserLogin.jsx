@@ -59,21 +59,24 @@ function UserLogin() {
     signInWithPopup(auth, provider).then(async (data) => {
 
       setGoogledata(data.user.email)
+
       const user = {
         Email: data.user.email,
         Password: data.user.uid
       }
+
       try {
         const { data } = await baseUrl.post("/userlogin", user, {
           withCredentials: true
         })
+
         if (data.errors) {
           const { email, password } = data.errors
           if (email) generateError(email)
           else if (password) generateError(password)
     
         } else {
-          dispatch(authactions.setUser(user))
+          dispatch(authactions.setUser(data.user))
           dispatch(authactions.logIn())
           navigate('/')  
         }
