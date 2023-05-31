@@ -115,14 +115,8 @@ function Posts() {
                     <p className='font-semibold'>₹ {hotel?.Price}<span className='font-semibold opacity-80 ml-2'>night</span></p>
                   </div>
                 </div>
-
               ))
-
             }
-
-
-
-
 
           </div>
 
@@ -136,8 +130,8 @@ function Posts() {
         <div className='bg-red-500 w-full h-96 mt-20 flex items-center justify-center bg-cover' style={{ backgroundImage: 'url("https://heavensportfolio.com/uploads/asia-me/tajm01.jpg")' }}>
           <div className='flex flex-col w-11/12 space-y-8 text-white '>
             <h1 className='text-3xl font-semibold'>Try Hosting With Us</h1>
-            <p className='xl:w-1/2'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit pariatur et illum incidunt asperiores tempora! Labore, quod eligendi voluptatem quas maxime eius, repellendus adipisci placeat ipsum fugit, suscipit sed minus.</p>
-            <div className='bg-white w-40 h-10 rounded-3xl text-black  flex justify-center items-center cursor-pointer'>
+            <p className='xl:w-1/2'>Are you the proud owner of a stunning villa? Are you looking to monetize your property and share its beauty with travelers from around the world? Join our hotel booking app as a host and embark on an exciting journey of hospitality. Here's why you should sign up</p>
+            <div  onClick={() => navigate('/host/hostlogin')} className='bg-white w-40 h-10 rounded-3xl text-black  flex justify-center items-center cursor-pointer'>
               <p className='font-medium'>Become a Host</p>
             </div>
 

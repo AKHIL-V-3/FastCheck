@@ -79,16 +79,16 @@ function Reservations() {
                             <h1 className='xl:text-3xl text-xl font-bold'>Reservations</h1>
                         </div>
 
-                        <div className='flex xl:items-center items-start space-x-5'>
+                        <div className='flex xl:items-center items-start space-x-2 xl:space-x-5'>
                             <div>
-                                <button onClick={()=> navigate("/paymenthistory")} className='xl:px-3 xl:py-2 px-1 py-1 border border-gray-300'>Payment history</button>
+                                <button onClick={()=> navigate("/paymenthistory")} className='xl:px-3 xl:py-2 px-2 py-2.5 border rounded-sm font-medium  border-gray-300 xl:text-base text-sm'>Payment history</button>
                             </div>
 
                             <div className='flex items-center'>
 
                                 <div className='border-gray-300 border xl:pe-2 pe-1'>
-                                    <select id="countries" onChange={filterReservation} className=" border-none outline-none  text-sm  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
-                                        <option selected >Filter</option>
+                                    <select id="countries" onChange={filterReservation} className=" border-none outline-none  text-sm  block w-full p-2.5 bg-white dark:border-gray-600 dark:placeholder-gray-400">
+                                        <option selected  >Filter</option>
                                         <option value="Booked" >Booked</option>
                                         <option value="All">All</option>
                                         <option value="Canceled">Canceled</option>
@@ -122,7 +122,7 @@ function Reservations() {
                             :
 
                             <div className='w-full bg-white text-gray-400 h-full flex justify-center items-center pb-96'>
-                                <h1 className='font-bold text-8xl mt-6'>No Reservations</h1>
+                                <h1 className='font-bold text-4xl xl:text-8xl mt-6'>No Reservations</h1>
                             </div>
                     }
                 </div>

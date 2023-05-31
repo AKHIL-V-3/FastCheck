@@ -108,7 +108,7 @@ function HostReservation() {
 
                             <div className='flex justify-between'>
                                 <div className='mb-12'>
-                                    {<h1 className='text-3xl font-bold'>Reservations</h1>
+                                    {<h1 className='xl:text-3xl text-xl font-bold'>Reservations</h1>
 
                                         // <div className='flex items-center space-x-4'>
                                         // <button onClick={()=>setPaymentHistory([])} className='flex items-center text-lg border-2 border-gray-600 px-2 rounded-md'>
@@ -131,29 +131,29 @@ function HostReservation() {
                             {
                                
                                     <div className='space-y-2 '>
-                                        <div className='w-full  h-12 border-b-2 border-gray-800 flex'>
-                                            <div className='pl-3 pt-2 w-1/12 flex justify-center border-gray-800'>NO</div>
-                                            <div className='pl-5 pt-2 w-3/12 flex  justify-center border-gray-800'>HotelName</div>
-                                            <div className='pl-5 pt-2 w-3/12   flex justify-center  border-gray-800'>Total Price</div>
-                                            <div className='pl-5 pt-2 w-3/12   flex justify-center border-gray-800'>Image</div>
-                                            <div className='pl-5 pt-2 w-3/12   flex justify-center  border-gray-800'>Status</div>
-                                            <div className='pl-5 pt-2 w-3/12   flex justify-center  border-gray-800'>Change Status</div>
+                                        <div className='w-full  h-12 border-b-2 border-gray-800 flex xl:text-base text-xs font-semibold'>
+                                            <div className='xl:pl-3  pt-2 w-1/12 flex justify-center border-gray-800'>No</div>
+                                            <div className='xl:pl-5 pl-1 pt-2 w-3/12 flex  justify-center border-gray-800'>HotelName</div>
+                                            <div className='xl:pl-5 pl-1 pt-2 w-3/12   flex justify-center  border-gray-800'>Total Price</div>
+                                            <div className='xl:pl-5 pl-1 pt-2 w-3/12   flex justify-center border-gray-800'>Image</div>
+                                            <div className='xl:pl-5 pl-1 pt-2 w-3/12   flex justify-center  border-gray-800'>Status</div>
+                                            <div className='xl:pl-5 pl-1 pt-2 w-3/12   flex justify-center  border-gray-800'>Change Status</div>
                                         </div>
                                         {
                                             reservation.map((Hotel, index) => (
 
-                                                <div className='w-full h-28 border-b-2 border-gray-800 flex'>
+                                                <div className='w-full h-28 border-b-2 border-gray-800 flex xl:text-base text-xs font-medium'>
                                                     <div className='w-1/12 h-full flex justify-center items-center '>{index + 1}</div>
                                                     <div className='w-3/12 h-full flex justify-start items-center '>{Hotel.HotelDetails.HotelName}</div>
                                                     <div className='w-3/12 h-full flex justify-center items-center '>{Hotel.BookingDetails.totalCost}</div>
                                                     <div className='w-3/12 h-full flex justify-center items-center '>
-                                                        <div className=' w-20 h-20 bg-cover' style={{ backgroundImage: `url("${Hotel?.HotelDetails?.HotelImage}")` }} >
+                                                        <div className='xl:w-20 xl:h-20 w-12 h-12 bg-cover' style={{ backgroundImage: `url("${Hotel?.HotelDetails?.HotelImage}")` }} >
 
                                                         </div>
                                                     </div>
                                                     <div className='w-3/12 h-full flex justify-center items-center '>{Hotel?.Booking}</div>
                                                     <div className='w-3/12 h-full flex justify-center items-center '>
-                                                        <button onClick={() => cancelReservation(Hotel?._id)} className='border-2 border-gray-700 rounded-sm text-sm font-bold px-2 py-1'>Cancel Reservation</button>
+                                                        <button onClick={() => cancelReservation(Hotel?._id)} className='border-2 border-gray-700 rounded-sm text-xs xl:text-sm font-bold xl:px-2 xl:py-1 px-2'>Cancel</button>
                                                     </div>
                                                 </div>
 

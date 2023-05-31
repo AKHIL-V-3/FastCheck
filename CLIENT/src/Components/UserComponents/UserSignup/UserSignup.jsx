@@ -111,17 +111,17 @@ function UserSignup() {
             <form action="" onSubmit={formik.handleSubmit} >
             <div className='mt-8 ml-8 rounded-xl'>
              
-              <input type="text" name='UserName' onBlur={formik.handleBlur}  onChange={formik.handleChange} value={formik.values.UserName}   className=" w-64 xl:w-80 h-11 bg-white border border-black  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Your Name"></input>
+              <input type="text" name='UserName' onBlur={formik.handleBlur}  onChange={formik.handleChange} value={formik.values.UserName}   className=" w-64 xl:w-80 h-11 bg-white border border-black  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Your Name"></input>
               {formik.touched.UserName && formik.errors.UserName ? <p>{formik.errors.UserName}</p> : null}
             </div>
 
             <div className='mt-8 ml-8 rounded-xl'>
-              <input type="Email" name='Email' onBlur={formik.handleBlur}  onChange={formik.handleChange} value={formik.values.Email} className=" w-64 xl:w-80 h-11 bg-white border border-black  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Your EmailAddress"></input>
+              <input type="Email" name='Email' onBlur={formik.handleBlur}  onChange={formik.handleChange} value={formik.values.Email} className=" w-64 xl:w-80 h-11 bg-white border border-black  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Your EmailAddress"></input>
               {formik.touched.Email && formik.errors.Email ? <p>{formik.errors.Email}</p> : null}
             </div>
 
             <div className='mt-8 ml-8 rounded-xl'>
-              <input type="Password" autocomplete="on" name='Password' onBlur={formik.handleBlur}  onChange={formik.handleChange} value={formik.values.Password} className=" w-64 xl:w-80 h-11 bg-white border border-black  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Your Password"></input>
+              <input type="Password" autocomplete="on" name='Password' onBlur={formik.handleBlur}  onChange={formik.handleChange} value={formik.values.Password} className=" w-64 xl:w-80 h-11 bg-white border border-black  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Your Password"></input>
               {formik.touched.Password && formik.errors.Password ? <p>{formik.errors.Password}</p>  : null}
             </div>
 

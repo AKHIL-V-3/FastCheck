@@ -17,6 +17,8 @@ const authSlice = createSlice({
           searchInput: "",
           homeHotels:null,
           searchHotels:null,
+          admin:null,
+          isadminLoggedIn:false,
           
      },
 
@@ -28,6 +30,13 @@ const authSlice = createSlice({
           },
           louOut: (state, action) => {
                state.isLoggedIn = false;
+          },
+
+          adminLogIn: (state) => {
+               state.isadminLoggedIn = true;
+          },
+          adminLogOut: (state, action) => {
+               state.isadminLoggedIn = false;
           },
 
           hostLogin: (state) => {
@@ -44,8 +53,15 @@ const authSlice = createSlice({
                state.host = action.payload
           },
 
+          setAdmin: (state, action) => {
+               state.admin = action.payload
+          },
           removeUser: (state, action) => {
                state.user = null
+          },
+
+          removeAdmin: (state, action) => {
+               state.admin = null
           },
           removeHost: (state, action) => {
                state.host = null

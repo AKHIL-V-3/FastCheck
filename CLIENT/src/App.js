@@ -16,12 +16,13 @@ import BookingRequestPage from './Pages/BookingRequestPage';
 import Sucesspage from './Pages/Stripe/Sucesspage';
 import Cancelpage from './Pages/Stripe/Cancelpage';
 import Createuserprofilepage from './Pages/Createuserprofilepage';
-import Searchplace from './Components/Searchplace';
 import HostEditHotelPage from './Pages/Host-EditHotelPage';
 import ReservationPage from './Pages/ReservationPage';
 import Chatpage from './Pages/Chat/Chatpage';
 import HostReservation from './Components/HostComponents/Reservation/HostReservation';
 import PaymentHistoryPage from './Pages/PaymentHistory-Page';
+import Adminpage from './Pages/Admin/Adminpage';
+import Loginpage from './Pages/Admin/Loginpage';
 
 function App() {
 
@@ -39,7 +40,6 @@ function App() {
         <Route path='/success'element = {<Sucesspage/>}/>
         <Route path='/cancel'element = {<Cancelpage/>}/>
         <Route path='/userprofile/createuserprofile'element = {<Createuserprofilepage/>}/>
-        <Route path='/places'element = {<Searchplace/>}/>
         <Route path='/trips'element = {<ReservationPage/>}/>
         <Route path='/paymenthistory'element = {<PaymentHistoryPage/>}/>
 
@@ -52,6 +52,11 @@ function App() {
 
         <Route path='/chat/messages'element = {<Chatpage />}/>
         <Route path='/host/messages'element = {<Chatpage />}/>
+
+
+        <Route path='/admin'element = {<Adminpage />}/>
+        <Route path='/admin/login'element = {<Loginpage />}/>
+       
 
       </Routes>   
     </Router>

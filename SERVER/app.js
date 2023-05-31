@@ -9,6 +9,7 @@ var UserRouter = require('./routes/User');
 var HostRouter = require('./routes/Host');
 var ChatRouter = require('./routes/Chat');
 var ReviewRouter = require('./routes/Review');
+var AdminRouter = require('./routes/Admin');
 const bodyParser = require("body-parser")
 require('dotenv').config()
 
@@ -43,6 +44,7 @@ app.use('/', UserRouter);
 app.use('/host', HostRouter);
 app.use('/chat', ChatRouter);
 app.use('/review', ReviewRouter);
+app.use('/admin', AdminRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

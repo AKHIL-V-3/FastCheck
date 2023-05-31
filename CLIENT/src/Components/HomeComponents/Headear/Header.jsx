@@ -67,6 +67,8 @@ function Header() {
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn)
   const user = useSelector((state) => state.user.user)
 
+  console.log(user);
+
   useEffect(() => {
     apiCall().then(data => {
       if (data) {

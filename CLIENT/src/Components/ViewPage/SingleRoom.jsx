@@ -49,13 +49,6 @@ function SingleRoom() {
     const user = useSelector(state => state.user.user)
     const isLoggedIn = useSelector(state => state.user.isLoggedIn)
 
-
-
-    console.log(user,'888888888888888888888888888888888888');
-
-
-
-
     const formatDate = (isoDate) => {
         const date = new Date(isoDate);
         const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
@@ -302,8 +295,6 @@ function SingleRoom() {
             <Header />
             <section className='w-full'>
 
-                {/* <hr className='bg-white w-full sticky top-2'/> */}
-
                 <div className='xl:flex xl:felx-col justify-center items-center xl:relative bg-white text-black'>
 
                     <div className='w-full space-y-4 xl:space-y-6 xl:flex xl:flex-col xl:items-center'>
@@ -504,7 +495,7 @@ function SingleRoom() {
                                                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                                     <svg aria-hidden="true" className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
                                                 </div>
-                                                <input onClick={(e) => setDateInput(!dateInput)} type="text" className="caret-transparent cursor-pointer border w-full border-black text-black text-sm rounded-s-lg focus:ring-blue-500 focus:border-blue-500 block pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder={`${checkin !== checkout ? checkin : "CEHCK-IN"} - ${checkout !== checkin ? checkout : "CHECK-OUT"}`} />
+                                                <input onClick={(e) => setDateInput(!dateInput)} type="text" className="caret-transparent cursor-pointer border w-full border-black text-black text-sm rounded-s-lg focus:ring-blue-500 focus:border-blue-500 block pl-10 p-2.5 bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder={`${checkin !== checkout ? checkin : "CEHCK-IN"} - ${checkout !== checkin ? checkout : "CHECK-OUT"}`} />
                                             </div>
 
                                         </div>
@@ -705,7 +696,7 @@ function SingleRoom() {
 
                             <div className='ml-7'>
                                 <div className='flex items-center space-x-6'>
-                                    <div className='w-20 h-20 bg-slate-200 rounded-full bg-cover' style={{ backgroundImage: `url("${user?.photoUrl}")` }}></div>
+                                    <div className='w-20 h-20 bg-slate-200 rounded-full bg-cover' style={{ backgroundImage: `url("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png")` }}></div>
 
                                     <div>
                                         <h1 className='font-bold text-xl'>Hosted by {HotelData?.HostData?.Hostname}</h1>

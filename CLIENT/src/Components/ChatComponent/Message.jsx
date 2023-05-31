@@ -212,10 +212,6 @@ function Message() {
         scrollRef.current?.scrollIntoView({ behavior: "smooth" })
     }, [messages])
 
-
-   
-
-
     useEffect(() => {
         const getselectedUser = async () => {
             try {
@@ -329,7 +325,7 @@ function Message() {
 
                                 </div>
 
-                                <div className='w-full h-5/6 overflow-x-hidden pb-52 bg-stone-50 text-white scrollbar-thumb-gray-400 scrollbar-thin flex justify-center' >
+                                <div className='w-full h-5/6 overflow-x-hidden xl:pb-52 pb-60 bg-stone-50 text-white scrollbar-thumb-gray-400 scrollbar-thin flex justify-center' >
                                 {/* style={{ backgroundImage: "url('https://cdn.wallpapersafari.com/4/11/WofyVJ.png')" }} */}
 
                                     <div className='w-10/12 h-auto space-y-2 mt-12'>
@@ -344,7 +340,7 @@ function Message() {
                                     </div>
                                 </div>
 
-                                <div className='bg-green-50 w-full h-14 absolute xl:bottom-7 bottom-12 text-black left-0 right-0 flex items-center'>
+                                <div className='bg-green-50 w-full h-14 absolute xl:bottom-7 bottom-14 pb-2 xl:pb-0 text-black left-0 right-0 flex items-center'>
                                     {/* <FontAwesomeIcon icon="smile" className='ms-3 w-7 h-7' /> */}
                                     <div className='w-full'>
                                         <form action="" onSubmit={SendMessage} className='flex me-3 ms-3 items-center '>

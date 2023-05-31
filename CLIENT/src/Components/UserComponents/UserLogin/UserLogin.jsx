@@ -30,7 +30,6 @@ function UserLogin() {
   }
 
   const sendRequest = async () => {
-
     const { data } = await baseUrl.post("/userlogin", userData, {
       withCredentials: true
     })
@@ -46,7 +45,7 @@ function UserLogin() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const data = await sendRequest()
-
+    
         if(data){
           dispatch(authactions.logIn())
           dispatch(authactions.setUser(data.user))
@@ -103,12 +102,12 @@ function UserLogin() {
             <form action="" onSubmit={(e) => handleSubmit(e)}>
               <div className='mt-12 ml-8 rounded-xl'>
                 
-                <input type="email" name='Email' onChange={(e) => setUserdata({ ...userData, [e.target.name]: e.target.value })} className=" w-64 xl:w-80 h-11  border border-gray-900  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Your EmailAddress" required></input>
+                <input type="email" name='Email' onChange={(e) => setUserdata({ ...userData, [e.target.name]: e.target.value })} className=" w-64 xl:w-80 h-11  border border-gray-900  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Your EmailAddress" required></input>
               </div>
 
               <div className='mt-12 ml-8 rounded-xl'>
                 
-                <input type="password" name='Password' autocomplete="on" onChange={(e) => setUserdata({ ...userData, [e.target.name]: e.target.value })} className=" w-64 xl:w-80 h-11  border border-gray-900   text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Your Password" required></input>
+                <input type="password" name='Password' autocomplete="on" onChange={(e) => setUserdata({ ...userData, [e.target.name]: e.target.value })} className=" w-64 xl:w-80 h-11  border border-gray-900   text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Your Password" required></input>
               </div>
 
               <button type='submit' className='bg-black mt-12 ml-8 text-white p-2 rounded-3xl w-28 font-semibold'>Continue</button>

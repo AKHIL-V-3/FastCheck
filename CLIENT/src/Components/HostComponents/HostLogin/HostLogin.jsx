@@ -68,18 +68,17 @@ function HostLogin() {
            <h1 className='text-lg font-bold mt-3 ml-5 '>Login as Host</h1>
 
 
-           {/* <div className='bg-white w-100 h-1'></div> */}
            <hr className='bg-white m-5'/>
           <div className='flex-col w-full h-auto'>
             <form action="" onSubmit={(e)=>handleSubmit(e)}>
           <div className='mt-12 ml-8 rounded-xl'>
-          {/* <input type="text" className='w-full h-full rounded-xl caret-white bg-black text-white text-start' placeholder='Enter Your Email Address'/> */}
-          <input type="email" name='Email'onChange={(e)=>setUserdata({...userData,[e.target.name]:e.target.value})} className=" w-64 xl:w-80 h-11  border border-black  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Your EmailAddress" required></input>
+         
+          <input type="email" name='Email'onChange={(e)=>setUserdata({...userData,[e.target.name]:e.target.value})} className=" w-64 xl:w-80 h-11  border border-black  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Your EmailAddress" required></input>
           </div>
 
           <div className='mt-12 ml-8 rounded-xl'>
-          {/* <input type="text" className='w-full h-full rounded-xl  bg-black' placeholder='Enter Your Password' /> */}
-          <input type="password" name='Password' autocomplete="on" onChange={(e)=>setUserdata({...userData,[e.target.name]:e.target.value})}  className=" w-64 xl:w-80 h-11  border border-black  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Your Password" required></input>
+         
+          <input type="password" name='Password' autocomplete="on" onChange={(e)=>setUserdata({...userData,[e.target.name]:e.target.value})}  className=" w-64 xl:w-80 h-11  border border-black  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Your Password" required></input>
           </div>
 
 

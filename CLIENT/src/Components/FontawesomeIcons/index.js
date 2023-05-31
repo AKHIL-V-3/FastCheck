@@ -35,7 +35,11 @@ import { faBars,
          faShoppingBag,
          faDog,
          faMapMarker,
-         faMapMarkerAlt
+         faMapMarkerAlt,
+         faHome,
+         faBarChart,
+         faHotel,
+         faPowerOff,
 
 
 
@@ -79,7 +83,11 @@ library.add(faBars,
             faShoppingBag,
             faDog,
             faMapMarker,
-            faMapMarkerAlt
+            faMapMarkerAlt,
+            faHome,
+            faBarChart,
+            faHotel,
+            faPowerOff,
             
            
 

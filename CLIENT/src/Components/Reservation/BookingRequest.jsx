@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import jwtInterceptor from '../helpers/jwtInterceptor'
+import { useNavigate } from 'react-router-dom'
 
 
 function BookingRequest() {
@@ -18,7 +19,9 @@ function BookingRequest() {
     const [panNumberExist, setPanNumberExist] = useState(false)
     const Reservation = useSelector(state => state.user.reservation)
 
-    const dispatch = useDispatch()
+
+    const navigate = useNavigate()
+
     const phoneRegExp = /^(?:\+?1[-.\s]?)?\(?([0-9]{3})\)?[-.\s]?([0-9]{3})[-.\s]?([0-9]{4})$/;
     const panRegExp = /^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/;
 
@@ -35,7 +38,7 @@ function BookingRequest() {
             addPhoneNumber()
         }
     })
-
+    
 
     const validatePan = (panNumber) => {
         if (!panRegExp.test(panNumber)) {
@@ -127,8 +130,8 @@ function BookingRequest() {
         <section>
             <div className=' bg-white text-black'>
 
-                <nav className='w-full h-20 flex justify-start items-center pl-12 border-b-2 border-gray-600'>
-                    <div className='font-extrabold text-3xl xl:text-4xl'>Fastcheck-in</div>
+                <nav className='w-full  h-20 flex justify-start items-center xl:pl-12 pl-6 border-b-2 border-gray-600'>
+                    <div onClick={()=> navigate("/")} className='font-extrabold text-3xl xl:text-4xl cursor-pointer'>Fastcheck-in</div>
                 </nav>
 
                 <div className='w-full h-auto xl:flex xl:justify-center'>
@@ -263,7 +266,7 @@ function BookingRequest() {
                                                             <div className=" rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                                                                 {/*header*/}
                                                                 <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-                                                                    <div className='flex xl:space-x-64 space-x-40 m-x-20 items-center'>
+                                                                    <div className='flex xl:space-x-64 space-x-28 m-x-20 items-center'>
                                                                         <div className='cursor-pointer' onClick={() => setShowModal(false)}><FontAwesomeIcon icon="times" /></div>
                                                                         <p>Add Phone Number</p>
                                                                     </div>
@@ -531,10 +534,10 @@ function BookingRequest() {
 
                             <div className='flex items-center h-full xl:space-x-4 text-xs xl:text-base space-x-1'>
                                 <p>© 2023 Inc.</p>
-                                <p>·Privacy</p>
-                                <p>·Terms</p>
-                                <p>·Sitemap</p>
-                                <p>·Company details</p>
+                                <p >Privacy</p>
+                                <p className='hidden xl:block'>·Terms</p>
+                                <p className='hidden xl:block'>·Sitemap</p>
+                                <p className='hidden xl:block'>·Company details</p>
                             </div>
 
                             <div className='flex items-center h-full xl:space-x-4 text-xs xl:text-base space-x-2'>

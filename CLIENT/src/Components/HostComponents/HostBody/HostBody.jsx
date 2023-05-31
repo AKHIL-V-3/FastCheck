@@ -170,7 +170,7 @@ function HostBody() {
 
 
                 <div className='h-80 flex justify-center items-center'>
-                    <h1 className='text-black font-bold text-8xl opacity-60'>No Reservations</h1>
+                    <h1 className='text-black font-bold text-4xl xl:text-8xl opacity-60'>No Properties</h1>
                 </div>
                 
             }

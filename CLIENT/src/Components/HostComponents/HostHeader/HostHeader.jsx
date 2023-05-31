@@ -100,17 +100,17 @@ function HostHeader() {
               <div className='flex flex-col items-start space-y-2 w-full pb-2'>
 
                     <div className='flex flex-col item-start space-y-2 w-full'>
-                    <div className='hover:bg-slate-300 w-full h-10 pl-3 flex items-center'>
-                      <p className='cursor-pointer' onClick={()=>navigate("/host/messages")} >Messages</p>
+                    <div  onClick={()=>navigate("/host/messages")} className='cursor-pointer hover:bg-slate-300 w-full h-10 pl-3 flex items-center'>
+                      <p className='cursor-pointer' >Messages</p>
                     </div>
-                    <div className='hover:bg-slate-300 w-full h-10 pl-3 flex items-center'>
-                      <p className='cursor-pointer' onClick={()=>navigate("/host/reservationlist")}>Reservations</p>
+                    <div onClick={()=>navigate("/host/reservationlist")} className='cursor-pointer hover:bg-slate-300 w-full h-10 pl-3 flex items-center'>
+                      <p className='cursor-pointer' >Reservations</p>
                     </div>
-                    <div className='hover:bg-slate-300 w-full h-10 pl-3 flex items-center'>
+                    <div className='hover:bg-slate-300 w-full h-10 pl-3 flex cursor-pointer items-center'>
                     <p className='cursor-pointer' >Account</p>
                   </div>
 
-                  <div onClick={handleLogout} className='hover:bg-slate-300 w-full h-10 pl-3 flex items-center'>
+                  <div onClick={handleLogout} className=' cursor-pointer hover:bg-slate-300 w-full h-10 pl-3 flex items-center'>
                     <p  className='cursor-pointer'>Log out</p>
                   </div>
 

@@ -153,11 +153,11 @@ module.exports = {
 
     logOut: (req, res) => {
 
-   res.clearCookie(`${process.env.USER_TOKEN}`)
-   req.cookies[`${process.env.USER_TOKEN}`] = "";
-   res.clearCookie(`${process.env.USER_TOKEN}`)
-   req.cookies[`${process.env.USER_TOKEN}`] = "";
-   res.status(200).json({ message: "Successfully Logged Out" })
+        res.clearCookie(`${process.env.USER_TOKEN}`)
+        req.cookies[`${process.env.USER_TOKEN}`] = "";
+        res.clearCookie(`${process.env.USER_REFRESH}`)
+        req.cookies[`${process.env.USER_REFRESH}`] = "";
+        res.status(200).json({ message: "Successfully Logged Out" })
  
     },
 

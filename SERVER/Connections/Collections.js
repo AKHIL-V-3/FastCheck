@@ -8,4 +8,5 @@ module.exports={
       MessageCollection:"Messages",
       ReviewCollection:"Reviews",
       ratingCollection:"rating",
+      AdminCollection:"Admin",
 }
