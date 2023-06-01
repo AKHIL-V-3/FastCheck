@@ -104,12 +104,12 @@ function BookingRequest() {
     }
 
     const handleBooking = async() => {
+        
          jwtInterceptor.post("/reservation", Reservation, {
             withCredentials: true,           
         })
-        .then((res)=>{  
-
-              if(res.data.url){
+        .then((res)=>{ 
+              if(res?.data?.url){
                  window.location.href = res.data.url
               }
         })

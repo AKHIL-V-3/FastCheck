@@ -36,12 +36,12 @@ function AdminHeader() {
   return (
     <section>
       <section>
-        <div className='w-full h-24 pl-80 bg-blue-500 fixed top-0'>
+        <div className='w-full h-24 pl-80 shadow-md shadow-stone-300 bg-white text-black stone-500 fixed top-0'>
           <div className='absolute right-10 h-full top-10  space-y-4'>
 
             {
               isLoggedIn &&
-              <div onClick={adminLogout} className='flex items-center text-white cursor-pointer hover:text-red-600 font-bold text-md'>
+              <div onClick={adminLogout} className='flex items-center  cursor-pointer hover:text-red-600 font-bold text-md'>
                 <FontAwesomeIcon icon="power-off" className='w-4 h-4  mr-2 mt-0.5' />
                 Log out
               </div>

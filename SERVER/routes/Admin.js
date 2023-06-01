@@ -8,10 +8,11 @@ const {verifyAdminToken} = require("../Controllers/AdminController")
 router.get('/',verifyAdminToken, AdminController.Dashboard);
 router.post('/login', AdminController.adminLogin);
 router.get('/refreshadmin',verifyAdminToken, AdminController.Dashboard);
+router.get('/logout', AdminController.logOut);
 router.get('/getusercount', AdminController.getUserCount);
 router.get('/gethostcount', AdminController.getHostCount);
 router.get('/getbookingcount', AdminController.getBookingCount);
-router.get('/logout', AdminController.logOut);
+router.get('/getrevenue', AdminController.getRevenue);
 
 
 

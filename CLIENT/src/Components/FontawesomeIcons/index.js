@@ -40,6 +40,8 @@ import { faBars,
          faBarChart,
          faHotel,
          faPowerOff,
+         faMoneyBill,
+         faMoneyCheck,
 
 
 
@@ -88,6 +90,8 @@ library.add(faBars,
             faBarChart,
             faHotel,
             faPowerOff,
+            faMoneyBill,
+            faMoneyCheck
             
            
 

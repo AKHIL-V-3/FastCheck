@@ -23,6 +23,7 @@ import HostReservation from './Components/HostComponents/Reservation/HostReserva
 import PaymentHistoryPage from './Pages/PaymentHistory-Page';
 import Adminpage from './Pages/Admin/Adminpage';
 import Loginpage from './Pages/Admin/Loginpage';
+import ErroPage from './Pages/Error/ErroPage';
 
 function App() {
 
@@ -56,7 +57,9 @@ function App() {
 
         <Route path='/admin'element = {<Adminpage />}/>
         <Route path='/admin/login'element = {<Loginpage />}/>
-       
+
+
+        <Route path='*'element = {<ErroPage/>}/>
 
       </Routes>   
     </Router>

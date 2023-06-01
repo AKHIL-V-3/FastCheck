@@ -43,6 +43,8 @@ function SingleRoom() {
     const [userIndividualRating, setUserIndividualRating] = useState(false)
 
 
+
+
     const [showModal, setShowModal] = useState(false)
 
     const HotelData = useSelector((state) => state.user.hotelData)
@@ -61,7 +63,7 @@ function SingleRoom() {
 
     const handleBooking = async () => {
 
-        if(!isLoggedIn)  return navigate("/userlogin")
+        if (!isLoggedIn) return navigate("/userlogin")
 
         if (numberOfDay >= 1) {
             const BookingDetails = {
@@ -74,6 +76,7 @@ function SingleRoom() {
                 numberOfChildren: children,
                 numberOfInfants: infants
             }
+
             const totalCost = (HotelData.Price * numberOfDay) + 12118
             BookingDetails.totalCost = totalCost
             dispatch(authactions.setReservation(BookingDetails))
@@ -125,10 +128,61 @@ function SingleRoom() {
         endDate: endDate,
         key: "selection"
     }
+
+
+
+    const [reservedDates, setreservedDates] = useState([])
+    // const [disabledDates, setDisabledDates] = useState([])
+
+    const [startDt, setStartDt] = useState()
+    const [endDt, setEndDt] = useState()
+
+
+
+
+
+    useEffect(() => {
+        const getBookedDate = async () => {
+            try {
+                const { data } = await baseUrl.get("/getreserveddates/" + HotelData?._id, {
+                    withCredentials: true
+                })
+
+                setreservedDates(data)
+                // setStartDt(data[0]?.CheckIn)
+                // setEndDt(data[0]?.CheckOut)
+                
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        getBookedDate()
+    }, [HotelData?._id])
+
+    const getfromToDate = (startDt, endDt) => {
+        let arr = []
+        const start = new Date(startDt)
+        const end = new Date(endDt)
+
+        for (let date = start; date <= end; date.setDate(date.getDate() + 1)) {
+            arr.push(new Date(date));
+         }
+        return arr
+    }
+
+    let disabledDates = []
+
+    for (let i = 0; i < reservedDates.length; i++) {
+        const dates = getfromToDate(reservedDates[i].CheckIn, reservedDates[i].CheckOut);
+        disabledDates.push(...dates);
+      }
+
+      console.log(disabledDates,'+++++++++++++++++++++++++++++++++');
+
     useEffect(() => {
         getNumberOfdays()
     }, [endDate, startDate])
-    
+
     const CreateConversation = async () => {
 
         const members = {
@@ -156,9 +210,7 @@ function SingleRoom() {
         const date = new Date(review.createdAt)
         review.createdAt = date.toLocaleString('en-US', { month: 'long', year: 'numeric' });
     })
-        useEffect(()=>{
-            
-        },[])
+
 
     useEffect(() => {
 
@@ -315,8 +367,8 @@ function SingleRoom() {
                         </div>
 
                         <div className='xl:flex xl:w-10/12 w-full flex justify-center  xl:h-auto rounded-2xl '>
-                              <div className='xl:w-1/2 bg-gray-600 w-full  h-96 xl:h-auto rounded-s-2xl bg-cover' style={{ backgroundImage: `url(${HotelData?.HotelImages[0]})` }}>
-                              </div>
+                            <div className='xl:w-1/2 bg-gray-600 w-full  h-96 xl:h-auto rounded-s-2xl bg-cover' style={{ backgroundImage: `url(${HotelData?.HotelImages[0]})` }}>
+                            </div>
                             <div className='xl:w-1/2 xl:flex xl:flex-col w-full xl:h-auto xl:space-y-2  hidden'>
 
                                 <div className='xl:flex xl:justify-evenly'>
@@ -499,9 +551,7 @@ function SingleRoom() {
                                             </div>
 
                                         </div>
-
                                         {
-
                                             dateInput &&
                                             <div className='flex flex-col text-black xl:col-span-3 xl:mx-auto '>
                                                 <DateRangePicker
@@ -511,10 +561,13 @@ function SingleRoom() {
                                                     minDate={new Date()}
                                                     rangeColors={["#2E5984"]}
                                                     onChange={handleSelect}
+                                                    disabledDates={
+                                                        disabledDates
+                                                    }
+
                                                 />
                                             </div>
                                         }
-
 
                                         <div className='w-full h-12 flex items-center justify-between p-4 rounded-b-md border-black border-t-2' onClick={() => setGuests(!guests)}>
 
@@ -732,7 +785,7 @@ function SingleRoom() {
 
 
                                         <div className='xl:pt-12 pt-12 xl:w-52 w-full'>
-                                            { isLoggedIn && <button onClick={() => CreateConversation()} className='xl:w-full w-full h-12 border-black border-2 rounded-md z-40'>Contact Host</button>}
+                                            {isLoggedIn && <button onClick={() => CreateConversation()} className='xl:w-full w-full h-12 border-black border-2 rounded-md z-40'>Contact Host</button>}
                                         </div>
                                     </div>
                                 </div>
@@ -743,7 +796,7 @@ function SingleRoom() {
 
                                 <div className='w-full h-auto mt-20 '>
 
-                                    {reviews.length > 0  &&
+                                    {reviews.length > 0 &&
                                         <div>
                                             <h1 className='font-bold text-2xl'>Reviews</h1>
                                         </div>}
@@ -765,15 +818,14 @@ function SingleRoom() {
                                     }
 
 
-                                    <div className='h-full pt-12 '>
-
+                                    <div className='h-full pt-12 w-full'>
 
                                         {
                                             show &&
                                             <div className='flex mb-12'>
 
                                                 <div className='w-full h-20'>
-                                                    <form action="" onSubmit={addReview} className='h-20'>
+                                                    <form action="" onSubmit={addReview} className='xl:h-20 h-14'>
                                                         <div className='flex justify-start items-center h-full'>
 
                                                             <input type="text" name='review' onChange={(e) => setReview(e.target.value)} value={review} className='w-full  p-4 h-4/6 opacity-70 text-md font-semibold rounded-md border-2 border-black outline-none' placeholder='Type Your Review . . . .' />
@@ -784,7 +836,7 @@ function SingleRoom() {
                                             </div>
                                         }
 
-                                        <div className='grid grid-cols-2 gap-12'>
+                                        <div className='grid xl:grid-cols-2 gap-12'>
 
                                             {
                                                 reviews.map((review) => (
@@ -792,15 +844,15 @@ function SingleRoom() {
                                                 ))
                                             }
 
-                                        
+
                                         </div>
 
-                                        {  
-                                           reviews.length > 0  &&
-                                            
+                                        {
+                                            reviews.length > 0 &&
+
                                             <div className='mt-12'>
-                                            <button onClick={() => setShowModal(true)} className='border-2 border-black w-48 h-12 font-semibold rounded-md'>Show all {reviewCount?.reviewtext} reviews</button>
-                                        </div>}
+                                                <button onClick={() => setShowModal(true)} className='border-2 border-black w-48 h-12 font-semibold rounded-md'>Show all {reviewCount?.reviewtext} reviews</button>
+                                            </div>}
 
 
                                         <>

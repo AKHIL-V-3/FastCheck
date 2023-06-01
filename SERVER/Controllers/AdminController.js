@@ -174,6 +174,19 @@ module.exports = {
                 console.log(err);
             }
     },
+    getRevenue:(req,res)=>{
+            try{
+                 Admin.getRevenue().then((Revenue)=>{
+                    res.status(200).json(Revenue)
+                 })
+                 .catch((err)=>{
+                    console.log(err);
+                      res.status(500).json({message:"Failed to get Revenue"})
+                 })
+            }catch(err){
+                console.log(err);
+            }
+    },
 
 
 

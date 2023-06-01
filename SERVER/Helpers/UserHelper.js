@@ -162,5 +162,30 @@ module.exports = {
                   reject()
               ])
         })
- }
+    },
+    getReservedDates :(hotelId)=>{
+        return new Promise((resolve,reject)=>{
+           Hotel.ReservationSchema.aggregate([
+               {
+                  $match:{
+                    $and:[
+                        {"HotelDetails.HotelId": new ObjectId(hotelId)},
+                        {Booking:"Booked"}
+                    ]
+                  }
+               },
+               {
+                   $project:{
+                        CheckIn:"$BookingDetails.CheckIn",
+                        CheckOut:"$BookingDetails.CheckOut"
+                   }
+               }
+           ]).then((response)=>{
+                   resolve(response)
+              })
+              .catch((err)=>[
+                  reject()
+              ])
+        })
+    }
 }

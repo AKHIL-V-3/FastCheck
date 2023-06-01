@@ -1,28 +1,18 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { useEffect, useState } from 'react'
-import { baseUrl } from '../../../Axios/api'
-import {  useNavigate } from 'react-router-dom'
+import React from 'react'
 import { useSelector } from 'react-redux'
 
 function Sidebar() {
-
-    const navigate = useNavigate()
-
     const admin = useSelector(state=> state.user.admin)
-
-
-    console.log(admin);
-
-   
     const adminName = admin?.Email?.split('@')[0].toUpperCase()
-
     return (
         <section>
             <div className='bg-white h-screen w-80 shadow-lg fixed z-10 shadow-stone-500'>
                 <nav>
-                    <div className='h-32 w-full flex justify-center items-center border border-b-stone-100'>
+                    <div className='h-32 w-full flex justify-center items-center border border-b-stone-100'>                    
+                    {/* style={{ backgroundImage: "url('https://cdn.onlinewebfonts.com/svg/img_574534.png')" }} */}
                         <div>
-                            <div className='w-20 h-20 rounded-full bg-black'></div>
+                            <div className='w-20 h-20 border border-stone-300 rounded-full bg-cover' style={{ backgroundImage: "url('https://images.pexels.com/photos/1933873/pexels-photo-1933873.jpeg?auto=compress&cs=tinysrgb&w=600')" }}></div>
                             <h1 className='ml-3 font-bold text-lg'>{adminName}</h1>
                         </div>
                     </div>

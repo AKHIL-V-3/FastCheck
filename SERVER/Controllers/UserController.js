@@ -220,6 +220,8 @@ module.exports = {
 
     HotelBook: async (req, res) => {
 
+        console.log(process.env.STRIPE_SUCCESS_URL);
+
         const { totalCost, } = req.body
         const userId = req.id
         const user = await userHelper.getUser(userId)
@@ -289,7 +291,7 @@ module.exports = {
         let data;
         let eventType;
 
-        if (endpointSecret) {
+        if (endpointSecret) {   
             try {
                 event = stripe.webhooks.constructEvent(payloadBuffer, sig, endpointSecret);
                 console.log('webhook verified');
@@ -402,6 +404,16 @@ module.exports = {
     getPaymentHistory:(req,res)=>{
         const userId = req.params.userId 
            User.getPaymentHistory(userId).then((response)=>{
+               res.status(200).json(response)
+           })
+           .catch((err)=> {
+            console.log(err)
+            res.status(403).json({message:"something wrong"})
+           })
+    },
+    getReservedDates:(req,res)=>{
+        const hotelId = req.params.hotelId 
+           User.getReservedDates(hotelId).then((response)=>{
                res.status(200).json(response)
            })
            .catch((err)=> {

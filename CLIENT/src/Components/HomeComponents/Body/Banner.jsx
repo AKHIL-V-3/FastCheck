@@ -30,12 +30,14 @@ const searchHotel = ()=>{
   dispatch(authactions.setsearchHotels(serachhotels))
    navigate("/")
 }
-
+ 
+// https://heavensportfolio.com/uploads/asia-me/tajm01.jpg
+// https://sayajihotels.com/images/innerBanner/sayaji-pune-overview/banner3.jpg
 
     return (
 
         <section className='h-96' >
-            <div className='h-full  w-full max-w-full text-black relative bg-cover' style={{ backgroundImage:'url("https://images.wallpaperscraft.com/image/single/pool_skyscraper_hotel_124522_2560x1080.jpg")' }}>
+            <div className='h-full  w-full max-w-full text-black relative bg-cover' style={{ backgroundImage:'url("https://sayajihotels.com/images/innerBanner/sayaji-pune-overview/banner3.jpg")' }}>
                 <div className='flex justify-center items-end h-full pb-12' >
                     <div className='flex flex-col justify-between h-24'>
                     <h1 className='text-4xl font-bold text-white'>Find</h1>

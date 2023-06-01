@@ -98,7 +98,30 @@ module.exports = {
                reject(err)
           })
      })
-}
+   },
+   getRevenue:()=>{
+     return new Promise((resolve,reject)=>{
+          ReservationSchema.aggregate([
+               {
+                 $match:{
+                    Booking:"Booked"
+                 }
+               },
+               {
+                    $group:{
+                         _id:null,
+                         Revenue:{$sum:"$Total"}
+                    }
+               }
+          ])
+          .then((Revenue)=>{
+                resolve(Revenue[0])   
+          })
+          .catch((err)=>{
+               reject(err)
+          })
+     })
+   }
 
 
 
