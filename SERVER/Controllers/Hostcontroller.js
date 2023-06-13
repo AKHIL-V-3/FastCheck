@@ -178,10 +178,9 @@ refreshTokenHost :(req,res,next)=>{
 },
 
 addHotel:async (req,res)=>{
-    const hostId = req.hostId
+    const hostId = req.id
     req.body.hostId = new ObjectId(hostId)
-    HostHelpers.addHotel(req.body).then((response)=>{
-           console.log(response);     
+    HostHelpers.addHotel(req.body).then((response)=>{     
            res.status(200).json({message:"Hotel Added"})
     })
     .catch((error)=>{

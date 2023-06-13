@@ -2,10 +2,8 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useDispatch, useSelector } from 'react-redux'
 import { authactions } from '../../../Redux/Auth/authSlice'
-import searchHotel from './Posts'
 import { useState } from 'react'
-import { useEffect } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 function Banner() {
 

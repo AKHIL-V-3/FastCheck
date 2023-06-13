@@ -1,9 +1,6 @@
 
 import axios from 'axios'
 
-
-console.log('process',process.env.BASE_URL);
-
 const jwtInterceptor = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL
 })

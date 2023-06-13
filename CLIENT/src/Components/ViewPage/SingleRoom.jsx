@@ -18,11 +18,7 @@ import { baseUrl } from '../../Axios/api';
 
 
 function SingleRoom() {
-
-
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
-
+ 
     const [guests, setGuests] = useState(false)
     const [dateInput, setDateInput] = useState(false)
     const [startDate, setStartDate] = useState(new Date())
@@ -32,7 +28,6 @@ function SingleRoom() {
     const [children, setChildren] = useState(0)
     const [infants, setInfants] = useState(0)
     const [totalGust, setTotalGust] = useState(1)
-
     const [review, setReview] = useState("")
     const [modalReviews, setModalReviews] = useState([])
     const [reviewCount, setReviewCount] = useState()
@@ -41,12 +36,10 @@ function SingleRoom() {
     const [rating, setRating] = useState([])
     const [startRating, setStarRating] = useState()
     const [userIndividualRating, setUserIndividualRating] = useState(false)
-
-
-
-
+    const [reservedDates, setreservedDates] = useState([])
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
     const [showModal, setShowModal] = useState(false)
-
     const HotelData = useSelector((state) => state.user.hotelData)
     const user = useSelector(state => state.user.user)
     const isLoggedIn = useSelector(state => state.user.isLoggedIn)
@@ -57,14 +50,10 @@ function SingleRoom() {
         const formattedDate = date.getDate() + " " + months[date.getMonth()] + " " + date.getFullYear();
         return formattedDate
     }
-
     const checkin = formatDate(startDate)
     const checkout = formatDate(endDate)
-
     const handleBooking = async () => {
-
         if (!isLoggedIn) return navigate("/userlogin")
-
         if (numberOfDay >= 1) {
             const BookingDetails = {
                 HotelDetails: HotelData,
@@ -76,18 +65,15 @@ function SingleRoom() {
                 numberOfChildren: children,
                 numberOfInfants: infants
             }
-
             const totalCost = (HotelData.Price * numberOfDay) + 12118
             BookingDetails.totalCost = totalCost
             dispatch(authactions.setReservation(BookingDetails))
-
             navigate("/requesttobook")
         }
         else {
             setDateInput(!dateInput)
         }
     }
-
     const getNumberOfdays = () => {
         const startdate = new Date(startDate)
         const enddate = new Date(endDate)
@@ -127,20 +113,7 @@ function SingleRoom() {
         startDate: startDate,
         endDate: endDate,
         key: "selection"
-    }
-
-
-
-    const [reservedDates, setreservedDates] = useState([])
-    // const [disabledDates, setDisabledDates] = useState([])
-
-    const [startDt, setStartDt] = useState()
-    const [endDt, setEndDt] = useState()
-
-
-
-
-
+    }    
     useEffect(() => {
         const getBookedDate = async () => {
             try {
@@ -149,9 +122,7 @@ function SingleRoom() {
                 })
 
                 setreservedDates(data)
-                // setStartDt(data[0]?.CheckIn)
-                // setEndDt(data[0]?.CheckOut)
-                
+               
             } catch (err) {
                 console.log(err);
             }
@@ -177,14 +148,10 @@ function SingleRoom() {
         disabledDates.push(...dates);
       }
 
-      console.log(disabledDates,'+++++++++++++++++++++++++++++++++');
-
     useEffect(() => {
         getNumberOfdays()
     }, [endDate, startDate])
-
     const CreateConversation = async () => {
-
         const members = {
             senderId: user._id,
             receiverId: HotelData.HostData._id,
@@ -193,7 +160,6 @@ function SingleRoom() {
             const res = await jwtInterceptor.post("/chat", members, {
                 withCredentials: true
             })
-
             if (res.status === 200) {
                 navigate("/chat/messages")
             }
@@ -203,21 +169,17 @@ function SingleRoom() {
     }
     useEffect(() => {
         document.getElementsByTagName("html")[0].scrollTop = 0
-
     }, [])
 
     modalReviews.map((review) => {
         const date = new Date(review.createdAt)
         review.createdAt = date.toLocaleString('en-US', { month: 'long', year: 'numeric' });
     })
-
-
     useEffect(() => {
-
         const checkUserBooked = async () => {
             const data = {
-                userId: user._id,
-                hotelId: HotelData._id
+                userId: user?._id,
+                hotelId: HotelData?._id
             }
             try {
                 const res = await baseUrl.post("/review/isbooked", data, {
@@ -231,26 +193,21 @@ function SingleRoom() {
                 }
             }
         }
-
         checkUserBooked()
-
-    }, [HotelData?._id, user?._id, show])
-
+    }, [HotelData?._id, user?._id,])
 
     const addReview = async (e) => {
         e.preventDefault()
         const Review = {
-
-            userId: user._id,
+            userId: user?._id,
             reviewtext: review,
-            hotelId: HotelData._id
+            hotelId: HotelData?._id
         }
         try {
             const res = await jwtInterceptor.post("/review", Review, {
                 withCredentials: true
             })
             setReview("")
-
         } catch (err) {
             console.log(err);
         }
@@ -258,9 +215,9 @@ function SingleRoom() {
 
     const ratingChanged = async (newRating) => {
         const rating = {
-            userId: user._id,
+            userId: user?._id,
             rating: newRating,
-            hotelId: HotelData._id
+            hotelId: HotelData?._id
         }
         try {
             const { data } = await baseUrl.post("/review/rating", rating, {
@@ -275,7 +232,7 @@ function SingleRoom() {
     useEffect(() => {
         const getRating = async () => {
             try {
-                const { data } = await baseUrl.get("/review/rating/" + HotelData._id, {
+                const { data } = await baseUrl.get("/review/rating/" + HotelData?._id, {
                     withCredentials: true
                 })
                 setRating(data)
@@ -283,15 +240,13 @@ function SingleRoom() {
                 console.log(err);
             }
         }
-
         getRating()
-
-    }, [HotelData._id, startRating])
+    }, [HotelData?._id, startRating])
 
     useEffect(() => {
         const getUserRating = async () => {
             try {
-                const { data } = await baseUrl.get(`/review/userrating/${user._id}/${HotelData._id}`, {
+                const { data } = await baseUrl.get(`/review/userrating/${user?._id}/${HotelData?._id}`, {
                     withCredentials: true
                 })
                 setUserIndividualRating(data)
@@ -299,15 +254,13 @@ function SingleRoom() {
                 console.log(err);
             }
         }
-
         getUserRating()
     }, [user?._id, HotelData?._id])
-
 
     useEffect(() => {
         const getReviews = async () => {
             try {
-                const { data } = await baseUrl.get("/review/" + HotelData._id, {
+                const { data } = await baseUrl.get("/review/" + HotelData?._id, {
                     withCredentials: true
                 })
                 const datas = data.slice(0, 6)
@@ -318,14 +271,12 @@ function SingleRoom() {
             }
         }
         getReviews()
-
     }, [HotelData?._id, review])
-
 
     useEffect(() => {
         const getReviewCount = async () => {
             try {
-                const { data } = await baseUrl.get("/review/reviewcount/" + HotelData._id, {
+                const { data } = await baseUrl.get("/review/reviewcount/" + HotelData?._id, {
                     withCredentials: true
                 })
                 setReviewCount(data)
@@ -334,13 +285,7 @@ function SingleRoom() {
             }
         }
         getReviewCount()
-
     }, [HotelData?._id, review])
-
-
-    // const date = new Date(review.createdAt)
-    // const formattedDate = date.toLocaleString('en-US', { month: 'long', year: 'numeric' });
-
 
     return (
         <section>
@@ -352,7 +297,7 @@ function SingleRoom() {
                     <div className='w-full space-y-4 xl:space-y-6 xl:flex xl:flex-col xl:items-center'>
 
                         <div className='xl:mt-10 mt-10 w-full xl:flex xl:pl-32 pl-5 h-6'>
-                            <h1 className='xl:text-3xl text-xl font-bold'>{HotelData.HotelName}</h1>
+                            <h1 className='xl:text-3xl text-xl font-bold'>{HotelData?.HotelName}</h1>
 
                         </div>
 
@@ -393,7 +338,7 @@ function SingleRoom() {
 
 
                                     <div className='xl:w-11/12 w-full  mt-5 pl-5 xl:pl-0'>
-                                        <h1 className='font-semibold text-2xl'>Entire rental unit hosted by <span>{HotelData.HostData.Hostname}</span></h1>
+                                        <h1 className='font-semibold text-2xl'>Entire rental unit hosted by <span>{HotelData?.HostData?.Hostname}</span></h1>
                                         <p><span>8</span>gusts  <span>2</span>bedrooms <span>6</span>beds  </p>
                                     </div>
 
@@ -476,7 +421,7 @@ function SingleRoom() {
 
                                             <div className='mt-7 space-y-7'>
 
-                                                {HotelData.HotelFacilities.amenities.Wifi && <div className='flex space-x-3'>
+                                                {HotelData?.HotelFacilities?.amenities?.Wifi && <div className='flex space-x-3'>
                                                     <div className='w-8 h-8 flex justify-center items-center rounded-full border-black border-2'>
                                                         <FontAwesomeIcon icon="wifi" />
                                                     </div>
@@ -484,7 +429,7 @@ function SingleRoom() {
                                                 </div>}
 
 
-                                                {HotelData.HotelFacilities.amenities.Parking && <div className='flex space-x-3'>
+                                                {HotelData?.HotelFacilities?.amenities?.Parking && <div className='flex space-x-3'>
                                                     <div className='w-8 h-8 flex justify-center items-center rounded-full border-black border-2'>
                                                         <FontAwesomeIcon icon="car" />
                                                     </div>
@@ -512,7 +457,7 @@ function SingleRoom() {
                                                 </div>
 
 
-                                                {HotelData.HotelFacilities.amenities.Television && <div className='flex space-x-3'>
+                                                {HotelData?.HotelFacilities?.amenities?.Television && <div className='flex space-x-3'>
                                                     <div className='w-8 h-8 flex justify-center items-center rounded-full border-black border-2'>
                                                         <FontAwesomeIcon icon="tv" />
                                                     </div>
@@ -537,7 +482,7 @@ function SingleRoom() {
                                 <div className='space-y-2 flex  flex-col items-center'>
 
                                     <div className='flex justify-between w-full'>
-                                        <h1 className='font-bold text-xl pl-4 mt-2'>₹{HotelData.Price} <span className='font-medium text-base'>night</span></h1>
+                                        <h1 className='font-bold text-xl pl-4 mt-2'>₹{HotelData?.Price} <span className='font-medium text-base'>night</span></h1>
                                     </div>
 
                                     <div className='w-11/12 rounded-lg border-black border-2'>
@@ -689,8 +634,8 @@ function SingleRoom() {
                                     <div className='w-full pt-4 flex flex-col items-center space-y-4'>
 
                                         <div className='flex justify-between w-10/12 '>
-                                            <p>₹{HotelData.Price} X <span>{numberOfDay}</span>nights</p>
-                                            {numberOfDay > 0 ? <p>₹{HotelData.Price * numberOfDay}</p> : <p>₹{HotelData.Price}</p>}
+                                            <p>₹{HotelData?.Price} X <span>{numberOfDay}</span>nights</p>
+                                            {numberOfDay > 0 ? <p>₹{HotelData?.Price * numberOfDay}</p> : <p>₹{HotelData?.Price}</p>}
                                         </div>
 
                                         <div className='flex justify-between w-10/12 '>
@@ -706,7 +651,7 @@ function SingleRoom() {
 
                                         <div className='flex justify-between w-10/12 '>
                                             <p className='font-semibold text-lg'>Total before taxes</p>
-                                            <p className='font-semibold text-lg'>₹{(HotelData.Price * numberOfDay) + 12118}</p>
+                                            <p className='font-semibold text-lg'>₹{(HotelData?.Price * numberOfDay) + 12118}</p>
                                         </div>
 
                                     </div>
@@ -731,7 +676,7 @@ function SingleRoom() {
                             </div>
 
 
-                            <MapComponent latitude={HotelData?.HotelAddress.geometry.coordinates[1]} longitude={HotelData.HotelAddress.geometry.coordinates[0]} />
+                            <MapComponent latitude={HotelData?.HotelAddress?.geometry.coordinates[1]} longitude={HotelData?.HotelAddress?.geometry?.coordinates[0]} />
 
 
                         </div>
@@ -796,7 +741,7 @@ function SingleRoom() {
 
                                 <div className='w-full h-auto mt-20 '>
 
-                                    {reviews.length > 0 &&
+                                    {reviews?.length > 0 &&
                                         <div>
                                             <h1 className='font-bold text-2xl'>Reviews</h1>
                                         </div>}
@@ -918,9 +863,6 @@ function SingleRoom() {
                                                 </>
                                             ) : null}
                                         </>
-
-
-
                                     </div>
                                 </div>
                             </div>

@@ -10,9 +10,9 @@ function Sidebar() {
             <div className='bg-white h-screen w-80 shadow-lg fixed z-10 shadow-stone-500'>
                 <nav>
                     <div className='h-32 w-full flex justify-center items-center border border-b-stone-100'>                    
-                    {/* style={{ backgroundImage: "url('https://cdn.onlinewebfonts.com/svg/img_574534.png')" }} */}
+                    {/* style={{ backgroundImage: "url('https://images.pexels.com/photos/1933873/pexels-photo-1933873.jpeg?auto=compress&cs=tinysrgb&w=600')" }} */}
                         <div>
-                            <div className='w-20 h-20 border border-stone-300 rounded-full bg-cover' style={{ backgroundImage: "url('https://images.pexels.com/photos/1933873/pexels-photo-1933873.jpeg?auto=compress&cs=tinysrgb&w=600')" }}></div>
+                            <div className='w-20 h-20 border border-stone-300 rounded-full bg-cover' style={{ backgroundImage: "url('https://cdn.onlinewebfonts.com/svg/img_574534.png')" }} ></div>
                             <h1 className='ml-3 font-bold text-lg'>{adminName}</h1>
                         </div>
                     </div>

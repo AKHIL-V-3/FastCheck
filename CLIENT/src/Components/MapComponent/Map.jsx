@@ -20,8 +20,8 @@ export const MapComponent = (props) => {
         <section className=' h-96 w-full rounded-md'>
 
             <Map
-                mapStyle='mapbox://styles/akhilv033/cli9rvidj00vv01pn8smg9bwx'
-                mapboxAccessToken='pk.eyJ1IjoiYWtoaWx2MDMzIiwiYSI6ImNsaDdodXg4ejBnODAzY210ZnBqNXRjazYifQ.TB4Ynq9txwJTID5zEYlNIA'
+                mapStyle='mapbox://styles/akhilv033/cli9rvidj00vv01pn8smg9bwx?optimize=true'
+                mapboxAccessToken='pk.eyJ1IjoiYWtoaWx2MDMzIiwiYSI6ImNsaDdnaGM0dzA5OGkzZ3BpaDdlejZuanYifQ.-FRRw7jUSm6r0TwReFdTTw'
                 {...viewport}
             >    
                     <Marker latitude={props.latitude} longitude={props.longitude}> {/* Replace with your desired latitude and longitude */}

@@ -30,3 +30,4 @@ router.get('/getreserveddates/:hotelId',userController.getReservedDates)
 
 
 module.exports = router;
+

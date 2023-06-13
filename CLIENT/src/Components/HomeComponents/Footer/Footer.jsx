@@ -1,5 +1,4 @@
 import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function Footer() {
   return (
@@ -9,7 +8,7 @@ function Footer() {
 
           <div className='xl:w-3/12 space-y-7'>
             <div className='font-extrabold text-3xl xl:text-4xl'>Fastcheck-in</div>
-            <div>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, laboriosam ullam!</div>
+            <div>Introducing our revolutionary hotel booking app, designed to provide you with the ultimate convenience and flexibility in planning your accommodations.</div>
           </div>
 
           <div className='flex flex-col xl:w-3/12 items-start  mt-2'>

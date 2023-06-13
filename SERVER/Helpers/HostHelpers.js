@@ -56,7 +56,6 @@ module.exports = {
      addHotel: (HotelData) => {
           return new Promise((resolve, reject) => {
                Hotel.create(HotelData).then((res) => {
-                    console.log(res);
                     resolve(res)
                })
                     .catch((err) => {

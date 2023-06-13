@@ -90,7 +90,7 @@ function Posts() {
     <section>
       <div className='bg-white text-black h-full flex flex-col items-center'>
         <div className='w-11/12 mt-20 items-center flex flex-col  space-y-10'>
-          <div className='space-y-4 xl:w-full md:w-full'>
+          <div className='space-y-4 xl:w-full w-full'>
             <h1 className='text-3xl font-semibold'>Property Listing</h1>
             <hr className='h-1 bg-black w-64' />
           </div>

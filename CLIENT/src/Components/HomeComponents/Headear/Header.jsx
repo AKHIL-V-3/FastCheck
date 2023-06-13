@@ -8,7 +8,6 @@ import jwtInterceptor from '../../helpers/jwtInterceptor';
 import { baseUrl } from '../../../Axios/api';
 
 
-
 function Header() {
 
   const [toggle, setToggle] = useState(false)
@@ -65,9 +64,6 @@ function Header() {
     }
   }
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn)
-  const user = useSelector((state) => state.user.user)
-
-  console.log(user);
 
   useEffect(() => {
     apiCall().then(data => {
@@ -88,12 +84,6 @@ function Header() {
           <div className='font-extrabold text-3xl xl:text-4xl cursor-pointer'>Fastcheck-in</div>
           </div>
           <div className='xl:flex justify-evenly items-center w-9/12 hidden'>
-
-            {/* <div className=' text-white w-96 h-12 rounded-2xl relative flex items-center' style={{background:"#616161"}}>
-              <input type="text" placeholder='Search Here . . . . .' className='h-full w-11/12 outline-none rounded-2xl  border-none p-4 relative flex items-center' style={{background:"#616161"}} />
-              <FontAwesomeIcon icon="search" className='absolute right-3' />
-            </div> */}
-
 
           </div>
           <div className='flex absolute xl:right-16 right-8'>
@@ -219,10 +209,6 @@ function Header() {
                       <div onClick={() => navigate("/usersignup")} className='hover:bg-slate-300 w-full h-10 pl-3 flex items-center'>
                         <p >Signup</p>
                       </div>
-
-                        {/* <div className='hover:bg-slate-300 w-full h-10 pl-3 flex items-center'>
-                          {!isLoggedIn ? <p>Login / Signup</p> : <p className='cursor-pointer' onClick={handleLogout}>Log out</p>}
-                        </div> */}
 
                     </>
 

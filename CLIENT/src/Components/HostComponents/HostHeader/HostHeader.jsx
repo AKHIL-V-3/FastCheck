@@ -5,8 +5,6 @@ import {  useSelector,useDispatch } from 'react-redux';
 import { authactions } from '../../../Redux/Auth/authSlice';
 import { baseUrl } from '../../../Axios/api';
 
-let firstRender = true
-
 
 function HostHeader() {
 
@@ -14,12 +12,10 @@ function HostHeader() {
     const handleToggle = () => {
       setToggle(!toggle)
     }
-
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const isLoggedIn = useSelector((state) => state.user.ishostLoggedIn)
-  const Host = useSelector((state) => state.user.host)
-
+  
     const apiCall = async () => {
       const { data } = await baseUrl.get("/host", {
         withCredentials: true
@@ -55,19 +51,13 @@ function HostHeader() {
       console.log(err)
     });
   }
-
-
-
   useEffect(()=>{
-
-    if(firstRender){ 
        apiCall().then(data => {
          if (data) {
            dispatch(authactions.hostLogin())
            dispatch(authactions.setHost(data))
          }
        }).catch((err)=>console.log(err))
-     }
      if(!isLoggedIn) navigate('/host/hostlogin')      
   },[dispatch,isLoggedIn,navigate])
 
