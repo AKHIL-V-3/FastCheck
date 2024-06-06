@@ -5,7 +5,11 @@ module.exports = {
     "./node_modules/react-tailwindcss-datepicker/dist/index.esm.js",
   ],
   theme: {
-    extend: {},
+    extend: {
+      width: {
+        'custom': '90%', // Customize width to be 80% of the parent container
+      }
+    },
   },
   plugins: [
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Conversation from './Conversation'
 import Chat from './Chat'
-import {useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useRef } from 'react';
 import { io } from "socket.io-client"
@@ -13,7 +13,7 @@ import { baseUrl } from '../../Axios/api';
 
 function Message() {
 
-   
+
 
 
     const currentUrl = window.location.href
@@ -32,7 +32,7 @@ function Message() {
     }
 
     const [conversation, setConversation] = useState([])
-   
+
     const [currentChat, setCurrentChat] = useState(null)
     const [messages, setMessages] = useState([])
     const [newMessage, setNewMessage] = useState([])
@@ -44,12 +44,12 @@ function Message() {
     const [ClickedHost, setClickedHost] = useState(null)
 
 
-    const [smallScreen,setSmallScreen] = useState(false)
-    const [firstrendersmall,setfirstrendersmall] = useState(false)
+    const [smallScreen, setSmallScreen] = useState(false)
+    const [firstrendersmall, setfirstrendersmall] = useState(false)
 
-    useEffect(()=>{
+    useEffect(() => {
         setfirstrendersmall(true)
-     },[])
+    }, [])
 
 
     const [search, setSearch] = useState(null)
@@ -122,29 +122,39 @@ function Message() {
     }, [currentUserId])
 
     const SendMessage = async (e) => {
+
         e.preventDefault()
-        const message = {
-            sender: currentUserId,
-            text: newMessage,
-            conversationId: currentChat?._id
-        }
 
-        const receiverId = currentChat.members.find(member => member !== currentUserId)
-        socket.current.emit("sendMessage", {
-            senderId: currentUserId,
-            receiverId,
-            text: newMessage
-        })
-
-        try {
-            const { data } = await baseUrl.post("/chat/message", message, {
-                withCredentials: true
+        if (newMessage.trim().length === 0) {
+                 return
+        }else{
+          const message = {
+                sender: currentUserId,
+                text: newMessage,
+                conversationId: currentChat?._id
+            }
+    
+            const receiverId = currentChat.members.find(member => member !== currentUserId)
+            socket.current.emit("sendMessage", {
+                senderId: currentUserId,
+                receiverId,
+                text: newMessage
             })
-            setMessages([...messages, data])
-            setNewMessage("")
-        } catch (error) {
-            console.log(error);
+    
+            try {
+                const { data } = await baseUrl.post("/chat/message", message, {
+                    withCredentials: true
+                })
+                setMessages([...messages, data])
+                setNewMessage("")
+            } catch (error) {
+                console.log(error);
+            }
+
+
+
         }
+        
     }
 
     useEffect(() => {
@@ -215,30 +225,30 @@ function Message() {
     useEffect(() => {
         const getselectedUser = async () => {
             try {
-                if(currentUrl === `${process.env.REACT_APP_CLIENT_URL}/chat/messages` ){
+                if (currentUrl === `${process.env.REACT_APP_CLIENT_URL}/chat/messages`) {
                     const { data } = await baseUrl.get("/chat/gethostdata/" + currentChat?._id, {
-                    withCredentials: true
-                })
-                setClickedUser(data)
-                setSelected(data?.userId)
+                        withCredentials: true
+                    })
+                    setClickedUser(data)
+                    setSelected(data?.userId)
 
-                } else if (currentUrl === `${process.env.REACT_APP_CLIENT_URL}/host/messages`){
+                } else if (currentUrl === `${process.env.REACT_APP_CLIENT_URL}/host/messages`) {
 
                     const { data } = await baseUrl.get("/chat/getuser/" + currentChat?._id, {
                         withCredentials: true
                     })
-    
+
                     setClickedHost(data)
                     setSelected(data?.userId)
-     
+
                 }
-             
+
             } catch (error) {
                 console.log(error);
             }
         }
         getselectedUser()
-    },[currentChat?._id,currentUrl])
+    }, [currentChat?._id, currentUrl])
 
     const selectUser = async (conv) => {
 
@@ -311,8 +321,8 @@ function Message() {
                             <div className={`xl:w-8/12 w-full ${smallScreen ? "block" : "hidden"} xl:block relative`}>
                                 <div className='w-full h-16 bg-stone-100 flex items-center border-b-stone-300 border text-black '>
 
-                                   <div className='cursor-pointer mx-1 xl:hidden block' onClick={()=> setSmallScreen(false)}>
-                                    <FontAwesomeIcon icon="arrow-left" className='ms-3' />
+                                    <div className='cursor-pointer mx-1 xl:hidden block' onClick={() => setSmallScreen(false)}>
+                                        <FontAwesomeIcon icon="arrow-left" className='ms-3' />
                                     </div>
 
                                     <div className='bg-white border border-stone-300 w-12 h-12 rounded-full ms-2 bg-cover' style={{ backgroundImage: "url('https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png')" }}>
@@ -326,7 +336,7 @@ function Message() {
                                 </div>
 
                                 <div className='w-full h-5/6 overflow-x-hidden xl:pb-52 pb-60 bg-stone-50 text-white scrollbar-thumb-gray-400 scrollbar-thin flex justify-center' >
-                                {/* style={{ backgroundImage: "url('https://cdn.wallpapersafari.com/4/11/WofyVJ.png')" }} */}
+                                    {/* style={{ backgroundImage: "url('https://cdn.wallpapersafari.com/4/11/WofyVJ.png')" }} */}
 
                                     <div className='w-10/12 h-auto space-y-2 mt-12'>
                                         {
@@ -343,8 +353,8 @@ function Message() {
                                 <div className='bg-green-50 w-full h-14 absolute xl:bottom-7 bottom-14 pb-2 xl:pb-0 text-black left-0 right-0 flex items-center'>
                                     {/* <FontAwesomeIcon icon="smile" className='ms-3 w-7 h-7' /> */}
                                     <div className='w-full'>
-                                        <form action="" onSubmit={SendMessage} className='flex me-3 ms-3 items-center '>
-                                            <input type="text" onChange={(e) => setNewMessage(e.target.value)} value={newMessage} className='w-full h-9 rounded-md outline-none border-none p-3 text-base font-semibold opacity-95 me-3 ' placeholder='Type a message'/>
+                                        <form action="" onSubmit={(e)=>SendMessage(e)} className='flex me-3 ms-3 items-center '>
+                                            <input type="text" onChange={(e) => setNewMessage(e.target.value)} value={newMessage} className='w-full h-9 rounded-md outline-none border-none p-3 text-base font-semibold opacity-95 me-3 ' placeholder='Type a message' />
                                             <div className='w-15'>
                                                 <button type='submit' className='bg-white w-11 h-11 rounded-full flex ps-3 items-center' >
                                                     <img src="https://static-00.iconduck.com/assets.00/send-icon-512x505-rfnsb0it.png" className='w-6 h-6 ' alt="" />

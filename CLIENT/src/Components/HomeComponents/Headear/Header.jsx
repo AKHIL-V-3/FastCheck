@@ -64,6 +64,7 @@ function Header() {
     }
   }
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn)
+  const user = useSelector((state)=>state.user.user)
 
   useEffect(() => {
     apiCall().then(data => {
@@ -140,7 +141,13 @@ function Header() {
                 isLoggedIn &&
                 <div className='w-full space-y-2'>
                   <div  onClick={() => userProfile()} className='cursor-pointer hover:bg-slate-300 w-full h-10 pl-3 flex items-center'>
-                    <p className=''  >Account</p>
+
+                    {  
+                     
+                     isLoggedIn ?  <p className=''  >{user.UserName}</p>  
+                     :
+                      <p className=''  >Account</p>}
+
                   </div>
                 </div>}
 

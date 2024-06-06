@@ -39,7 +39,7 @@ function ErroPage() {
             ></span>
 
             <span className="relative block px-8 py-3 bg-[#1A2238] border border-current">
-              <router-link to="">Go Home</router-link>
+              <router-link to="   ">Go Home</router-link>
             </span>
           </a>
         </button>

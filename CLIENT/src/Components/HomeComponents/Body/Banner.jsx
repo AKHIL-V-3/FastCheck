@@ -35,7 +35,7 @@ const searchHotel = ()=>{
     return (
 
         <section className='h-96' >
-            <div className='h-full  w-full max-w-full text-black relative bg-cover' style={{ backgroundImage:'url("https://sayajihotels.com/images/innerBanner/sayaji-pune-overview/banner3.jpg")' }}>
+            <div className='h-full w-full max-w-full text-black relative bg-cover' style={{ backgroundImage:'url("https://digital.ihg.com/is/image/ihg/ihg-lp-refresh-hero-imea-gben-lvp-1440x617")' }}>
                 <div className='flex justify-center items-end h-full pb-12' >
                     <div className='flex flex-col justify-between h-24'>
                     <h1 className='text-4xl font-bold text-white'>Find</h1>

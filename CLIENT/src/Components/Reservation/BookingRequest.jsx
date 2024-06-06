@@ -435,7 +435,7 @@ function BookingRequest() {
                             <hr className='w-full mt-12 bg-slate-300 ' />
 
 
-                            <div className='mt-10'>
+                            <div className='mt-10 z-50'>
                                 <button onClick={handleBooking} className='w-52 h-16 bg-black text-white font-bold flex justify-center items-center text-xl rounded-xl'>
                                     Confirm and pay
                                 </button>

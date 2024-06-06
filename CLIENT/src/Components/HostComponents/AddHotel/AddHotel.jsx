@@ -136,7 +136,7 @@ function AddHotel() {
     initialValues: {
       HotelName: "",
       noOfRooms: "",
-      RoomType: null,
+      RoomType: "Ac",
       price: "",
       hotelImages: [],
       roomImages: [],
@@ -239,7 +239,9 @@ function AddHotel() {
             <label htmlFor="">Room Type</label>
             <div>
               <select name='RoomType' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.RoomType} className=' mt-3 xl:mt-0 w-full xl:w-80 h-11 bg-white border border-black text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 '>
-                <option value="Ac">Ac</option>
+               
+               
+                <option value="Ac" selected>Ac</option>
                 <option value="Non Ac">Non Ac</option>
               </select>
               {formik.touched.RoomType && formik.errors.RoomType ? <p className='text-red-600 text-sm'>{formik.errors.RoomType}</p> : null}
