@@ -26,10 +26,9 @@ app.use((req, res, next) => {
 app.use(
   cors({
     
-    origin:true,
+    origin:["https://fastcheck.shop","http://localhost:3000"],
     methods: ["GET", "POST","PUT","DELETE","PATCH"],
     credentials: true,
-    origin:["https://fastcheck.shop","http://localhost:3000"]
     
   })
 
